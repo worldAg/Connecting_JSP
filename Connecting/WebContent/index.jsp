@@ -1,5 +1,12 @@
-<%-- WebContent에 index.jsp를 만듭니다.
-	http://localhost:8088/Board_Ajax/login.net
- --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
-   <jsp:forward page="/main.jsp"/>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<jsp:forward page="/main.jsp"></jsp:forward>
+</body>
+</html>

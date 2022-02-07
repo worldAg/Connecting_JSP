@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="utf-8"%>
+
 <!DOCTYPE html>
 <html>
 
@@ -7,6 +8,15 @@
     <meta charset="utf-8">
     <title>main page</title>
     <link rel="stylesheet" href="css/bootstrap.css" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+	<link href="https://fonts.googleapis.com/css2?family=Gaegu&display=swap" rel="stylesheet">
+	
+	<style>
+		* {
+			font-family: 'Gaegu', cursive!important;
+		}
+	</style>
 </head>
 
 <body>
