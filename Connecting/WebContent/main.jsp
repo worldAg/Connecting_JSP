@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 
@@ -7,12 +7,21 @@
     <meta charset="utf-8">
     <title>main page</title>
     <link rel="stylesheet" href="css/bootstrap.css" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+	<link href="https://fonts.googleapis.com/css2?family=Gaegu&display=swap" rel="stylesheet">
+	
+	<style>
+		* {
+			font-family: 'Gaegu', cursive!important;
+		}
+	</style>
 </head>
 
 <body>
     <jsp:include page="header.jsp" />
 
-	<button type="button" class="btn btn-primary btn-lg">»õ·Î¿î ¼Ò½ÄÀ» È®ÀÎÇÏ¼¼¿ä></button>
+	<button type="button" class="btn btn-primary btn-lg">ìƒˆë¡œìš´ ì†Œì‹ì„ í™•ì¸í•˜ì„¸ìš”></button>
 	
     <div id="boards">
         <div class="card" style="width: 18rem;">
