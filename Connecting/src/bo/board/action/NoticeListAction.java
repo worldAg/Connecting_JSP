@@ -25,12 +25,12 @@ public class NoticeListAction implements Action {
 		
 		if (noticelist != null) {
 			JsonObject object = new JsonObject();
-			object.addProperty("listcount", noticelist.size()); // ÃÑ ±ÛÀÇ °³¼ö
+			object.addProperty("listcount", noticelist.size()); // ì´ ê¸€ì˜ ê°œìˆ˜
 			
 			/*
-			 * JsonObject¿¡ List Çü½ÄÀ» ´ãÀ» ¼ö ÀÖ´Â addProperty ¸Ş¼­µå´Â ¾øÀ½
-			 * void com.google.gson.JsonObject.add(String property, JsonElement value) ¸Ş¼­µå¸¦ ÀÌ¿ëÇÏ¿© ÀúÀåÇØ¾ß ÇÔ
-			 * List Çü½ÄÀ» JsonElement·Î ¹Ù²ã Áà¾ß¸¸ object¿¡ ÀúÀåÇÒ ¼ö ÀÖÀ½
+			 * JsonObjectì— List í˜•ì‹ì„ ë‹´ì„ ìˆ˜ ìˆëŠ” addProperty ë©”ì„œë“œëŠ” ì—†ìŒ
+			 * void com.google.gson.JsonObject.add(String property, JsonElement value) ë©”ì„œë“œë¥¼ ì´ìš©í•˜ì—¬ ì €ì¥í•´ì•¼ í•¨
+			 * List í˜•ì‹ì„ JsonElementë¡œ ë°”ê¿” ì¤˜ì•¼ë§Œ objectì— ì €ì¥í•  ìˆ˜ ìˆìŒ
 			 * List => JsonElement
 			 */
 			
@@ -40,7 +40,7 @@ public class NoticeListAction implements Action {
 			
 			response.setContentType("text/html;charset=utf-8");
 			response.getWriter().append(object.toString());
-			System.out.println("Java¿¡¼­ JSP/AJAX·Î º¸³»´Â °á°ú JsonObjectÀÇ toString(): \n" + object.toString());
+			System.out.println("Javaì—ì„œ JSP/AJAXë¡œ ë³´ë‚´ëŠ” ê²°ê³¼ JsonObjectì˜ toString(): \n" + object.toString());
 		} else {
 			
 		}

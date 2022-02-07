@@ -19,7 +19,7 @@ public class BoardDAO {
 			Context init = new InitialContext();
 			ds = (DataSource) init.lookup("java:comp/env/jdbc/OracleDB");
 		} catch (Exception e) {
-			System.out.println("Oracle DB ¿¬°á ½ÇÆĞ: " + e.getMessage());
+			System.out.println("Oracle DB ì—°ê²° ì‹¤íŒ¨: " + e.getMessage());
 		}
 	}
 
@@ -42,7 +42,7 @@ public class BoardDAO {
 				totalArticleNo = rs.getInt(1);
 			}
 			
-			System.out.println("DB¿¡ ÀúÀåµÈ ÃÑ °Ô½Ã±ÛÀÇ ¼ö: " + totalArticleNo + "°³");
+			System.out.println("DBì— ì €ì¥ëœ ì´ ê²Œì‹œê¸€ì˜ ìˆ˜: " + totalArticleNo + "ê°œ");
 		} catch (Exception e) {
 			System.out.println("BoardDAO - getListCount() exception - " + e.getMessage());
 			e.printStackTrace();
@@ -50,17 +50,17 @@ public class BoardDAO {
 			try {
 				if (rs != null) rs.close();
 			} catch (Exception e) {
-				System.out.println("ResultSet ´İ´Â Áß ¿¹¿Ü ¹ß»ı.");
+				System.out.println("ResultSet ë‹«ëŠ” ì¤‘ ì˜ˆì™¸ ë°œìƒ.");
 			}
 			try {
 				if (pstmt != null) pstmt.close();
 			} catch (Exception e) {
-				System.out.println("PreparedStatement ´İ´Â Áß ¿¹¿Ü ¹ß»ı.");
+				System.out.println("PreparedStatement ë‹«ëŠ” ì¤‘ ì˜ˆì™¸ ë°œìƒ.");
 			}
 			try {
 				if (con != null) con.close();
 			} catch (Exception e) {
-				System.out.println("Connection ´İ´Â Áß ¿¹¿Ü ¹ß»ı.");
+				System.out.println("Connection ë‹«ëŠ” ì¤‘ ì˜ˆì™¸ ë°œìƒ.");
 			}
 		}
 		return totalArticleNo;
@@ -72,10 +72,10 @@ public class BoardDAO {
 		ResultSet rs = null;
 		
 		/*
-		 * page: ÇöÀç ÆäÀÌÁö
-		 * limit: ÇÑ ÆäÀÌÁö´ç ÃÖ´ë °³½Ã±Û ¼ö
-		 * BOARD_RE_REF DESC, BOARD_RE_SEQ ASC ¿¡ ÀÇÇØ Á¤·ÄµÈ °ÍÀ»,
-		 * Á¶°ÇÀı¿¡ ¸Â´Â RNUMÀÇ ¹üÀ§ ¸¸Å­ °¡Á®¿À´Â Äõ¸®¹®
+		 * page: í˜„ì¬ í˜ì´ì§€
+		 * limit: í•œ í˜ì´ì§€ë‹¹ ìµœëŒ€ ê°œì‹œê¸€ ìˆ˜
+		 * BOARD_RE_REF DESC, BOARD_RE_SEQ ASC ì— ì˜í•´ ì •ë ¬ëœ ê²ƒì„,
+		 * ì¡°ê±´ì ˆì— ë§ëŠ” RNUMì˜ ë²”ìœ„ ë§Œí¼ ê°€ì ¸ì˜¤ëŠ” ì¿¼ë¦¬ë¬¸
 		 */
 		
 		String selectSQL = "SELECT * " +
@@ -134,17 +134,17 @@ public class BoardDAO {
 			try {
 				if (rs != null) rs.close();
 			} catch (Exception e) {
-				System.out.println("ResultSet ´İ´Â Áß ¿¹¿Ü ¹ß»ı.");
+				System.out.println("ResultSet ë‹«ëŠ” ì¤‘ ì˜ˆì™¸ ë°œìƒ.");
 			}
 			try {
 				if (pstmt != null) pstmt.close();
 			} catch (Exception e) {
-				System.out.println("PreparedStatement ´İ´Â Áß ¿¹¿Ü ¹ß»ı.");
+				System.out.println("PreparedStatement ë‹«ëŠ” ì¤‘ ì˜ˆì™¸ ë°œìƒ.");
 			}
 			try {
 				if (con != null) con.close();
 			} catch (Exception e) {
-				System.out.println("Connection ´İ´Â Áß ¿¹¿Ü ¹ß»ı.");
+				System.out.println("Connection ë‹«ëŠ” ì¤‘ ì˜ˆì™¸ ë°œìƒ.");
 			}
 		}
 		return list;
@@ -156,10 +156,10 @@ public class BoardDAO {
 		ResultSet rs = null;
 		
 		/*
-		 * page: ÇöÀç ÆäÀÌÁö
-		 * limit: ÇÑ ÆäÀÌÁö´ç ÃÖ´ë °³½Ã±Û ¼ö
-		 * BOARD_RE_REF DESC, BOARD_RE_SEQ ASC ¿¡ ÀÇÇØ Á¤·ÄµÈ °ÍÀ»,
-		 * Á¶°ÇÀı¿¡ ¸Â´Â RNUMÀÇ ¹üÀ§ ¸¸Å­ °¡Á®¿À´Â Äõ¸®¹®
+		 * page: í˜„ì¬ í˜ì´ì§€
+		 * limit: í•œ í˜ì´ì§€ë‹¹ ìµœëŒ€ ê°œì‹œê¸€ ìˆ˜
+		 * BOARD_RE_REF DESC, BOARD_RE_SEQ ASC ì— ì˜í•´ ì •ë ¬ëœ ê²ƒì„,
+		 * ì¡°ê±´ì ˆì— ë§ëŠ” RNUMì˜ ë²”ìœ„ ë§Œí¼ ê°€ì ¸ì˜¤ëŠ” ì¿¼ë¦¬ë¬¸
 		 */
 		
 		String selectSQL = "SELECT * " +
@@ -218,17 +218,17 @@ public class BoardDAO {
 			try {
 				if (rs != null) rs.close();
 			} catch (Exception e) {
-				System.out.println("ResultSet ´İ´Â Áß ¿¹¿Ü ¹ß»ı.");
+				System.out.println("ResultSet ë‹«ëŠ” ì¤‘ ì˜ˆì™¸ ë°œìƒ.");
 			}
 			try {
 				if (pstmt != null) pstmt.close();
 			} catch (Exception e) {
-				System.out.println("PreparedStatement ´İ´Â Áß ¿¹¿Ü ¹ß»ı.");
+				System.out.println("PreparedStatement ë‹«ëŠ” ì¤‘ ì˜ˆì™¸ ë°œìƒ.");
 			}
 			try {
 				if (con != null) con.close();
 			} catch (Exception e) {
-				System.out.println("Connection ´İ´Â Áß ¿¹¿Ü ¹ß»ı.");
+				System.out.println("Connection ë‹«ëŠ” ì¤‘ ì˜ˆì™¸ ë°œìƒ.");
 			}
 		}
 		return list;
@@ -240,10 +240,10 @@ public class BoardDAO {
 		ResultSet rs = null;
 		
 		/*
-		 * page: ÇöÀç ÆäÀÌÁö
-		 * limit: ÇÑ ÆäÀÌÁö´ç ÃÖ´ë °³½Ã±Û ¼ö
-		 * BOARD_RE_REF DESC, BOARD_RE_SEQ ASC ¿¡ ÀÇÇØ Á¤·ÄµÈ °ÍÀ»,
-		 * Á¶°ÇÀı¿¡ ¸Â´Â RNUMÀÇ ¹üÀ§ ¸¸Å­ °¡Á®¿À´Â Äõ¸®¹®
+		 * page: í˜„ì¬ í˜ì´ì§€
+		 * limit: í•œ í˜ì´ì§€ë‹¹ ìµœëŒ€ ê°œì‹œê¸€ ìˆ˜
+		 * BOARD_RE_REF DESC, BOARD_RE_SEQ ASC ì— ì˜í•´ ì •ë ¬ëœ ê²ƒì„,
+		 * ì¡°ê±´ì ˆì— ë§ëŠ” RNUMì˜ ë²”ìœ„ ë§Œí¼ ê°€ì ¸ì˜¤ëŠ” ì¿¼ë¦¬ë¬¸
 		 */
 		
 		String selectSQL = "SELECT * " +
@@ -302,17 +302,17 @@ public class BoardDAO {
 			try {
 				if (rs != null) rs.close();
 			} catch (Exception e) {
-				System.out.println("ResultSet ´İ´Â Áß ¿¹¿Ü ¹ß»ı.");
+				System.out.println("ResultSet ë‹«ëŠ” ì¤‘ ì˜ˆì™¸ ë°œìƒ.");
 			}
 			try {
 				if (pstmt != null) pstmt.close();
 			} catch (Exception e) {
-				System.out.println("PreparedStatement ´İ´Â Áß ¿¹¿Ü ¹ß»ı.");
+				System.out.println("PreparedStatement ë‹«ëŠ” ì¤‘ ì˜ˆì™¸ ë°œìƒ.");
 			}
 			try {
 				if (con != null) con.close();
 			} catch (Exception e) {
-				System.out.println("Connection ´İ´Â Áß ¿¹¿Ü ¹ß»ı.");
+				System.out.println("Connection ë‹«ëŠ” ì¤‘ ì˜ˆì™¸ ë°œìƒ.");
 			}
 		}
 		return list;
@@ -324,10 +324,10 @@ public class BoardDAO {
 		ResultSet rs = null;
 		
 		/*
-		 * page: ÇöÀç ÆäÀÌÁö
-		 * limit: ÇÑ ÆäÀÌÁö´ç ÃÖ´ë °³½Ã±Û ¼ö
-		 * BOARD_RE_REF DESC, BOARD_RE_SEQ ASC ¿¡ ÀÇÇØ Á¤·ÄµÈ °ÍÀ»,
-		 * Á¶°ÇÀı¿¡ ¸Â´Â RNUMÀÇ ¹üÀ§ ¸¸Å­ °¡Á®¿À´Â Äõ¸®¹®
+		 * page: í˜„ì¬ í˜ì´ì§€
+		 * limit: í•œ í˜ì´ì§€ë‹¹ ìµœëŒ€ ê°œì‹œê¸€ ìˆ˜
+		 * BOARD_RE_REF DESC, BOARD_RE_SEQ ASC ì— ì˜í•´ ì •ë ¬ëœ ê²ƒì„,
+		 * ì¡°ê±´ì ˆì— ë§ëŠ” RNUMì˜ ë²”ìœ„ ë§Œí¼ ê°€ì ¸ì˜¤ëŠ” ì¿¼ë¦¬ë¬¸
 		 */
 		
 		String selectSQL = "SELECT * " +
@@ -386,17 +386,17 @@ public class BoardDAO {
 			try {
 				if (rs != null) rs.close();
 			} catch (Exception e) {
-				System.out.println("ResultSet ´İ´Â Áß ¿¹¿Ü ¹ß»ı.");
+				System.out.println("ResultSet ë‹«ëŠ” ì¤‘ ì˜ˆì™¸ ë°œìƒ.");
 			}
 			try {
 				if (pstmt != null) pstmt.close();
 			} catch (Exception e) {
-				System.out.println("PreparedStatement ´İ´Â Áß ¿¹¿Ü ¹ß»ı.");
+				System.out.println("PreparedStatement ë‹«ëŠ” ì¤‘ ì˜ˆì™¸ ë°œìƒ.");
 			}
 			try {
 				if (con != null) con.close();
 			} catch (Exception e) {
-				System.out.println("Connection ´İ´Â Áß ¿¹¿Ü ¹ß»ı.");
+				System.out.println("Connection ë‹«ëŠ” ì¤‘ ì˜ˆì™¸ ë°œìƒ.");
 			}
 		}
 		return list;
@@ -443,17 +443,17 @@ public class BoardDAO {
 			try {
 				if (rs != null) rs.close();
 			} catch (Exception e) {
-				System.out.println("ResultSet ´İ´Â Áß ¿¹¿Ü ¹ß»ı.");
+				System.out.println("ResultSet ë‹«ëŠ” ì¤‘ ì˜ˆì™¸ ë°œìƒ.");
 			}
 			try {
 				if (pstmt != null) pstmt.close();
 			} catch (Exception e) {
-				System.out.println("PreparedStatement ´İ´Â Áß ¿¹¿Ü ¹ß»ı.");
+				System.out.println("PreparedStatement ë‹«ëŠ” ì¤‘ ì˜ˆì™¸ ë°œìƒ.");
 			}
 			try {
 				if (con != null) con.close();
 			} catch (Exception e) {
-				System.out.println("Connection ´İ´Â Áß ¿¹¿Ü ¹ß»ı.");
+				System.out.println("Connection ë‹«ëŠ” ì¤‘ ì˜ˆì™¸ ë°œìƒ.");
 			}
 		}
 		return board;

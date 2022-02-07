@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /*
- * Æ¯Á¤ ºñÁî´Ï½º ¿äÃ»À¸·Î ¼öÇàÇÏ°í °á°ú °ªÀ» ActionForward Å¸ÀÔÀ¸·Î º¯È¯ÇÏ´Â ¸Ş¼­µå°¡ Á¤ÀÇµÇ¾î ÀÖ´Ù.
- * Action : ÀÎÅÍÆäÀÌ½º ¸í
- * ActionForward: ¹İÈ¯Çü
+ * íŠ¹ì • ë¹„ì¦ˆë‹ˆìŠ¤ ìš”ì²­ìœ¼ë¡œ ìˆ˜í–‰í•˜ê³  ê²°ê³¼ ê°’ì„ ActionForward íƒ€ì…ìœ¼ë¡œ ë³€í™˜í•˜ëŠ” ë©”ì„œë“œê°€ ì •ì˜ë˜ì–´ ìˆë‹¤.
+ * Action : ì¸í„°í˜ì´ìŠ¤ ëª…
+ * ActionForward: ë°˜í™˜í˜•
  */
 public interface Action {
 

@@ -34,7 +34,7 @@ public class MemberInfoAction implements Action {
 		request.setAttribute("memberInfo", m);
 		request.setAttribute("myboard", boardlist);
 		
-		forward.setRedirect(false);//ÁÖ¼Ò º¯°æ¾øÀÌ jspÆäÀÌÁöÀÇ ³»¿ëÀ» º¸¿©Áİ´Ï´Ù.
+		forward.setRedirect(false);//ì£¼ì†Œ ë³€ê²½ì—†ì´ jspí˜ì´ì§€ì˜ ë‚´ìš©ì„ ë³´ì—¬ì¤ë‹ˆë‹¤.
 		forward.setPath("mypage.jsp");
 		return forward;
 	}

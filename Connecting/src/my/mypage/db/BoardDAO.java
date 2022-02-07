@@ -1,8 +1,8 @@
 /*
- DAO(Data Access Object) Å¬·¡½º
- -µ¥ÀÌÅÍ º£ÀÌ½º¿Í ¿¬µ¿ÇÏ¿© ·¹ÄÚµåÀÇ Ãß°¡, ¼öÁ¤, »èÁ¦ ÀÛ¾÷ÀÌ ÀÌ·ç¾îÁö´Â Å¬·¡½º ÀÔ´Ï´Ù.
- -¾î¶² ActionÅ¬·¡½º°¡ È£ÃâµÇ´õ¶óµµ ±×¿¡ ÇØ´çÇÏ´Â µ¥ÀÌÅÍ º£ÀÌ½º ¿¬µ¿ Ã³¸®´Â
- 	DAOÅ¬·¡½º¿¡¼­ ÀÌ·ç¾îÁö°Ô µË´Ï´Ù.
+ DAO(Data Access Object) í´ë˜ìŠ¤
+ -ë°ì´í„° ë² ì´ìŠ¤ì™€ ì—°ë™í•˜ì—¬ ë ˆì½”ë“œì˜ ì¶”ê°€, ìˆ˜ì •, ì‚­ì œ ì‘ì—…ì´ ì´ë£¨ì–´ì§€ëŠ” í´ë˜ìŠ¤ ì…ë‹ˆë‹¤.
+ -ì–´ë–¤ Actioní´ë˜ìŠ¤ê°€ í˜¸ì¶œë˜ë”ë¼ë„ ê·¸ì— í•´ë‹¹í•˜ëŠ” ë°ì´í„° ë² ì´ìŠ¤ ì—°ë™ ì²˜ë¦¬ëŠ”
+ 	DAOí´ë˜ìŠ¤ì—ì„œ ì´ë£¨ì–´ì§€ê²Œ ë©ë‹ˆë‹¤.
  */
 
 package my.mypage.db;
@@ -27,13 +27,13 @@ public class BoardDAO {
 	
 	private DataSource ds;
 	
-	//»ı¼ºÀÚ¿¡¼­ JNDI ¸®¼Ò½º¸¦ ÂüÁ¶ÇÏ¿© Connection °´Ã¼¸¦ ¾ò¾î¿É´Ï´Ù.
+	//ìƒì„±ìì—ì„œ JNDI ë¦¬ì†ŒìŠ¤ë¥¼ ì°¸ì¡°í•˜ì—¬ Connection ê°ì²´ë¥¼ ì–»ì–´ì˜µë‹ˆë‹¤.
 	public BoardDAO() {
 		try {
 			Context init = new InitialContext();
 			ds = (DataSource) init.lookup("java:comp/env/jdbc/OracleDB");
 		}catch (Exception e) {
-			System.out.println("DB¿¬°á ½ÇÆĞ:" + e);
+			System.out.println("DBì—°ê²° ì‹¤íŒ¨:" + e);
 		}
 	}
 
@@ -75,7 +75,7 @@ public class BoardDAO {
 			
 			
 		} catch (Exception ex) {
-			System.out.println("getListCount() ¿¡·¯: " + ex);
+			System.out.println("getListCount() ì—ëŸ¬: " + ex);
 		} finally {
 			if (rs != null)
 				try {
@@ -99,13 +99,6 @@ public class BoardDAO {
 
 		return boardlist;
 		
-	}
-	
-
-	
-	
-	
-	
-	
+	}	
 	
 }

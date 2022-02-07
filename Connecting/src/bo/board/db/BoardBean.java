@@ -19,7 +19,7 @@ public class BoardBean {
 	private String content;
 	private String board_img;
 	
-	private int heart_num; // ÇÏÆ®¼ö
+	private int heart_num; // í•˜íŠ¸ìˆ˜
 
 	public int getBoard_id() {
 		return board_id;
