@@ -1,11 +1,19 @@
+DROP TABLE MEMBER CASCADE CONSTRAINTS;
+
 CREATE TABLE MEMBER (
 
 	ID VARCHAR2(20) PRIMARY KEY,
 	PASSWORD VARCHAR2(20) NOT NULL,
 	EMAIL VARCHAR2(20) NOT NULL,
 	NAME VARCHAR2(10) NOT NULL,
+	REG_DATE DATE DEFAULT SYSDATE,
 	PROFILE_IMG VARCHAR2(20) 
 );
+
+insert into member (id, password, email,name,profile_img) 
+values('hh','1234','hhyy@naver.com','hy',null);
+
+select * from MEMBER;
 
 
 CREATE TABLE HEART ( -- 사용자가 하트 버튼 클릭한 게시물을 모아주는 테이블 --
@@ -33,11 +41,15 @@ CREATE TABLE BOARD (
 	FOREIGN KEY(ID) REFERENCES MEMBER(ID) ON DELETE CASCADE -- 회원 탈퇴 시 작성 글도 날아감 --
 );
 
+insert into board (board_id,category,loc,id,title,
+start_date,end_date) 
+values(3,1,0,'hh','2월박람회','2022-02-01','2022-02-31');
 
+select * from board;
 
 
 CREATE TABLE NOTICE (
-	NOTICE_ID VARCHAR2(20) PRIMARY KEY,
+	NOTICE_ID NUMBER(20) PRIMARY KEY,
 	TITLE VARCHAR2(50),
 	CONTENT VARCHAR2(399),
 	WRITE_DATE DATE DEFAULT SYSDATE

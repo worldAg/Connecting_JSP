@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 
@@ -12,7 +12,7 @@
 <body>
     <jsp:include page="header.jsp" />
 
-	<button type="button" class="btn btn-primary btn-lg">»õ·Î¿î ¼Ò½ÄÀ» È®ÀÎÇÏ¼¼¿ä></button>
+	<button type="button" class="btn btn-primary btn-lg">ìƒˆë¡œìš´ ì†Œì‹ì„ í™•ì¸í•˜ì„¸ìš”></button>
 	
     <div id="boards">
         <div class="card" style="width: 18rem;">
