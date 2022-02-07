@@ -31,20 +31,20 @@ public class MemberJoinProcessAction implements Action {
 		
 		int result = mdao.insert(m);
 		if(result==0) {
-			System.out.println("È¸¿ø °¡ÀÔ ½ÇÆĞÀÔ´Ï´Ù.");
+			System.out.println("íšŒì› ê°€ì… ì‹¤íŒ¨ì…ë‹ˆë‹¤.");
 			ActionForward forward = new ActionForward();
 			forward.setRedirect(false);
-			request.setAttribute("message", "È¸¿ø °¡ÀÔ ½ÇÆĞÀÔ´Ï´Ù.");
+			request.setAttribute("message", "íšŒì› ê°€ì… ì‹¤íŒ¨ì…ë‹ˆë‹¤.");
 			forward.setPath("error/error.jsp");
 			return forward;
 		}
 		
 		out.println("<script>");
 		if (result == 1) { 
-			out.println("alert('È¸¿ø °¡ÀÔÀ» ÃàÇÏÇÕ´Ï´Ù.');");
+			out.println("alert('íšŒì› ê°€ì…ì„ ì¶•í•˜í•©ë‹ˆë‹¤.');");
 			out.println("location.href='login.net';");
 		} else if (result == -1) {
-			out.println("alert('¾ÆÀÌµğ°¡ Áßº¹µÇ¾ú½À´Ï´Ù.');");
+			out.println("alert('ì•„ì´ë””ê°€ ì¤‘ë³µë˜ì—ˆìŠµë‹ˆë‹¤.');");
 			out.println("history.back()");
 		}
 		out.println("</script>");

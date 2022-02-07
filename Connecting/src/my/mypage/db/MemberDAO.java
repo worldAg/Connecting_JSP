@@ -13,13 +13,13 @@ import javax.sql.DataSource;
 public class MemberDAO {
 private DataSource ds;
 	
-	//»ı¼ºÀÚ¿¡¼­ JNDI ¸®¼Ò½º¸¦ ÂüÁ¶ÇÏ¿© Connection °´Ã¼¸¦ ¾ò¾î¿É´Ï´Ù.
+	//ìƒì„±ìì—ì„œ JNDI ë¦¬ì†ŒìŠ¤ë¥¼ ì°¸ì¡°í•˜ì—¬ Connection ê°ì²´ë¥¼ ì–»ì–´ì˜µë‹ˆë‹¤.
 	public MemberDAO() {
 		try {
 			Context init = new InitialContext();
 			ds = (DataSource) init.lookup("java:comp/env/jdbc/OracleDB");
 		}catch (Exception e) {
-			System.out.println("DB¿¬°á ½ÇÆĞ:" + e);
+			System.out.println("DBì—°ê²° ì‹¤íŒ¨:" + e);
 		}
 	}
 	
@@ -52,7 +52,7 @@ private DataSource ds;
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			//¿©´Â ¼ø¼­¿Í ¹İ´ë·Î ´İ±â
+			//ì—¬ëŠ” ìˆœì„œì™€ ë°˜ëŒ€ë¡œ ë‹«ê¸°
 			try {
 				if(rs != null)
 					rs.close();
@@ -67,7 +67,7 @@ private DataSource ds;
 			}
 			try {
 				if(conn != null)
-					conn.close();	//4´Ü°è : DB¿¬°áÀ» ²÷´Â´Ù.
+					conn.close();	//4ë‹¨ê³„ : DBì—°ê²°ì„ ëŠëŠ”ë‹¤.
 			}catch(Exception e) {
 				System.out.println(e.getMessage());
 			}
@@ -96,7 +96,7 @@ private DataSource ds;
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
-			//¿©´Â ¼ø¼­¿Í ¹İ´ë·Î ´İ±â
+			//ì—¬ëŠ” ìˆœì„œì™€ ë°˜ëŒ€ë¡œ ë‹«ê¸°
 			try {
 				if(pstmt != null)
 					pstmt.close();
@@ -105,7 +105,7 @@ private DataSource ds;
 			}
 			try {
 				if(conn != null)
-					conn.close();	//4´Ü°è : DB¿¬°áÀ» ²÷´Â´Ù.
+					conn.close();	//4ë‹¨ê³„ : DBì—°ê²°ì„ ëŠëŠ”ë‹¤.
 			}catch(Exception e) {
 				System.out.println(e.getMessage());
 			}
@@ -135,7 +135,7 @@ private DataSource ds;
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
-			//¿©´Â ¼ø¼­¿Í ¹İ´ë·Î ´İ±â
+			//ì—¬ëŠ” ìˆœì„œì™€ ë°˜ëŒ€ë¡œ ë‹«ê¸°
 			try {
 				if(pstmt != null)
 					pstmt.close();
@@ -144,7 +144,7 @@ private DataSource ds;
 			}
 			try {
 				if(conn != null)
-					conn.close();	//4´Ü°è : DB¿¬°áÀ» ²÷´Â´Ù.
+					conn.close();	//4ë‹¨ê³„ : DBì—°ê²°ì„ ëŠëŠ”ë‹¤.
 			}catch(Exception e) {
 				System.out.println(e.getMessage());
 			}

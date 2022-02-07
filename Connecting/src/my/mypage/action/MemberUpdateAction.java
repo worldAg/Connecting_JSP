@@ -27,18 +27,18 @@ public class MemberUpdateAction implements Action {
 		
 		m = mdao.getUser("hh");
 		
-		//±Û ³»¿ë ºÒ·¯¿À±â ½ÇÆĞÇÑ °æ¿ì
+		//ê¸€ ë‚´ìš© ë¶ˆëŸ¬ì˜¤ê¸° ì‹¤íŒ¨í•œ ê²½ìš°
 		if(m == null) {
-			System.out.println("È¸¿øÁ¤º¸ º¸±â ½ÇÆĞ");
+			System.out.println("íšŒì›ì •ë³´ ë³´ê¸° ì‹¤íŒ¨");
 			forward = new ActionForward();
 			forward.setRedirect(false);
-			request.setAttribute("message", "È¸¿øÁ¤º¸ º¸±â ½ÇÆĞÀÔ´Ï´Ù.");
+			request.setAttribute("message", "íšŒì›ì •ë³´ ë³´ê¸° ì‹¤íŒ¨ì…ë‹ˆë‹¤.");
 			forward.setPath("error/error.jsp");
 			return forward;
 		}
 		
 		
-		System.out.println("È¸¿øÁ¤º¸ º¸±â ¼º°ø");
+		System.out.println("íšŒì›ì •ë³´ ë³´ê¸° ì„±ê³µ");
 		
 		
 		request.setAttribute("memberInfo", m);

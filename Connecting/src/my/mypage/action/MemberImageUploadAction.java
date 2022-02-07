@@ -22,12 +22,12 @@ public class MemberImageUploadAction implements Action {
 		// TODO Auto-generated method stub
 		String realFolder = "";
 		
-		//WebContent¾Æ·¡¿¡ ²À Æú´õ »ı¼º
+		//WebContentì•„ë˜ì— ê¼­ í´ë” ìƒì„±
 		String saveFolder = "memberupload";
 		
-		int fileSize = 5 * 1024 * 1024; // ¾÷·ÎµåÇÒ ÆÄÀÏÀÇ ÃÖ´ë »çÀÌÁî ÀÔ´Ï´Ù. 5MB
+		int fileSize = 5 * 1024 * 1024; // ì—…ë¡œë“œí•  íŒŒì¼ì˜ ìµœëŒ€ ì‚¬ì´ì¦ˆ ì…ë‹ˆë‹¤. 5MB
 		
-		//½ÇÁ¦ ÀúÀå °æ·Î¸¦ ÁöÁ¤ÇÕ´Ï´Ù.
+		//ì‹¤ì œ ì €ì¥ ê²½ë¡œë¥¼ ì§€ì •í•©ë‹ˆë‹¤.
 		ServletContext sc = request.getServletContext();
 		realFolder = sc.getRealPath(saveFolder);
 		System.out.println(realFolder);
@@ -38,7 +38,7 @@ public class MemberImageUploadAction implements Action {
 			String id = multi.getParameter("id");
 			String profile = multi.getFilesystemName("profile");
 			
-			System.out.println("ÆÄÀÏ=" + profile);
+			System.out.println("íŒŒì¼=" + profile);
 			
 			
 			MemberDAO mdao = new MemberDAO();
@@ -47,12 +47,12 @@ public class MemberImageUploadAction implements Action {
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			//¼öÁ¤ÀÌ µÈ °æ¿ì
+			//ìˆ˜ì •ì´ ëœ ê²½ìš°
 			if (result == 1) {
-				out.println("alert('¼öÁ¤µÇ¾ú½À´Ï´Ù.');");
+				out.println("alert('ìˆ˜ì •ë˜ì—ˆìŠµë‹ˆë‹¤.');");
 				out.println("location.href='memberInfo.my';");
 			} else {
-				out.println("alert('È¸¿ø Á¤º¸ ¼öÁ¤¿¡ ½ÇÆĞÇß½À´Ï´Ù.');");
+				out.println("alert('íšŒì› ì •ë³´ ìˆ˜ì •ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.');");
 				out.println("history.back()");
 			}
 			out.println("</script>");
@@ -61,7 +61,7 @@ public class MemberImageUploadAction implements Action {
 		}catch(IOException ex) {
 			ActionForward forward = new ActionForward();
 			forward.setPath("error/error.jsp");
-			request.setAttribute("message", "ÇÁ·ÎÇÊ »çÁø ¾÷·Îµå ½ÇÆĞÀÔ´Ï´Ù.");
+			request.setAttribute("message", "í”„ë¡œí•„ ì‚¬ì§„ ì—…ë¡œë“œ ì‹¤íŒ¨ì…ë‹ˆë‹¤.");
 			forward.setRedirect(false);
 			return forward;
 		}

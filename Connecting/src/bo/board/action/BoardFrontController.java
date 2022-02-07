@@ -35,33 +35,33 @@ public class BoardFrontController extends HttpServlet {
 	
 	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/*
-		 * ¿äÃ»µÈ ÀüÃ¼ url Áß¿¡¼­ Æ÷Æ® ¹øÈ£ ´ÙÀ½ ºÎÅÍ ¸¶Áö¸· ¹®ÀÚ¿­±îÁö ¹İÈ¯ÇÕ´Ï´Ù.
-		 * 		¿¹) contextPath°¡ "/JspProject"ÀÎ °æ¿ì,
-		 * 		http://localhost:8088/JspProject/login.netÀ¸·Î ¿äÃ»ÇÏ¸é, RequestURI´Â
-		 * 			"/JspProject/login.net"ÀÌ ¹İÈ¯µË´Ï´Ù.
+		 * ìš”ì²­ëœ ì „ì²´ url ì¤‘ì—ì„œ í¬íŠ¸ ë²ˆí˜¸ ë‹¤ìŒ ë¶€í„° ë§ˆì§€ë§‰ ë¬¸ìì—´ê¹Œì§€ ë°˜í™˜í•©ë‹ˆë‹¤.
+		 * 		ì˜ˆ) contextPathê°€ "/JspProject"ì¸ ê²½ìš°,
+		 * 		http://localhost:8088/JspProject/login.netìœ¼ë¡œ ìš”ì²­í•˜ë©´, RequestURIëŠ”
+		 * 			"/JspProject/login.net"ì´ ë°˜í™˜ë©ë‹ˆë‹¤.
 		 */
 		String RequestURI = request.getRequestURI();
 		System.out.println("RequestURI: " + RequestURI);
 		
-		// getContextPath() : ÄÁÅØ½ºÆ® °æ·Î°¡ ¹İÈ¯µÈ´Ù.
-		// contextPath´Â "/JspProject"°¡ ¹İÈ¯µÈ´Ù.
+		// getContextPath() : ì»¨í…ìŠ¤íŠ¸ ê²½ë¡œê°€ ë°˜í™˜ëœë‹¤.
+		// contextPathëŠ” "/JspProject"ê°€ ë°˜í™˜ëœë‹¤.
 		String contextPath = request.getContextPath();
 		System.out.println("contextPath: " + contextPath);
 		
 		/*
-		 * RequestURI¿¡¼­ ÄÁÅØ½ºÆ® °æ·Î ±æÀÌ °ªÀÇ ÀÎµ¦½º À§Ä¡ÀÇ ¹®ÀÚºÎÅÍ,
-		 * ¸¶Áö¸· À§Ä¡ ¹®ÀÚ±îÁö ÃßÃâÇÑ´Ù.
-		 * command´Â "/login.net"ÀÌ ¹İÈ¯µÈ´Ù.
+		 * RequestURIì—ì„œ ì»¨í…ìŠ¤íŠ¸ ê²½ë¡œ ê¸¸ì´ ê°’ì˜ ì¸ë±ìŠ¤ ìœ„ì¹˜ì˜ ë¬¸ìë¶€í„°,
+		 * ë§ˆì§€ë§‰ ìœ„ì¹˜ ë¬¸ìê¹Œì§€ ì¶”ì¶œí•œë‹¤.
+		 * commandëŠ” "/login.net"ì´ ë°˜í™˜ëœë‹¤.
 		 */
 		String command = RequestURI.substring(contextPath.length());
 		System.out.println("command: " + command);
 		
 		
-		// ÃÊ±âÈ­
+		// ì´ˆê¸°í™”
 		Action action = null;
 		
 		switch (command) {			
-			case "/BoardList.bo": // ·Î±×ÀÎÀÌ ¼º°øÀûÀ¸·Î µÆÀ» ¶§ ÀÌ ÁÖ¼Ò·Î "redirect"µÅ¼­ ÀÌµ¿. Áï ÁÖ¼Ò°¡ ¹Ù²ñ. ±×¸®°í boardList.jsp·Î forward
+			case "/BoardList.bo": // ë¡œê·¸ì¸ì´ ì„±ê³µì ìœ¼ë¡œ ëì„ ë•Œ ì´ ì£¼ì†Œë¡œ "redirect"ë¼ì„œ ì´ë™. ì¦‰ ì£¼ì†Œê°€ ë°”ë€œ. ê·¸ë¦¬ê³  boardList.jspë¡œ forward
 				action = new BoardListAction();
 				break;	
 			case "/NoticeList.bo":

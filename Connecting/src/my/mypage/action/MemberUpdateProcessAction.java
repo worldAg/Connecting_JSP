@@ -35,13 +35,13 @@ public class MemberUpdateProcessAction implements Action {
 		PrintWriter out = response.getWriter();
 		
 		out.println("<script>");
-		//¼öÁ¤ÀÌ µÈ °æ¿ì
+		//ìˆ˜ì •ì´ ëœ ê²½ìš°
 		if (result == 1) {
-			out.println("alert('¼öÁ¤µÇ¾ú½À´Ï´Ù.');");
+			out.println("alert('ìˆ˜ì •ë˜ì—ˆìŠµë‹ˆë‹¤.');");
 			out.println("location.href='memberInfo.my';");
 		} else {
-			out.println("alert('È¸¿ø Á¤º¸ ¼öÁ¤¿¡ ½ÇÆĞÇß½À´Ï´Ù.');");
-			out.println("history.back()");//ºñ¹Ğ¹øÈ£¸¦ Á¦¿ÜÇÑ ´Ù¸¥ µ¥ÀÌÅÍ´Â À¯Áö µÇ¾î ÀÖ½À´Ï´Ù.
+			out.println("alert('íšŒì› ì •ë³´ ìˆ˜ì •ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.');");
+			out.println("history.back()");//ë¹„ë°€ë²ˆí˜¸ë¥¼ ì œì™¸í•œ ë‹¤ë¥¸ ë°ì´í„°ëŠ” ìœ ì§€ ë˜ì–´ ìˆìŠµë‹ˆë‹¤.
 		}
 		out.println("</script>");
 		out.close();

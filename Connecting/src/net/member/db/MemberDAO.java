@@ -14,20 +14,20 @@ import javax.sql.DataSource;
 public class MemberDAO {
 private DataSource ds;
 	
-	//»ı¼ºÀÚ¿¡¼­ JNDI ¸®¼Ò½º¸¦ ÂüÁ¶ÇÏ¿© Connection °´Ã¼¸¦ ¾ò¾î¿É´Ï´Ù.
+	//ìƒì„±ìì—ì„œ JNDI ë¦¬ì†ŒìŠ¤ë¥¼ ì°¸ì¡°í•˜ì—¬ Connection ê°ì²´ë¥¼ ì–»ì–´ì˜µë‹ˆë‹¤.
 	public MemberDAO() {
 		try {
 				Context init = new InitialContext();
 				ds = (DataSource) init.lookup("java:comp/env/jdbc/OracleDB");
 		}catch (Exception ex) {
-			System.out.println("DB_¿¬°á ½ÇÆĞ :" + ex);
+			System.out.println("DB_ì—°ê²° ì‹¤íŒ¨ :" + ex);
 		}
 	}
 	public int isId(String id) {
 		Connection con =null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		int result=-1;//DB¿¡ ÇØ´çid°¡ ¾ø½À´Ï´Ù.
+		int result=-1;//DBì— í•´ë‹¹idê°€ ì—†ìŠµë‹ˆë‹¤.
 		try {
 			con = ds.getConnection();
 			
@@ -37,7 +37,7 @@ private DataSource ds;
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()){
-				result = 0; //DB¿¡ ÇØ´ç id°¡ ÀÖ½À´Ï´Ù.
+				result = 0; //DBì— í•´ë‹¹ idê°€ ìˆìŠµë‹ˆë‹¤.
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -77,10 +77,10 @@ private DataSource ds;
 		 	pstmt.setString(2, m.getPASSWORD());
 		 	pstmt.setString(3, m.getNAME());
 		 	pstmt.setString(4, m.getEMAIL());
-		 	result = pstmt.executeUpdate(); //»ğÀÔ ¼º°ø½Ã result´Â 1
+		 	result = pstmt.executeUpdate(); //ì‚½ì… ì„±ê³µì‹œ resultëŠ” 1
 	 }catch(java.sql.SQLIntegrityConstraintViolationException e) {
 		 result = -1;
-		 System.out.println("¸â¹ö ¾ÆÀÌµğ Áßº¹ ¿¡·¯ÀÔ´Ï´Ù.");
+		 System.out.println("ë©¤ë²„ ì•„ì´ë”” ì¤‘ë³µ ì—ëŸ¬ì…ë‹ˆë‹¤.");
 	 }catch (Exception e) {
 		 e.printStackTrace();
 		}finally {
@@ -103,7 +103,7 @@ private DataSource ds;
 	 Connection con=null;
 	 PreparedStatement pstmt=null;
 	 ResultSet rs=null;
-	 int result=-1;//¾ÆÀÌµğ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.
+	 int result=-1;//ì•„ì´ë””ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.
 	 try {
 		 con = ds.getConnection();
 		 
@@ -114,9 +114,9 @@ private DataSource ds;
 		 
 		 if(rs.next()){
 			 if(rs.getString(2).contentEquals(pass)){
-				 result = 1; //¾ÆÀÌµğ¿Í ºñ¹Ğ¹øÈ£ ÀÏÄ¡ÇÏ´Â °æ¿ì
+				 result = 1; //ì•„ì´ë””ì™€ ë¹„ë°€ë²ˆí˜¸ ì¼ì¹˜í•˜ëŠ” ê²½ìš°
 			 }else {
-				 result = 0; //ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê´Â °æ¿ì
+				 result = 0; //ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠëŠ” ê²½ìš°
 			 }
 		 }
 	 } catch (Exception e) {
@@ -232,7 +232,7 @@ public int getListCount() {
 		}
 	} catch (Exception ex) {
 		ex.printStackTrace();
-		System.out.println("getListCount() ¿¡·¯: " + ex);
+		System.out.println("getListCount() ì—ëŸ¬: " + ex);
 	} finally {
 		if (rs != null)
 			 try {
@@ -336,7 +336,7 @@ public int getListCount(String field, String value) {
 		}
 	} catch (Exception ex) {
 		ex.printStackTrace();
-		System.out.println("getListCount() ¿¡·¯: " + ex);
+		System.out.println("getListCount() ì—ëŸ¬: " + ex);
 	} finally {
 		if (rs != null)
 			 try {

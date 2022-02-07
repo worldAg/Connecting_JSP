@@ -20,25 +20,25 @@ public class BoardDetailAction implements Action {
 
 		BoardBean boarddata = dao.getDetail(boardId);
 
-		// boarddata == null; error Å×½ºÆ®¸¦ À§ÇÑ °ª ¼³Á¤
-		// dao¿¡¼­ ±ÛÀÇ ³»¿ëÀ» ÀĞÁö ¸øÇßÀ» °æ¿ì nullÀ» ¹İÈ¯
+		// boarddata == null; error í…ŒìŠ¤íŠ¸ë¥¼ ìœ„í•œ ê°’ ì„¤ì •
+		// daoì—ì„œ ê¸€ì˜ ë‚´ìš©ì„ ì½ì§€ ëª»í–ˆì„ ê²½ìš° nullì„ ë°˜í™˜
 		if (boarddata == null) {
-			System.out.println("°Ô½Ã±Û »ó¼¼º¸±â ½ÇÆĞ...");
+			System.out.println("ê²Œì‹œê¸€ ìƒì„¸ë³´ê¸° ì‹¤íŒ¨...");
 			ActionForward forward = new ActionForward();
 			forward.setRedirect(true);
-			// request.setAttribute("message", "±Û »ó¼¼ µ¥ÀÌÅÍ¸¦ ÀĞÁö ¸øÇß½À´Ï´Ù.");
+			// request.setAttribute("message", "ê¸€ ìƒì„¸ ë°ì´í„°ë¥¼ ì½ì§€ ëª»í–ˆìŠµë‹ˆë‹¤.");
 			forward.setPath("BoardList.bo");
 			return forward;
 		}
-		System.out.println("°Ô½Ã±Û »ó¼¼º¸±â ¼º°ø...");
+		System.out.println("ê²Œì‹œê¸€ ìƒì„¸ë³´ê¸° ì„±ê³µ...");
 
-		// boarddata °´Ã¼¸¦ request °´Ã¼¿¡ ÀúÀåÇÑ´Ù.
+		// boarddata ê°ì²´ë¥¼ request ê°ì²´ì— ì €ì¥í•œë‹¤.
 		request.setAttribute("boarddata", boarddata);
 
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
 
-		// ±Û ³»¿ë º¸±â ÆäÀÌÁö·Î ÀÌµ¿ÇÏ±â À§ÇØ °æ·Î¸¦ ¼³Á¤ÇÑ´Ù.
+		// ê¸€ ë‚´ìš© ë³´ê¸° í˜ì´ì§€ë¡œ ì´ë™í•˜ê¸° ìœ„í•´ ê²½ë¡œë¥¼ ì„¤ì •í•œë‹¤.
 		forward.setPath("board/boardView.jsp");
 		return forward;
 	}

@@ -26,33 +26,33 @@ public class BoardListAction implements Action {
 		List<BoardBean> boardlist = new ArrayList<BoardBean>();		
 		
 		/*
-		 * °Ô½Ã¹° ÀÛ¼º ¼ø: 0;
-		 * °ü½É ¸¹Àº ¼ø: 1;
-		 * ½ÃÀÛ ÀÏÀÚ ÀÓ¹Ú ¼ø: 2;
-		 * Á¾·á ÀÏÀÚ ÀÓ¹Ú ¼ø: 3;
+		 * ê²Œì‹œë¬¼ ì‘ì„± ìˆœ: 0;
+		 * ê´€ì‹¬ ë§ì€ ìˆœ: 1;
+		 * ì‹œì‘ ì¼ì ì„ë°• ìˆœ: 2;
+		 * ì¢…ë£Œ ì¼ì ì„ë°• ìˆœ: 3;
 		 */
 		String orderby = request.getParameter("orderby");
 		System.out.println("orderby: " + orderby);		
 		
-		// ·Î±×ÀÎ ¼º°ø ½Ã ÆÄ¶ó¹ÌÅÍ page°¡ ¾ø½À´Ï´Ù. ±×·¡¼­ ÃÊ±â °ªÀÌ ÇÊ¿ä.
-		int page = 1; // º¸¿©ÁÙ ÆäÀÌÁö
-		int limit = 5; // ÇÑ ÆäÀÌÁö¿¡ º¸¿©ÁÙ °Ô½ÃÆÇ ±Û ¸ñ·ÏÀÇ ¼ö
+		// ë¡œê·¸ì¸ ì„±ê³µ ì‹œ íŒŒë¼ë¯¸í„° pageê°€ ì—†ìŠµë‹ˆë‹¤. ê·¸ë˜ì„œ ì´ˆê¸° ê°’ì´ í•„ìš”.
+		int page = 1; // ë³´ì—¬ì¤„ í˜ì´ì§€
+		int limit = 5; // í•œ í˜ì´ì§€ì— ë³´ì—¬ì¤„ ê²Œì‹œíŒ ê¸€ ëª©ë¡ì˜ ìˆ˜
 		
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page").trim());
 		}		
-		System.out.println("º¸¿©ÁÙ ÆäÀÌÁö - page: " + page);
+		System.out.println("ë³´ì—¬ì¤„ í˜ì´ì§€ - page: " + page);
 		
-		// Ãß°¡
+		// ì¶”ê°€
 		if (request.getParameter("limit") != null) {
 			limit = Integer.parseInt(request.getParameter("limit").trim());
 		}
-		System.out.println("ÇÑ ÆäÀÌÁö´ç º¸¿©ÁÙ °Ô½Ã¹°ÀÇ °³¼ö - limit: " + limit);
+		System.out.println("í•œ í˜ì´ì§€ë‹¹ ë³´ì—¬ì¤„ ê²Œì‹œë¬¼ì˜ ê°œìˆ˜ - limit: " + limit);
 				
-		// ÃÑ ±ÛÀÇ °³¼ö
+		// ì´ ê¸€ì˜ ê°œìˆ˜
 		int listcount = boarddao.getListCount();
 		
-		// ¸®½ºÆ®¸¦ ¹Ş¾Æ¿É´Ï´Ù.		
+		// ë¦¬ìŠ¤íŠ¸ë¥¼ ë°›ì•„ì˜µë‹ˆë‹¤.		
 		if (orderby == null || orderby.equals("") || orderby.equals("0")) {
 			boardlist = boarddao.getBoardListOrderByDefault(page, limit);			
 			request.setAttribute("orderby", "0");
@@ -68,43 +68,43 @@ public class BoardListAction implements Action {
 		}
 		
 		/*
-		 * ÃÑ ÆäÀÌÁö °³¼ö: (DB¿¡ ÀúÀåµÈ ÃÑ ¸®½ºÆ®ÀÇ ¼ö + ÇÑ ÆäÀÌÁö¿¡¼­ º¸¿©ÁÖ´Â ¸®½ºÆ®ÀÇ ¼ö - 1) / ÇÑ ÆäÀÌÁö¿¡¼­ º¸¿©ÁÖ´Â ¸®½ºÆ®ÀÇ ¼ö
+		 * ì´ í˜ì´ì§€ ê°œìˆ˜: (DBì— ì €ì¥ëœ ì´ ë¦¬ìŠ¤íŠ¸ì˜ ìˆ˜ + í•œ í˜ì´ì§€ì—ì„œ ë³´ì—¬ì£¼ëŠ” ë¦¬ìŠ¤íŠ¸ì˜ ìˆ˜ - 1) / í•œ í˜ì´ì§€ì—ì„œ ë³´ì—¬ì£¼ëŠ” ë¦¬ìŠ¤íŠ¸ì˜ ìˆ˜
 		 * 
-		 * ¿¹¸¦ µé¾î ÇÑ ÆäÀÌÁö¿¡¼­ º¸¿©ÁÖ´Â ¸®½ºÆ®ÀÇ ¼ö°¡ 10 °³ÀÎ °æ¿ì...
-		 * 		¿¹1) DB¿¡ ÀúÀåµÈ ÃÑ ¸®½ºÆ®ÀÇ ¼ö°¡ 0ÀÌ¸é ÃÑ ÆäÀÌÁöÀÇ ¼ö´Â 0ÆäÀÌÁö
-		 * 		¿¹2) DB¿¡ ÀúÀåµÈ ÃÑ ¸®½ºÆ®ÀÇ ¼ö°¡ (01~10)ÀÌ¸é, ÃÑ ÆäÀÌÁöÀÇ ¼ö´Â 1ÆäÀÌÁö
-		 * 		¿¹3) DB¿¡ ÀúÀåµÈ ÃÑ ¸®½ºÆ®ÀÇ ¼ö°¡ (11~20)ÀÌ¸é, ÃÑ ÆäÀÌÁöÀÇ ¼ö´Â 2ÆäÀÌÁö
-		 * 		¿¹4) DB¿¡ ÀúÀåµÈ ÃÑ ¸®½ºÆ®ÀÇ ¼ö°¡ (21~30)ÀÌ¸é, ÃÑ ÆäÀÌÁöÀÇ ¼ö´Â 3ÆäÀÌÁö
+		 * ì˜ˆë¥¼ ë“¤ì–´ í•œ í˜ì´ì§€ì—ì„œ ë³´ì—¬ì£¼ëŠ” ë¦¬ìŠ¤íŠ¸ì˜ ìˆ˜ê°€ 10 ê°œì¸ ê²½ìš°...
+		 * 		ì˜ˆ1) DBì— ì €ì¥ëœ ì´ ë¦¬ìŠ¤íŠ¸ì˜ ìˆ˜ê°€ 0ì´ë©´ ì´ í˜ì´ì§€ì˜ ìˆ˜ëŠ” 0í˜ì´ì§€
+		 * 		ì˜ˆ2) DBì— ì €ì¥ëœ ì´ ë¦¬ìŠ¤íŠ¸ì˜ ìˆ˜ê°€ (01~10)ì´ë©´, ì´ í˜ì´ì§€ì˜ ìˆ˜ëŠ” 1í˜ì´ì§€
+		 * 		ì˜ˆ3) DBì— ì €ì¥ëœ ì´ ë¦¬ìŠ¤íŠ¸ì˜ ìˆ˜ê°€ (11~20)ì´ë©´, ì´ í˜ì´ì§€ì˜ ìˆ˜ëŠ” 2í˜ì´ì§€
+		 * 		ì˜ˆ4) DBì— ì €ì¥ëœ ì´ ë¦¬ìŠ¤íŠ¸ì˜ ìˆ˜ê°€ (21~30)ì´ë©´, ì´ í˜ì´ì§€ì˜ ìˆ˜ëŠ” 3í˜ì´ì§€
 		 */
-		int maxpage = (listcount + limit - 1) / limit; // limitÀº ÇÑ ÆäÀÌÁö´ç º¸¿©ÁÙ ±ÛÀÇ °³¼ö
+		int maxpage = (listcount + limit - 1) / limit; // limitì€ í•œ í˜ì´ì§€ë‹¹ ë³´ì—¬ì¤„ ê¸€ì˜ ê°œìˆ˜
 		
-		System.out.println("ÇÑ ÆäÀÌÁö´ç º¸¿©ÁÙ ±ÛÀÇ °³¼ö: " + limit + ",    ÇÊ¿äÇÑ ÃÑ ÆäÀÌÁö °³¼ö: " + maxpage);
+		System.out.println("í•œ í˜ì´ì§€ë‹¹ ë³´ì—¬ì¤„ ê¸€ì˜ ê°œìˆ˜: " + limit + ",    í•„ìš”í•œ ì´ í˜ì´ì§€ ê°œìˆ˜: " + maxpage);
 		
 		/*
-		 * startpage: ÇöÀç ÆäÀÌÁö ±×·ì¿¡¼­ ¸Ç Ã³À½¿¡ Ç¥½ÃµÉ ÆäÀÌÁö ¼ö¸¦ ÀÇ¹Ì.
-		 * ([1], [11], [21] µî...) º¸¿©ÁÙ ÆäÀÌÁö°¡ 30°³ÀÏ °æ¿ì,
-		 * [1][2][3]...[30]±îÁö ´Ù Ç¥½ÃÇÏ±â¿¡´Â ³Ê¹« ¸¹±â ¶§¹®¿¡ º¸Åë ÇÑ ÆäÀÌÁö¿¡´Â 10ÆäÀÌÁö Á¤µµ±îÁö ÀÌµ¿ÇÒ ¼ö ÀÖ°Ô Ç¥½Ã.
+		 * startpage: í˜„ì¬ í˜ì´ì§€ ê·¸ë£¹ì—ì„œ ë§¨ ì²˜ìŒì— í‘œì‹œë  í˜ì´ì§€ ìˆ˜ë¥¼ ì˜ë¯¸.
+		 * ([1], [11], [21] ë“±...) ë³´ì—¬ì¤„ í˜ì´ì§€ê°€ 30ê°œì¼ ê²½ìš°,
+		 * [1][2][3]...[30]ê¹Œì§€ ë‹¤ í‘œì‹œí•˜ê¸°ì—ëŠ” ë„ˆë¬´ ë§ê¸° ë•Œë¬¸ì— ë³´í†µ í•œ í˜ì´ì§€ì—ëŠ” 10í˜ì´ì§€ ì •ë„ê¹Œì§€ ì´ë™í•  ìˆ˜ ìˆê²Œ í‘œì‹œ.
 		 * 
-		 * ¿¹) ÆäÀÌÁö ±×·ìÀÌ ¾Æ·¡¿Í °°Àº °æ¿ì,
+		 * ì˜ˆ) í˜ì´ì§€ ê·¸ë£¹ì´ ì•„ë˜ì™€ ê°™ì€ ê²½ìš°,
 		 * 		[1][2][3][4][5][6][7][8][9][10]
-		 * ÆäÀÌÁö ±×·ìÀÇ ½ÃÀÛ ÆäÀÌÁö´Â startpage¿¡, ¸¶Áö¸· ÆäÀÌÁö´Â endpage¿¡ ±¸ÇÕ´Ï´Ù.
+		 * í˜ì´ì§€ ê·¸ë£¹ì˜ ì‹œì‘ í˜ì´ì§€ëŠ” startpageì—, ë§ˆì§€ë§‰ í˜ì´ì§€ëŠ” endpageì— êµ¬í•©ë‹ˆë‹¤.
 		 * 
-		 * ¿¹·Î, 1~10ÆäÀÌÁöÀÇ ³»¿ëÀ» Å¸³ª³¾¶§ ÆäÀÌÁö ±×·ìÀº [1][2]...[10]À¸·Î Ç¥½ÃµÇ°í,
-		 * 11~20ÆäÀÌÁöÀÇ ³»¿ëÀ» ³ªÅ¸³¾¶§´Â ÆäÀÌÁö ±×·ìÀº [11][12]...[20]±îÁö Ç¥½ÃµÈ´Ù. 
+		 * ì˜ˆë¡œ, 1~10í˜ì´ì§€ì˜ ë‚´ìš©ì„ íƒ€ë‚˜ë‚¼ë•Œ í˜ì´ì§€ ê·¸ë£¹ì€ [1][2]...[10]ìœ¼ë¡œ í‘œì‹œë˜ê³ ,
+		 * 11~20í˜ì´ì§€ì˜ ë‚´ìš©ì„ ë‚˜íƒ€ë‚¼ë•ŒëŠ” í˜ì´ì§€ ê·¸ë£¹ì€ [11][12]...[20]ê¹Œì§€ í‘œì‹œëœë‹¤. 
 		 */
 		
-		// page == º¸¿©ÁÙ ÆäÀÌÁö
+		// page == ë³´ì—¬ì¤„ í˜ì´ì§€
 		int startpage = ((page - 1) / 10) * 10 + 1;
-		System.out.println("ÇöÀç ÆäÀÌÂ¡±×·ì¿¡ º¸¿©ÁÙ ½ÃÀÛ ÆäÀÌÁö´Â? - startpage: " + startpage);
+		System.out.println("í˜„ì¬ í˜ì´ì§•ê·¸ë£¹ì— ë³´ì—¬ì¤„ ì‹œì‘ í˜ì´ì§€ëŠ”? - startpage: " + startpage);
 		
 		int endpage = startpage + 10 - 1;
-		System.out.println("ÇöÀç ÆäÀÌÂ¡±×·ì¿¡ º¸¿©ÁÙ ¸¶Áö¸· ÆäÀÌÁö´Â? - endpage: " + endpage);
+		System.out.println("í˜„ì¬ í˜ì´ì§•ê·¸ë£¹ì— ë³´ì—¬ì¤„ ë§ˆì§€ë§‰ í˜ì´ì§€ëŠ”? - endpage: " + endpage);
 		
 		/*
-		 * ¸¶Áö¸· ±×·ìÀÇ ¸¶Áö¸· ÆäÀÌÁö °ªÀº ÃÖ´ë ÆäÀÌÁö °ªÀÌ´Ù.
-		 * ¿¹·Î, ¸¶Áö¸· ÆäÀÌÁö ±×·ìÀÌ [21]~[30]ÀÎ °æ¿ì¿¡´Â
-		 * ½ÃÀÛÆäÀÌÁö(startpage==21), ¸¶Áö¸·ÆäÀÌÁö(endpage==30) ÀÌÁö¸¸, 
-		 * ÃÖ´ë ÇÊ¿äÇÑ ÆäÀÌÁö(maxpage)°¡ 25¶ó¸é, [21][22]...[25]±îÁö¸¸ Ç¥½ÃµÇµµ·Ï ÇØ¾ßµÈ´Ù.
+		 * ë§ˆì§€ë§‰ ê·¸ë£¹ì˜ ë§ˆì§€ë§‰ í˜ì´ì§€ ê°’ì€ ìµœëŒ€ í˜ì´ì§€ ê°’ì´ë‹¤.
+		 * ì˜ˆë¡œ, ë§ˆì§€ë§‰ í˜ì´ì§€ ê·¸ë£¹ì´ [21]~[30]ì¸ ê²½ìš°ì—ëŠ”
+		 * ì‹œì‘í˜ì´ì§€(startpage==21), ë§ˆì§€ë§‰í˜ì´ì§€(endpage==30) ì´ì§€ë§Œ, 
+		 * ìµœëŒ€ í•„ìš”í•œ í˜ì´ì§€(maxpage)ê°€ 25ë¼ë©´, [21][22]...[25]ê¹Œì§€ë§Œ í‘œì‹œë˜ë„ë¡ í•´ì•¼ëœë‹¤.
 		 */
 		if (endpage > maxpage) {
 			endpage = maxpage;
@@ -115,46 +115,46 @@ public class BoardListAction implements Action {
 		
 		if (state == null) {
 			System.out.println("state == null");
-			request.setAttribute("page", page); // ÇöÀç º¸¿©ÁÙ ÆäÀÌÁö
-			request.setAttribute("maxpage", maxpage); // ÇÊ¿äÇÑ ÃÑ ÆäÀÌÁöÀÇ °³¼ö
+			request.setAttribute("page", page); // í˜„ì¬ ë³´ì—¬ì¤„ í˜ì´ì§€
+			request.setAttribute("maxpage", maxpage); // í•„ìš”í•œ ì´ í˜ì´ì§€ì˜ ê°œìˆ˜
 			
-			// ÇöÀç ÆäÀÌÁö¿¡ Ç¥½ÃÇÒ Ã¹ ÆäÀÌÁö ¼ö
+			// í˜„ì¬ í˜ì´ì§€ì— í‘œì‹œí•  ì²« í˜ì´ì§€ ìˆ˜
 			request.setAttribute("startpage", startpage);
 			
-			// ÇöÀç ÆäÀÌÁö¿¡ Ç¥½ÃÇÒ ²ø ÆäÀÌÁö ¼ö
+			// í˜„ì¬ í˜ì´ì§€ì— í‘œì‹œí•  ëŒ í˜ì´ì§€ ìˆ˜
 			request.setAttribute("endpage", endpage);
 			
-			// ÃÑ ±ÛÀÇ °³¼ö
+			// ì´ ê¸€ì˜ ê°œìˆ˜
 			request.setAttribute("listcount", listcount);
 			
-			// ÇØ´ç ÆäÀÌÁöÀÇ ±Û ¸ñ·ÏÀ» °®°í ÀÖ´Â ¸®½ºÆ®
+			// í•´ë‹¹ í˜ì´ì§€ì˜ ê¸€ ëª©ë¡ì„ ê°–ê³  ìˆëŠ” ë¦¬ìŠ¤íŠ¸
 			request.setAttribute("boardlist", boardlist);
 			
-			// ÇÑ ÆäÀÌÁö´ç º¸¿©ÁÙ ÃÖ´ë °³½Ã±Û °³¼ö
+			// í•œ í˜ì´ì§€ë‹¹ ë³´ì—¬ì¤„ ìµœëŒ€ ê°œì‹œê¸€ ê°œìˆ˜
 			request.setAttribute("limit", limit);
 			
 			ActionForward forward = new ActionForward();
 			forward.setRedirect(false);
 			
-			// ±Û ¸ñ·Ï ÆäÀÌÁö·Î ÀÌµ¿ÇÏ±â À§ÇØ °æ·Î ÁöÁ¤
+			// ê¸€ ëª©ë¡ í˜ì´ì§€ë¡œ ì´ë™í•˜ê¸° ìœ„í•´ ê²½ë¡œ ì§€ì •
 			forward.setPath("board/boardList.jsp");
 			return forward;			
 		} else {
 			System.out.println("state == ajax");
 			
-			// À§¿¡¼­ request·Î ´ã¾Ò´ø °ÍÀ» JsonObject¿¡ ´ã½À´Ï´Ù.
+			// ìœ„ì—ì„œ requestë¡œ ë‹´ì•˜ë˜ ê²ƒì„ JsonObjectì— ë‹´ìŠµë‹ˆë‹¤.
 			JsonObject object = new JsonObject();
 			object.addProperty("page", page);
-			object.addProperty("maxpage", maxpage); // ÇÊ¿äÇÑ ÃÑ ÆäÀÌÁö °³¼ö
+			object.addProperty("maxpage", maxpage); // í•„ìš”í•œ ì´ í˜ì´ì§€ ê°œìˆ˜
 			object.addProperty("startpage", startpage);
 			object.addProperty("endpage", endpage);
-			object.addProperty("listcount", listcount); // ÃÑ ±ÛÀÇ °³¼ö
+			object.addProperty("listcount", listcount); // ì´ ê¸€ì˜ ê°œìˆ˜
 			object.addProperty("limit", limit);
 			
 			/*
-			 * JsonObject¿¡ List Çü½ÄÀ» ´ãÀ» ¼ö ÀÖ´Â addProperty ¸Ş¼­µå´Â ¾øÀ½
-			 * void com.google.gson.JsonObject.add(String property, JsonElement value) ¸Ş¼­µå¸¦ ÀÌ¿ëÇÏ¿© ÀúÀåÇØ¾ß ÇÔ
-			 * List Çü½ÄÀ» JsonElement·Î ¹Ù²ã Áà¾ß¸¸ object¿¡ ÀúÀåÇÒ ¼ö ÀÖÀ½
+			 * JsonObjectì— List í˜•ì‹ì„ ë‹´ì„ ìˆ˜ ìˆëŠ” addProperty ë©”ì„œë“œëŠ” ì—†ìŒ
+			 * void com.google.gson.JsonObject.add(String property, JsonElement value) ë©”ì„œë“œë¥¼ ì´ìš©í•˜ì—¬ ì €ì¥í•´ì•¼ í•¨
+			 * List í˜•ì‹ì„ JsonElementë¡œ ë°”ê¿” ì¤˜ì•¼ë§Œ objectì— ì €ì¥í•  ìˆ˜ ìˆìŒ
 			 * List => JsonElement
 			 */
 			
@@ -164,7 +164,7 @@ public class BoardListAction implements Action {
 			
 			response.setContentType("text/html;charset=utf-8");
 			response.getWriter().append(object.toString());
-			System.out.println("Java¿¡¼­ JSP/AJAX·Î º¸³»´Â °á°ú JsonObjectÀÇ toString(): \n" + object.toString());
+			System.out.println("Javaì—ì„œ JSP/AJAXë¡œ ë³´ë‚´ëŠ” ê²°ê³¼ JsonObjectì˜ toString(): \n" + object.toString());
 			return null;
 		}
 		

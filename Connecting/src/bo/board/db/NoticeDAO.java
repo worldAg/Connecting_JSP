@@ -19,7 +19,7 @@ public class NoticeDAO {
 			Context init = new InitialContext();
 			ds = (DataSource) init.lookup("java:comp/env/jdbc/OracleDB");
 		} catch (Exception e) {
-			System.out.println("Oracle DB ¿¬°á ½ÇÆĞ: " + e.getMessage());
+			System.out.println("Oracle DB ì—°ê²° ì‹¤íŒ¨: " + e.getMessage());
 		}
 	}
 	
@@ -65,17 +65,17 @@ public class NoticeDAO {
 			try {
 				if (rs != null) rs.close();
 			} catch (Exception e) {
-				System.out.println("ResultSet ´İ´Â Áß ¿¹¿Ü ¹ß»ı.");
+				System.out.println("ResultSet ë‹«ëŠ” ì¤‘ ì˜ˆì™¸ ë°œìƒ.");
 			}
 			try {
 				if (pstmt != null) pstmt.close();
 			} catch (Exception e) {
-				System.out.println("PreparedStatement ´İ´Â Áß ¿¹¿Ü ¹ß»ı.");
+				System.out.println("PreparedStatement ë‹«ëŠ” ì¤‘ ì˜ˆì™¸ ë°œìƒ.");
 			}
 			try {
 				if (con != null) con.close();
 			} catch (Exception e) {
-				System.out.println("Connection ´İ´Â Áß ¿¹¿Ü ¹ß»ı.");
+				System.out.println("Connection ë‹«ëŠ” ì¤‘ ì˜ˆì™¸ ë°œìƒ.");
 			}
 		}
 		return list;
