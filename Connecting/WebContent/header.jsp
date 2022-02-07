@@ -11,7 +11,7 @@
     <style>
         body {
             font-size: 30px;
-        }
+        } 
 
         .nav-item {
             display: inline-block;
@@ -96,8 +96,8 @@
 <body>
 
     <div class="d-flex flex-row-reverse bd-highlight">
-        <div class="p-2 bd-highlight"><a href="#">register</a></div>
-        <div class="p-2 bd-highlight"><a href="#">login</a></div>
+        <div class="p-2 bd-highlight"><a href="member/register.jsp">register</a></div>
+        <div class="p-2 bd-highlight"><a href="member/login.jsp">login</a></div>
     </div>
 
     <div class="container" style="margin-bottom: 44px;">
