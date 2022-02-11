@@ -27,24 +27,24 @@ public class MemberUpdateAction implements Action {
 		
 		m = mdao.getUser("hh");
 		
-		//글 내용 불러오기 실패한 경우
+
 		if(m == null) {
-			System.out.println("회원정보 보기 실패");
+			System.out.println("회원정보 불러오기 실패");
 			forward = new ActionForward();
 			forward.setRedirect(false);
-			request.setAttribute("message", "회원정보 보기 실패입니다.");
+			request.setAttribute("message", "회원정보 불러오기에 실패하였습니다.");
 			forward.setPath("error/error.jsp");
 			return forward;
 		}
 		
 		
-		System.out.println("회원정보 보기 성공");
+		System.out.println("회원정보 불러오기 성공");
 		
 		
 		request.setAttribute("memberInfo", m);
 		forward.setRedirect(false);
 
-		forward.setPath("updateForm.jsp");
+		forward.setPath("mypage/updateForm.jsp");
 		
 		return forward;
 	}

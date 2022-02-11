@@ -27,8 +27,14 @@ body {
 }
 
 h1 {
+
+	font-family: 'Gaegu', cursive!important;
 	font-size: 5rem;
 	display: inline-block;
+}
+
+h2 {
+	font-family: 'Gaegu', cursive!important;
 }
 
 .header {
@@ -104,9 +110,14 @@ h1 {
 
 .hidden {display:none;}
 
-.profile_img{
+#profile_img{
 	width:140px;
-	heigth:140px;
+	height:140px;
+	border-radius: 50%;
+
+}
+.t_head{
+	margin-bottom:0px;
 }
 </style>
 </head>
@@ -115,7 +126,7 @@ h1 {
 
 	<div class="rayout">
 		<div class="header">
-			<a href="#">
+			<a href="/Connecting">
 				<h1 id="forms">Connecting</h1>
 			</a>
 
@@ -170,7 +181,7 @@ h1 {
 							
 							<c:if test='${empty memberInfo.profile_img }'>
 								<c:set var='src' value='images/profile.png' />
-							</c:if> 
+							</c:if>  
 							<c:if test='${!empty memberInfo.profile_img }'>
 								<c:set var='src' value='${"memberupload/"}${memberInfo.profile_img}'/>
 							</c:if>
@@ -194,25 +205,33 @@ h1 {
 			</div>
 		</div>
 
-		<div class="item my_board">
-			<table class="table table-hover">
+
+		<div class="item my_board" >
+			<table class="table t_head">
 				<thead class="table-dark">
 					<tr>
 						<th>내가 작성한 게시글</th>
 					</tr>
 				</thead>
+			</table>
+			<div style="height: 450px; overflow: scroll">
+			<table class="table table-hover">
+				
+				
 				<c:forEach var="b" items="${myboard}">
 					<tr class="table-info">
-						<td><a href="#" class="list-group-item">
-								<p>${b.title}</p> <small id="emailHelp"
-								class="form-text text-muted"> ${b.start_date} ~
-									${b.end_date}</small>
-						</a></td>
+						<td>
+							<a href="#" class="list-group-item">
+									<p>${b.title}</p> <small id="emailHelp"
+									class="form-text text-muted"> ${b.start_date} ~
+										${b.end_date}</small>
+							</a>
+						</td>
 					</tr>
 
-				</c:forEach>
-
+				</c:forEach>				
 			</table>
+			</div>
 		</div>
 	</div>
 
@@ -230,7 +249,8 @@ h1 {
 				$("#sub_info").addClass("hidden");
 				var button_ = '<button id="img_submit" class="btn btn-outline-info">확인</button>'
 				$('#showImage').html('<img src="'
-									+ event.target.result + '" style ="width:140px; height:140px;">'
+									+ event.target.result + '" style ="width:140px; height:140px;'
+									+ ' border-radius: 50%;">'
 									+'<i class="fas fa-cog fa-lg"></i>'
 									+ button_);
 			};
