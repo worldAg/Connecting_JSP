@@ -136,7 +136,7 @@ h2 {
 				<a href="updateMemberInfo.my" style="margin-right: 50px">회원정보 변경 </a>
 			</div>
 			<div class="p-2 bd-highlight" id="reg">
-				<a href="#">logout</a>
+				<a href="logout.net">logout</a>
 			</div>
 			<div class="p-2 bd-highlight" id="reg">
 				<p>${memberInfo.id}님</p>
@@ -175,7 +175,7 @@ h2 {
 
 					
 					<form id="img_form" action="updateImg.my" method="post" enctype="multipart/form-data">
-						<input type="text" style="display: none" name="id" value="hh">
+						<input type="text" style="display: none" name="id" value="${sessionScope.id }">
 						<label for="profile"> 
 						<span id="showImage">
 							
@@ -221,7 +221,7 @@ h2 {
 				<c:forEach var="b" items="${myboard}">
 					<tr class="table-info">
 						<td>
-							<a href="#" class="list-group-item">
+							<a href="BoardDetailAction.bo?num=${b.board_id }" class="list-group-item">
 									<p>${b.title}</p> <small id="emailHelp"
 									class="form-text text-muted"> ${b.start_date} ~
 										${b.end_date}</small>

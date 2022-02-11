@@ -18,8 +18,8 @@ public class MyHeartListAction implements Action {
 		// TODO Auto-generated method stub
 		BoardDAO bdao = new BoardDAO();
 		List<Board> boardlist = null;
-		//String id = (String)session.getAttribute("id");
-		String id = "hh";
+
+		String id = (String) request.getSession().getAttribute("id");
 		
 		int page =1; //보여줄 page
 		int limit = 5; //한 페이지에 보여줄 게시판 목록의 수

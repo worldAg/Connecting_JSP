@@ -15,67 +15,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Gaegu&display=swap"
 	rel="stylesheet">
 
-<style>
-* {
-	font-family: 'Gaegu', cursive !important;
-}
-</style>
+	<style>
+		* {
+			font-family: 'Gaegu', cursive !important;
+		}
+		a {
+			text-decoration-line : none!important;
+			text-decoration : none!important;
+		}
+	</style>
 </head>
 
 <body>
 	<jsp:include page="header.jsp" />
 
-	<%--
-	<button type="button" class="btn btn-primary btn-lg">새로운 소식을 확인하세요></button>
-	
-    <div id="boards">
-        <div class="card" style="width: 18rem;">
-            <img src="./images/icecream.png" class="card-img-top" alt="...">
-            <div class="card-body">
-                <p class="card-text">Some quick example text to build on the
-                    card title and make up the bulk of the card's content.</p>
-            </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img src="./images/icecream.png" class="card-img-top" alt="...">
-            <div class="card-body">
-                <p class="card-text">Some quick example text to build on the
-                    card title and make up the bulk of the card's content.</p>
-            </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img src="./images/icecream.png" class="card-img-top" alt="...">
-            <div class="card-body">
-                <p class="card-text">Some quick example text to build on the
-                    card title and make up the bulk of the card's content.</p>
-            </div>
-        </div>
-        <div class="card" style="width: 18rem;">
-            <img src="./images/icecream.png" class="card-img-top" alt="...">
-            <div class="card-body">
-                <p class="card-text">Some quick example text to build on the
-                    card title and make up the bulk of the card's content.</p>
-            </div>
-        </div>
-    </div>
-     --%>
-
 	<div class="container" style="margin-top: 20px;">
-		<button type="button" class="btn btn-primary btn-lg">새로운 소식을
-			확인하세요 ></button>
+		<button type="button" class="btn btn-primary btn-lg" id="board-list">새로운 소식을 확인하세요 ></button>
 	</div>
 
 	<div id="boards" class="container" style="margin-top: 20px;">
-
-		<div class="card mb-3" style="width: 400px!important">
-			<h3 class="card-header">Card header</h3>
-			<img src="./images/icecream.png" width="100%" height="200" />			
-			<div class="card-body">
-				<h5 class="card-title">Special title treatment</h5>
-				<h6 class="card-subtitle text-muted">Support card subtitle</h6>
-			</div>
-		</div>
-		
+	</div>
+	
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
@@ -85,6 +45,10 @@
 	<script>
 		$(document).ready(function () {
 			showRecentBoard();
+			
+			$("#board-list").click(function () {
+				location.href="BoardList.bo";
+			})
 		});	
 		
 		function showRecentBoard() {
@@ -102,7 +66,7 @@
 						
 						output += '<div class="card mb-3">';
 						output += '<h3 class="card-header"><a href="BoardDetailAction.bo?num=' + item.board_id + '">' + item.title + '</a></h3>';
-						output += '<img src="./boardupload/' + item.board_img + '" width="200px" height="300px" />';
+						output += '<a href="BoardDetailAction.bo?num=' + item.board_id + '"><img src="./boardupload/' + item.board_img + '" width="200px" height="300px" /></a>';
 						output += '<div class="card-body">';
 						output += '<h5 class="card-title">' + item.address + '</h5>';
 						output += '<h6 class="card-subtitle text-muted">' + item.start_date + ' ~ ' + item.end_date + '</h6>';

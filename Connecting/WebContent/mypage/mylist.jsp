@@ -45,7 +45,7 @@
 		<table class="table table-hover table-bordered" >
 			<c:forEach var="h" items="${heartboards}">
 				<tr class="table-info">
-					<td><a href="#" class="list-group-item">
+					<td><a href="BoardDetailAction.bo?num=${h.board_id }" class="list-group-item">
 							<p>${h.title}</p> 
 							<small id="emailHelp" class="form-text text-muted"> 								
 								<c:if test="${h.content.length() >= 30}">

@@ -58,7 +58,14 @@
 				</h2>
 				<hr />
 				<div class="d-flex justify-content-center align-items-center">
-					<img src="images/icecream.png" style="width: 150px; height: 150px; display: inline-block; border-radius: 50%;" />
+					<c:if test='${empty member.profile_img }'> 
+						<c:set var='src' value='images/profile.png' /> 
+					</c:if> 
+					<c:if test='${!empty member.profile_img }'> 
+						<c:set var='src' value='${"memberupload/"}${member.profile_img}'/> 
+					</c:if>
+					<img id="profile_img" src="${src}" alt="profile" style="width: 150px; height: 150px; display: inline-block; border-radius: 50%;" />
+					
 					<div style="display: inline-block; padding-left: 10%">
 					    <h3>주최자: ${boarddata.host_name }</h3>
 						<h3>장소: ${boarddata.address }</h3>
@@ -86,7 +93,7 @@
     </script>
     
     <script>
-	    var userId = "eggjam82";
+	    var userId = '<%=(String) request.getSession().getAttribute("id") %>';
 		var boardId = '<%=((BoardBean) request.getAttribute("boarddata")).getBoard_id() %>';
     	var checked = "";
     	

@@ -68,7 +68,7 @@
 				alert("제목은 25자 이내로 입력해주세요.");
 				return false;
 			}
-			if ($("#content").val().length > 25) {
+			if ($("#content").val().length > 1000) {
 				alert("본문은 1000자 이내로 입력해주세요.");
 				return false;
 			}
