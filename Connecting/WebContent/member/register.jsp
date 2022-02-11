@@ -67,7 +67,7 @@ span {
 	<div class="container" style="margin-bottom: 44px;">
 		<div class="row align-items-center">
 			<div class="col-lg-5 col-md-12">
-				<a href="../main.jsp">
+				<a href="main.jsp">
 					<h1 id="logo">Connecting</h1>
 				</a>
 			</div>

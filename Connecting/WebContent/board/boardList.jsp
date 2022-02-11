@@ -48,7 +48,7 @@
 	  			<label class="btn btn-outline-primary" for="notice">공지사항</label>
 			</div>
 			
-			<c:if test="${empty sessionScope.id }">
+			<c:if test="${!empty sessionScope.id }">
 				<button type="button" class="btn btn-info" id="writebtn">글쓰기</button>
 			</c:if>			 
 	</div> <%--div.container ends --%>	
@@ -68,7 +68,7 @@
 			<div class="row">
 				<div class="col-md-3">
 					<div class="alert alert-info" style="padding: 0px; font-size: 1.5rem; text-align: center;">
-						<strong>전체 게시글: </strong><span id="num-list" style="font-weight: normal;">11개</span>
+						<strong>전체 게시글: </strong><span id="num-list" style="font-weight: normal;">${listcount }개</span>
 					</div>
 				</div>
 				<div class="offset-md-9"></div>
@@ -192,7 +192,10 @@
 	</div>
 	
 	<script>
-		$(document).ready(function () {			
+		$(document).ready(function () {	
+			
+			
+			
 			$("#orderby").change(function () {
 				goBoard(1);
 			});			
@@ -228,7 +231,7 @@
 						$(data.noticelist).each(function (index, item) {
 							output += "<tr>";
 							output += "		<td>" + (num--) + "</td>";
-							output += "		<td><a href='NoticeDetailAction.bo?num=" + item.notice_id + "'>" + textLengthOverCut(item.title) + "</a></td>";
+							output += "		<td><a href='noticeDetail.mgr?notice_id=" + item.notice_id + "'>" + textLengthOverCut(item.title) + "</a></td>";
 							output += "		<td>" + (item.write_date) + "</td>";
 							output += "</tr>";
 						}); // each ends

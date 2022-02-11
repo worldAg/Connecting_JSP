@@ -136,9 +136,9 @@
             </div>
             <div class="col-lg-7 col-md-12">
                 <div>
-                    <form>
-                        <input type="text" style="width:84%" placeholder="Search">
-                        <button type="submit">Search</button>
+                    <form action="BoardSearchBarListAction.bo" id="searchform">
+                        <input type="text" style="width:84%" placeholder="Search" name="keyword"/>
+                        <button type="submit" id="searchbtn">Search</button>
                     </form>
                 </div>
             </div>
@@ -250,13 +250,22 @@
 			
 			$("#smart_btn").click(function () {
 				var category = $("input[name='category']:checked").val();
-				var loc = $("input[name='loc']:checked").val();
-				
+				var loc = $("input[name='loc']:checked").val();				
 				console.log(category);
-				console.log(loc);
-				
+				console.log(loc);				
 				location.href = "BoardSmartSearchListAction.bo?category=" + category + "&loc=" + loc;
-			})
+			});
+			
+			$("#searchform").submit(function () {
+				var keyword = $("#searchbar").val();
+				if (keyword == "") {
+					alert("검색어를 입력해 주세요.");
+					$("#searchbar").focus();
+					return false;
+				} else {
+					
+				}
+			});
 		})
 	</script>
 </body>

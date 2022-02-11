@@ -1,7 +1,7 @@
 package naver;
 
 public class MyInfo {
-	public static String clientId= "0LhWLHZ59F3HmM38R6HJ" ;
+	public static String clientId= "1PjD4Tjw5IRR9Ka1cbfy" ;
 	public static String callbackurl = "http://localhost:8088/Connecting/naverlogin.net" ;
 
 }

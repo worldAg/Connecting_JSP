@@ -18,7 +18,7 @@ public class NoticeDetailAction implements Action {
 		int notice_id = Integer.parseInt(request.getParameter("notice_id"));
 		NoticeDAO ndao = new NoticeDAO();
 		NoticeBean n = ndao.noticeDetail(notice_id);
-		String id = "admin";
+		String id = (String) request.getSession().getAttribute("id");
 		
 		if (n == null) {
 			forward.setPath("noticeList.mgr");
