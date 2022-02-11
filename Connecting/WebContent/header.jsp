@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
@@ -95,15 +96,39 @@
 
 <body>
 
-    <div class="d-flex flex-row-reverse bd-highlight">
-        <div class="p-2 bd-highlight"><a href="member/register.jsp">register</a></div>
-        <div class="p-2 bd-highlight"><a href="member/login.jsp">login</a></div>
-    </div>
 
+	<c:if test="${!empty id}">
+	 	 <div class="d-flex flex-row-reverse bd-highlight">
+	 	    <c:if test='${id=="admin"}'>
+	 	       <div class="p-2 bd-highlight">
+	 		   <a class="nav-link" href="mgrMain.mgr">관리자 페이지</a>
+	 		  </div>
+	 	 </c:if>
+	 
+	 		  <div class="p-2 bd-highlight">
+	 		   <a class="nav-link" href="logout.net">로그아웃</a>
+	 		  </div>
+	 		  
+	 		  <c:if test='${ id !="admin" && empty email}'>
+	 		  <div class="p-2 bd-highlight">
+	 		   <a class="nav-link" href="memberInfo.my">마이페이지</a>
+	 		   </div>
+	 		   </c:if>
+	 		  <div class="p-2 bd-highlight">
+	 		    <a class="nav-link">${id } 님 </a> 
+	 		  </div>
+	 	</div>
+	</c:if>
+	<c:if test="${empty id}">
+    <div class="d-flex flex-row-reverse bd-highlight">
+        <div class="p-2 bd-highlight"><a href="register.net">register</a></div>
+        <div class="p-2 bd-highlight"><a href="login.net">login</a></div>
+    </div>
+    </c:if>
     <div class="container" style="margin-bottom: 44px;">
         <div class="row align-items-center">
             <div class="col-lg-5 col-md-12">
-                <a href="#">
+                <a href="main.jsp">
                     <h1 id="logo" style="font-size: 5rem">Connecting</h1>
                 </a>
             </div>

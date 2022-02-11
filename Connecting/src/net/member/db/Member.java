@@ -1,5 +1,5 @@
 package net.member.db;
-
+//MemberBean
 public class Member {
 	private String ID ;
 	private String PASSWORD;
