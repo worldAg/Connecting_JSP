@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 public class NoticeWriteView implements Action {
 
 	@Override
-	public ActionForward excute(HttpServletRequest request, HttpServletResponse response)
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);

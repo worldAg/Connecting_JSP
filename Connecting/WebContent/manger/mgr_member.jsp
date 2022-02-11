@@ -8,7 +8,10 @@
 <style>
 	#memberList {
 		text-align:center;
-		font-size:20px;
+		font-size:23px;
+	}
+	.memberInfo, .delete {
+		font-size:19px;
 	}
 </style>
 </head>
@@ -42,19 +45,18 @@
 							<td>${m.id}</td>
 							<td>${m.name}</td>
 							<td>
-								<button type="button" class="btn btn-info" data-toggle="modal" data-target="#memberInfo"
-									onclick="location.href='memberInfo.mgr?id=${m.id}'">상세 정보</button>
+								<button type="button" class="btn btn-info memberInfo" 
+									onclick="open_info('memberInfo.mgr?id=${m.id}')">상세 정보</button>
 							</td>
 							<td>
-								<button type="button" class="btn btn-danger delete"
-									onclick="location.href='memberDelete.mgr?id=${m.id}'">회원 탈퇴</button>
+								<button type="button" class="btn btn-danger delete" id="memberDelete">회원 탈퇴</button>
 							</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 			<div>
-				<ul class="pagination pagination-sm justify-content-center">
+				<ul class="pagination pagination justify-content-center">
 					<c:if test="${page <= 1}">
 						<li class="page-item disabled">
 							<a class="page-link gray">이전</a>
@@ -67,7 +69,7 @@
 					</c:if>
 					<c:forEach var="a" begin="${startpage}" end="${endpage}">
 						<c:if test="${a == page}">
-							<li class="page-item">
+							<li class="page-item active">
 								<a class="page-link">${a}</a>
 							</li>
 						</c:if>
@@ -82,8 +84,8 @@
 						</c:if>
 					</c:forEach>
 					<c:if test="${page >= maxpage}">
-						<li class="page-item">
-							<a class="page-link gray">&nbsp;다음</a>
+						<li class="page-item disabled">
+							<a class="page-link">&nbsp;다음</a>
 						</li>
 					</c:if>
 					<c:if test="${page < maxpage}">
@@ -106,5 +108,22 @@
 		<h3>검색 결과가 없습니다.</h3>	
 	</c:if>
 	
+	<script>
+		// 회원 탈퇴 버튼 클릭 시
+		$(".delete").click(function(event){
+			var answer = confirm("정말 해당 회원 정보를 삭제하겠습니까?");
+			console.log(answer);
+			if (answer) {
+				var id = $(this).parent().parent().find('td').first().text();
+				console.log(id);
+				location.href='memberDelete.mgr?id='+id;
+			}
+		});
+		
+		// 회원 상세 보기 클릭 시 보이는 팝업창
+		function open_info(url) {
+		    newPage=window.open(url, "member_info", "width=335, height=305, left=500, top=300");
+		}
+	</script>
 </body>
 </html>

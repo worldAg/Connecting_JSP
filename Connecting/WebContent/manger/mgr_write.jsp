@@ -7,6 +7,9 @@
 	.form-group {
 		font-size:23px;
 	}
+	#ok {
+        text-align:center;
+    }
 </style>
 </head>
 <body>
@@ -21,8 +24,35 @@
 				<label for="content" class="form-label mt-4">본문</label>
       			<textarea class="form-control" name="content" id="content" rows="10" cols="1000" style="font-size:23px" placeholder="내용을 입력하세요."></textarea>
     		</div>
-  			<button type="submit" class="btn btn-primary">작성 완료</button>
+    		<div id="ok">
+  				<button type="submit" class="btn btn-success btn-lg">작성 완료</button>
+  			</div>
   		</fieldset>
   	</form>	
 </body>
+<script>
+	//submit 버튼을 클릭할 때
+	$("form").submit(function() {
+		if($.trim($("#title").val()) == "") {
+			alert("제목을 입력하세요.");
+			$("input").focus();
+			return false;
+		}
+		
+		if($.trim($("#content").val()) == "") {
+			alert("내용을 입력하세요.");
+			$("textarea").focus();
+			return false;
+		}
+		if ($("#title").val().length > 25) {
+			alert("제목은 25자 이내로 입력해주세요.");
+			return false;
+		}
+		if ($("#content").val().length > 25) {
+			alert("본문은 1000자 이내로 입력해주세요.");
+			return false;
+		}
+		
+	});
+</script>
 </html>

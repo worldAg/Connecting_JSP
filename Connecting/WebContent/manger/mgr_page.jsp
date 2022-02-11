@@ -30,12 +30,12 @@
 		}
 	
 		#mgrmain {
-			font-size: 25px
+			font-size: 27px
 		}
 		.sidenav a {
 		  padding: 10px 0px 6px 32px;
 		  text-decoration: none;
-		  font-size: 22px;
+		  font-size: 24px;
 		  color: #818181;
 		  display: block;
 		}
@@ -44,24 +44,30 @@
 		  color: #f1f1f1;
 		}
 		
-		@media screen and (min-width: 575px) and (max-width: 991px) {
-		  .sidenav { width: 150px; margin-top: 400px;}
-		  #mgrmain {font-size: 15px}
-		  .sidenav a {font-size: 14px;}
-		  
+		@media screen and (min-width: 707px) and (max-width: 991px) {
+		  .sidenav { width: 220px; margin-top: 400px;}
+		  #mgrmain {font-size: 25px}
+		  .sidenav a {font-size: 23px;}
 		}
+		
+		@media screen and (min-width: 575px) and (max-width: 706px) {
+		  .sidenav { width: 150px; margin-top: 400px;}
+		  #mgrmain {font-size: 17px}
+		  .sidenav a {font-size: 16px;}
+		}
+		
 		@media screen and (max-width: 574px) {
 			.sidenav { display:none; }
 		}
-		
 	</style>
 </head>
 <body>
+
 	<%
 		String pagefile = (String)request.getAttribute("pagefile");
 	%>
 	<header>
-		<jsp:include page="header.jsp" /><br><br>
+		<jsp:include page="../header.jsp" /><br><br>
 	</header>
 	<div class="container" style="margin-top:10px">
 		<div class="row">
@@ -70,14 +76,14 @@
 					<jsp:include page="mgr_left.jsp" />
 				</aside>
 			</div>
-			<div class="col-sm-8">
+			<div class="col-sm-8" style="margin-bottom: 100px;">
 				<section>
 					<jsp:include page='<%=pagefile + ".jsp"%>' />
 				</section>
 			</div>
 		</div>
 	</div>
-		
+	
 	<script>
 		var pagefile='<%=pagefile%>';
 		var filelist = ["mgr_main", "mgr_member", "mgr_notice", "mgr_write" ];

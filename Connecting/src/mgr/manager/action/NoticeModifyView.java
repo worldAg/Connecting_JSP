@@ -9,28 +9,33 @@ import javax.servlet.http.HttpServletResponse;
 import mgr.manager.db.NoticeBean;
 import mgr.manager.db.NoticeDAO;
 
-public class NoticeDetailAction implements Action {
+
+public class NoticeModifyView implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		ActionForward forward = new ActionForward();
-		int notice_id = Integer.parseInt(request.getParameter("notice_id"));
 		NoticeDAO ndao = new NoticeDAO();
-		NoticeBean n = ndao.noticeDetail(notice_id);
-		String id = "admin";
+		NoticeBean n = new NoticeBean();
+		int notice_id = Integer.parseInt(request.getParameter("notice_id"));
+		n = ndao.noticeDetail(notice_id);
 		
+		// 글 내용 불러오기를 실패할 경우
 		if (n == null) {
-			forward.setPath("noticeList.mgr");
+			System.out.println("(수정)상세보기 실패");
+			forward = new ActionForward();
 			forward.setRedirect(false);
-			request.setAttribute("message", "해당 공지사항 정보가 없습니다.");
+			request.setAttribute("message", "게시판 (수정)상세보기 실패입니다.");
+			forward.setPath("main.jsp");
 			return forward;
 		}
-		
-		forward.setPath("manger/mgr_noticeDetail.jsp");
-		forward.setRedirect(false);
+		System.out.println("(수정)상세보기 성공");
+
 		request.setAttribute("noticedata", n);
-		request.setAttribute("id", id);
+		forward.setRedirect(false);
+		
+		forward.setPath("manger/mgr_noticeModify.jsp");
 		return forward;
 	}
 

@@ -14,7 +14,7 @@ import mgr.manager.db.NoticeDAO;
 public class NoticeListAction implements Action {
 
 	@Override
-	public ActionForward excute(HttpServletRequest request, HttpServletResponse response)
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
 		NoticeDAO noticedao = new NoticeDAO();
