@@ -39,6 +39,7 @@ public class MgrFrontController extends HttpServlet {
 			break;
     	case "/memberInfo.mgr" :
     		action = new MemberInfoAction();
+    		break;
     	case "/noticeList.mgr" :
     		action = new NoticeListAction();
     		break;
@@ -51,10 +52,19 @@ public class MgrFrontController extends HttpServlet {
     	case "/noticeWrite.mgr" :
     		action = new NoticeWriteView();
     		break;
+    	case "/noticeDetail.mgr" :
+    		action = new NoticeDetailAction();
+    		break;
+    	case "/noticeModifyView.mgr" :
+    		action = new NoticeModifyView();
+    		break;
+    	case "/noticeModifyAction.mgr" :
+    		action = new NoticeModifyAction();
+    		break;
     	
     	}
    
-    	forward = action.excute(request, response);
+    	forward = action.execute(request, response);
     	
     	if (forward != null) {
     		if(forward.isRedirect()) {

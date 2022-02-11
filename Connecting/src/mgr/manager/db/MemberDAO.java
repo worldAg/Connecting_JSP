@@ -229,7 +229,7 @@ public class MemberDAO {
 		return list;
 	}
 	
-	public Member infoModal(String id) {
+	public Member memberInfo(String id) {
 		Member m = null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;

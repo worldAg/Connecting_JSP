@@ -11,7 +11,7 @@ import mgr.manager.db.*;
 public class MemberDeleteAction implements Action {
 
 	@Override
-	public ActionForward excute(HttpServletRequest request, HttpServletResponse response)
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		MemberDAO mdao = new MemberDAO();
 		String id = request.getParameter("id");
