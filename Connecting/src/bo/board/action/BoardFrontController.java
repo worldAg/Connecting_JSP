@@ -63,24 +63,59 @@ public class BoardFrontController extends HttpServlet {
 		switch (command) {			
 			case "/BoardList.bo": // 로그인이 성공적으로 됐을 때 이 주소로 "redirect"돼서 이동. 즉 주소가 바뀜. 그리고 boardList.jsp로 forward
 				action = new BoardListAction();
-				break;	
+				break;
+			case "/BoardCategoryList.bo":
+				action = new BoardCategoryListAction();
+				break;
 			case "/NoticeList.bo":
 				action = new NoticeListAction();
 				break;
 			case "/BoardDetailAction.bo":
 				action = new BoardDetailAction();
 				break;
+			case "/BoardSmartSearchListAction.bo":
+				action = new BoardSmartSearchListAction();
+				break;
+			case "/BoardSearchBarListAction.bo":
+				action = new BoardSearchBarListAction();
+				break;
+			case "/IsAddedToMemberTable.bo":
+				action = new IsAddedToMemberTableAction();
+				break;
+			case "/AddOrRemoveHeart.bo":
+				action = new AddOrRemoveHeartAction();
+				break;				
+			case "/boardAddAction.bo" :
+	    		action = new BoardAddAction();
+	    		break;
+	    	case "/boardWrite.bo" :
+	    		action = new BoardWriteAction();
+	    		break;
+	    	case "/BoardModifyView.bo": 
+	    		action = new BoardModifyView(); 
+	    		break; 
+	    	case "/BoardModifyAction.bo": 
+	    		action = new BoardModifyAction(); 
+	    		break; 
+	    	case "/BoardDelete.bo":
+	    		action = new BoardDeleteAction(); 
+	    		break;
+	    	case "/RecentBoard.bo":
+	    		action = new RecentBoardAction();
+	    		break;
 		} // switch ends
 		
-		ActionForward forward = action.execute(request, response);
-		
-		if (forward != null) {
-			if (forward.isRedirect()) {
-				response.sendRedirect(forward.getPath());
-			} else {
-				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
-				dispatcher.forward(request, response);
-			}
+		if (action != null) {
+			ActionForward forward = action.execute(request, response);
+			
+			if (forward != null) {
+				if (forward.isRedirect()) {
+					response.sendRedirect(forward.getPath());
+				} else {
+					RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
+					dispatcher.forward(request, response);
+				}
+			}		
 		}
 	} // doProcess ends
 

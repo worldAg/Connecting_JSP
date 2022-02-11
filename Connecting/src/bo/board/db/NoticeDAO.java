@@ -32,7 +32,7 @@ public class NoticeDAO {
 		
 		try {
 			String selectSQL = "SELECT * " +
-		                       "FROM NOTICE_COPY " +
+		                       "FROM NOTICE " +
 					           "ORDER BY NOTICE_ID DESC";
 			
 			con = ds.getConnection();
@@ -45,7 +45,7 @@ public class NoticeDAO {
 					firstLoop = false;
 				}
 				
-				String notice_id = rs.getString("NOTICE_ID");
+				int notice_id = rs.getInt("NOTICE_ID");
 				String title = rs.getString("TITLE");
 				String content = rs.getString("CONTENT");
 				String write_date = rs.getString("WRITE_DATE");

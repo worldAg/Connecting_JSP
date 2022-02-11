@@ -1,5 +1,11 @@
 eclipse.preferences.version=1
 
+encoding//src/mgr/manager/action/Action.java=UTF-8
+encoding//src/mgr/manager/action/MemberDeleteAction.java=UTF-8
+encoding//src/mgr/manager/action/MemberInfoAction.java=UTF-8
+encoding//src/mgr/manager/action/MemberListAction.java=UTF-8
+encoding//src/mgr/manager/action/NoticeAddAction.java=UTF-8
+
 encoding//WebContent/js/bo_write.js=UTF-8
 encoding//WebContent/mypage/mylist.jsp=UTF-8
 encoding//WebContent/mypage/mypage.jsp=UTF-8
@@ -14,6 +20,7 @@ encoding//src/bo/board/db/BoardBean.java=UTF-8
 encoding//src/bo/board/db/BoardDAO.java=UTF-8
 encoding//src/bo/board/db/NoticeBean.java=UTF-8
 encoding//src/bo/board/db/NoticeDAO.java=UTF-8
+
 encoding//src/my/mypage/action/MemberImageUploadAction.java=UTF-8
 encoding//src/my/mypage/action/MemberInfoAction.java=UTF-8
 encoding//src/my/mypage/action/MemberUpdateAction.java=UTF-8

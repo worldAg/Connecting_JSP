@@ -12,7 +12,7 @@
     <style>
         body {
             font-size: 30px;
-        } 
+        }
 
         .nav-item {
             display: inline-block;
@@ -121,8 +121,10 @@
 	</c:if>
 	<c:if test="${empty id}">
     <div class="d-flex flex-row-reverse bd-highlight">
+
         <div class="p-2 bd-highlight"><a href="register.net">register</a></div>
         <div class="p-2 bd-highlight"><a href="login.net">login</a></div>
+
     </div>
     </c:if>
     <div class="container" style="margin-bottom: 44px;">
@@ -153,10 +155,10 @@
 
             <div class="collapse navbar-collapse" id="navbarColor02">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">전시회</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">박람회</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">버스킹</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">연극&공연</a></li>
+                    <li class="nav-item"><a class="nav-link" href="BoardCategoryList.bo?category=0">전시회</a></li>
+                    <li class="nav-item"><a class="nav-link" href="BoardCategoryList.bo?category=1">박람회</a></li>
+                    <li class="nav-item"><a class="nav-link" href="BoardCategoryList.bo?category=2">버스킹</a></li>
+                    <li class="nav-item"><a class="nav-link" href="BoardCategoryList.bo?category=3">연극&공연</a></li>
                 </ul>
             </div>
 
@@ -176,32 +178,32 @@
                 <legend class="mt-4">카테고리</legend>
                 <div class="form-check">
                     <label class="form-check-label"> <input type="radio" class="form-check-input" name="category"
-                            id="optionsRadios1" value="option1" checked=""> 전체
+                            id="optionsRadios1" value="all"> 전체
                     </label>
                 </div>
                 <div class="form-check">
                     <label class="form-check-label"> <input type="radio" class="form-check-input" name="category"
-                            id="optionsRadios1" value="option1" checked=""> 전시회
+                            id="optionsRadios1" value="0"> 전시회
                     </label>
                 </div>
                 <div class="form-check">
                     <label class="form-check-label"> <input type="radio" class="form-check-input" name="category"
-                            id="optionsRadios2" value="option2"> 박람회
+                            id="optionsRadios2" value="1"> 박람회
                     </label>
                 </div>
                 <div class="form-check">
                     <label class="form-check-label"> <input type="radio" class="form-check-input" name="category"
-                            id="optionsRadios3" value="option3"> 버스킹
+                            id="optionsRadios3" value="2"> 버스킹
                     </label>
                 </div>
                 <div class="form-check">
                     <label class="form-check-label"> <input type="radio" class="form-check-input" name="category"
-                            id="optionsRadios3" value="option3"> 연극/공연
+                            id="optionsRadios3" value="3"> 연극/공연
                     </label>
                 </div>
                 <div style="visibility:hidden" class="form-check">
                     <label class="form-check-label"> <input type="radio" class="form-check-input" name="category"
-                            id="optionsRadios3" value="option3"> 연극/공연
+                            id="optionsRadios3" value="-1"> 
                     </label>
                 </div>
             </fieldset>
@@ -209,40 +211,54 @@
                 <legend class="mt-4">지역별</legend>
                 <div class="form-check">
                     <label class="form-check-label"> <input type="radio" class="form-check-input" name="loc"
-                            id="optionsRadios1" value="option1" checked=""> 전체
+                            id="optionsRadios1" value="all"> 전체
                     </label>
                 </div>
                 <div class="form-check">
                     <label class="form-check-label"> <input type="radio" class="form-check-input" name="loc"
-                            id="optionsRadios2" value="option2"> 서울
+                            id="optionsRadios2" value="0"> 서울
                     </label>
                 </div>
                 <div class="form-check">
                     <label class="form-check-label"> <input type="radio" class="form-check-input" name="loc"
-                            id="optionsRadios3" value="option3"> 경기/인천
+                            id="optionsRadios3" value="1"> 경기/인천
                     </label>
                 </div>
                 <div class="form-check">
                     <label class="form-check-label"> <input type="radio" class="form-check-input" name="loc"
-                            id="optionsRadios3" value="option3"> 대전/충청/강원
+                            id="optionsRadios3" value="2"> 대전/충청/강원
                     </label>
                 </div>
                 <div class="form-check">
                     <label class="form-check-label"> <input type="radio" class="form-check-input" name="loc"
-                            id="optionsRadios3" value="option3"> 부산/대구/경상
+                            id="optionsRadios3" value="3"> 부산/대구/경상
                     </label>
                 </div>
                 <div class="form-check">
                     <label class="form-check-label"> <input type="radio" class="form-check-input" name="loc"
-                            id="optionsRadios3" value="option3"> 광주/전라/제주
+                            id="optionsRadios3" value="4"> 광주/전라/제주
                     </label>
                 </div>
             </fieldset>
 
         </div>
-        <button type="button" class="btn btn-primary" id="smart_btn">Primary</button>
+        <button type="button" class="btn btn-primary" id="smart_btn">검색하기</button>
     </div>
-
+	
+	<script>
+		$(document).ready(function () {
+			
+			$("#smart_btn").click(function () {
+				var category = $("input[name='category']:checked").val();
+				var loc = $("input[name='loc']:checked").val();
+				
+				console.log(category);
+				console.log(loc);
+				
+				location.href = "BoardSmartSearchListAction.bo?category=" + category + "&loc=" + loc;
+			})
+		})
+	</script>
 </body>
 
 </html>
