@@ -51,10 +51,16 @@
 						[연극/공연]
 					</c:if>
 					<c:out value="${boarddata.title }" />
-					<div id="heart" style="float: right;">
-						<span id="heart-text" style="font-size: 1.5rem">관심글</span>
-						<img src="./images/beforeheart.png" id="heart-img" style="width: 50px; height: 50px;" />
-					</div>
+					
+					<%--로그인해야 관심글 등록 가능 --%>
+					<c:if test="${!empty sessionScope.id }">
+						<div id="heart" style="float: right;">
+							<span id="heart-text" style="font-size: 1.5rem">관심글</span>
+							<img src="./images/beforeheart.png" id="heart-img" style="width: 50px; height: 50px;" />
+						</div>
+					</c:if>
+					
+					
 				</h2>
 				<hr />
 				<div class="d-flex justify-content-center align-items-center">
@@ -81,11 +87,21 @@
 			<textarea class="form-control" id="text-content" rows="3" style="font-size: 1.5rem; font-weight: normal" readonly><c:out value="${boarddata.content }" /></textarea>
 		</div>
 		
-		<div class="row">			
-			<div class="offset-md-9 col-md-3 d-flex justify-content-end">
-				<button type="button" class="btn btn-info">게시글 수정하기</button>
+		<c:if test="${sessionScope.id ==  boarddata.id }">
+			<div class="row">			
+				<div class="offset-md-9 col-md-3 d-flex justify-content-end">
+					<button type="button" class="btn btn-info" id="edit">게시글 수정/삭제하기</button>
+				</div>
 			</div>
-		</div>
+		</c:if>
+		
+		<c:if test="${sessionScope.id ==  'admin' }">
+			<div class="row">			
+				<div class="offset-md-9 col-md-3 d-flex justify-content-end">
+					<button type="button" class="btn btn-danger" id="delete">게시글 삭제하기</button>
+				</div>
+			</div>
+		</c:if>
 	</div>
 	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
@@ -98,6 +114,20 @@
     	var checked = "";
     	
     	$(document).ready(function () {
+    		$("#edit").click(function () {
+    			location.href = 'BoardModifyView.bo?board_id=' + boardId;
+    		});
+    		
+    		$("#delete").click(function() {
+    			var check = confirm("정말로 삭제하시겠습니까?")
+    			
+    			if(!check){
+    				alert("게시글 삭제를 취소하셨습니다.");
+    			} else {
+    				location.href="BoardDelete.bo?board_id=" + boardId;
+    			}
+    		})
+    		
     		selectImage();
     		
     		$("div#heart").click(function () {

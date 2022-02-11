@@ -194,6 +194,11 @@
 	<script>
 		$(document).ready(function () {	
 			
+			// 글쓰기 버튼 클릭 시 글쓰는 페이지로 이동
+			$("#writebtn").click(function () {
+				location.href = "boardWrite.bo";
+			})
+			
 			
 			
 			$("#orderby").change(function () {

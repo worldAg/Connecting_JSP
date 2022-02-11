@@ -6,6 +6,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -18,7 +19,7 @@ public class BoardAddAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
 		// 하연님 ,
 		BoardDAO boarddao = new BoardDAO();
 		BoardBean boarddata = new BoardBean();
@@ -33,15 +34,18 @@ public class BoardAddAction implements Action {
 		realFolder = sc.getRealPath(saveFolder);
 		System.out.println("realFolder = " + realFolder);
 		boolean result = false;
-
+		
+		HttpSession session = request.getSession(); 
+		String id = (String) session.getAttribute("id");
+		
 		try {
 			MultipartRequest multi = new MultipartRequest(request, realFolder, fileSize, "utf-8",
 					new DefaultFileRenamePolicy());
-
+			
+			
 			boarddata.setCategory(Integer.parseInt(multi.getParameter("category")));
 			boarddata.setLoc(Integer.parseInt(multi.getParameter("loc")));
-			boarddata.setId("hh");
-			// boarddata.setId(multi.getParameter("id"));
+			boarddata.setId(id);
 			boarddata.setTitle(multi.getParameter("title"));
 			boarddata.setHost_name(multi.getParameter("host_name"));
 			boarddata.setAddress(multi.getParameter("address"));
@@ -67,7 +71,7 @@ public class BoardAddAction implements Action {
 
 			System.out.println("게시판 등록 완료");
 
-			// 글 등록이 완료되면 게시판 리스트로 이동
+			// 글 등록이 완료되면 글 상세페이지로 이동
 			forward.setRedirect(true);
 			forward.setPath("BoardList.bo");
 			return forward;

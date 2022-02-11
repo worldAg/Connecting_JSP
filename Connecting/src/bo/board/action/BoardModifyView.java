@@ -15,8 +15,8 @@ public class BoardModifyView implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// String board_id = request.getParameter("board_id")
-		int board_id = 5;
+		int board_id = Integer.parseInt(request.getParameter("board_id").trim());
+		 
 		ActionForward forward = new ActionForward();
 		BoardDAO bdao = new BoardDAO();
 		Board bo = new Board();
@@ -37,7 +37,7 @@ public class BoardModifyView implements Action {
 		request.setAttribute("boardInfo", bo);
 
 		forward.setRedirect(false);
-		forward.setPath("board_update.jsp");
+		forward.setPath("board/board_update.jsp");
 
 		return forward;
 	}
