@@ -16,13 +16,13 @@ public class MemberJoinProcessAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String id = request.getParameter("id");
-		String pass = request.getParameter("pass");
+		String password = request.getParameter("pass");
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		
 		Member m = new Member();
 		m.setEMAIL(email);  m.setID(id);
-		m.setNAME(name);	m.setPASSWORD(pass);
+		m.setNAME(name);	m.setPASSWORD(password);
 		
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();

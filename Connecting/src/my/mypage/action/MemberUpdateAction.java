@@ -25,7 +25,10 @@ public class MemberUpdateAction implements Action {
 		MemberDAO mdao = new MemberDAO();
 		Member m = new Member();
 		
-		m = mdao.getUser("hh");
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("id"); 
+		
+		m = mdao.getUser(id);
 		
 		//글 내용 불러오기 실패한 경우
 		if(m == null) {

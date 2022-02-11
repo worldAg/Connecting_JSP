@@ -11,8 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import net.member.db.MemberDAO;
 
-public class MemberLoginAction implements Action {
-
+public class NaverloginAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -29,7 +28,7 @@ public class MemberLoginAction implements Action {
 		request.setAttribute("id", id);
 		ActionForward forward=new ActionForward();
 		forward.setRedirect(false); 
-		forward.setPath("member/login.jsp");
+		forward.setPath("member/naverlogin.jsp");
 		return forward;
 	}
 

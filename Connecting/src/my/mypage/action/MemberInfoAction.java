@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import my.mypage.db.Board;
 import my.mypage.db.BoardDAO;
@@ -26,10 +27,11 @@ public class MemberInfoAction implements Action {
 		Member m = new Member();
 		List<Board> boardlist = new ArrayList<Board>();
 		
-		//String id = request.getParameter("id");
+			HttpSession session = request.getSession();
+			String id = (String) session.getAttribute("id");
 		
-		m = mdao.getUser("hh");
-		boardlist = bdao.getMyBoard("hh");
+		m = mdao.getUser(id);
+		boardlist = bdao.getMyBoard(id);
 		
 		request.setAttribute("memberInfo", m);
 		request.setAttribute("myboard", boardlist);

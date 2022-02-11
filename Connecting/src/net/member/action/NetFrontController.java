@@ -50,6 +50,28 @@ public class NetFrontController extends HttpServlet {
     			break;
     		case "/emailcheck.net":
     			action = new EmailCheckAction();
+    			break;
+    		case "/idfind.net":
+    			action = new IdfindAction();
+    			break;
+    		case "/idfindProcess.net":
+    			action = new IdfindProcessAction();
+    			break;
+    		case "/pwfind.net":
+    			action = new PwfindAction();
+    			break;
+    		case "/pwfindProcess.net":
+    			action = new PwfindProcessAction();
+    			break;
+		/*
+		 * case "/sendmail.net": action = new SendmailAction(); break;
+		 */
+    		case "/naverlogin.net":
+    			action = new NaverloginAction();
+    			break;
+    		case "/naverloginProcess.net":
+    			action = new NaverloginProcessAction();
+    			break;
     		} 
     		forward = action.execute(request, response);
     		
@@ -67,11 +89,6 @@ public class NetFrontController extends HttpServlet {
     		doProcess(request, response);
     		
     	}
-
-    	
-    	
-
-
     	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     		request.setCharacterEncoding("utf-8");
     		doProcess(request, response);
