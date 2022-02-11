@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>boardList.jsp</title>	
+	<title>boardCategoryList.jsp</title>
 	
 	<script src="<%=request.getContextPath() %>/jQuery/jquery-3.6.0.js"></script>	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
@@ -23,40 +23,18 @@
 			font-family: 'Gaegu', cursive!important;
 		}
 		
-		div.container > div:nth-child(1) {
-			margin-right: 20px;
-		}
-		
 		a {
-			text-decoration-line: none!important;
-		}
-		
-		.hide-container {
-			display: none!important;
+			text-decoration : none;
 		}
 	</style>
 </head>
 <body>
 	<jsp:include page="../header.jsp" />
 	
-	<div class="container">
-			<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-				<input type="radio" class="btn-check" name="select_what" id="board" value="board" autocomplete="off" checked />
-	  			<label class="btn btn-outline-primary" for="board" checked>게시글</label>
-	  			
-	  			<input type="radio" class="btn-check" name="select_what" id="notice" value="notice" autocomplete="off" />
-	  			<label class="btn btn-outline-primary" for="notice">공지사항</label>
-			</div>
-			
-			<c:if test="${empty sessionScope.id }">
-				<button type="button" class="btn btn-info" id="writebtn">글쓰기</button>
-			</c:if>			 
-	</div> <%--div.container ends --%>	
-	
 	<div class="container" id="board-container">	
 		<c:if test="${listcount >= 1 }">
 			
-			<div class="rows" style="text-align: right">
+			<div class="rows" style="text-align: right; margin-top: 20px;">
 				<select class="form-control" id="orderby" style="width:auto; margin-bottom: 2em; display: inline-block;">
 					<option value="0">게시글 작성 순 &#8595;</option>
 					<option value="1">관심 많은 순 &#8595;</option>
@@ -68,10 +46,24 @@
 			<div class="row">
 				<div class="col-md-3">
 					<div class="alert alert-info" style="padding: 0px; font-size: 1.5rem; text-align: center;">
-						<strong>전체 게시글: </strong><span id="num-list" style="font-weight: normal;">11개</span>
+						<c:if test="${category == '0' }">
+							<strong>전시회  게시글: </strong>
+						</c:if>
+						<c:if test="${category == '1' }">
+							<strong>박람회  게시글: </strong>
+						</c:if>	
+						<c:if test="${category == '2' }">
+							<strong>버스킹  게시글: </strong>
+						</c:if>	
+						<c:if test="${category == '3' }">
+							<strong>연극/공연  게시글: </strong>
+						</c:if>		
+						<span id="num-list" style="font-weight: normal;">${listcount }개</span>
 					</div>
 				</div>
-				<div class="offset-md-9"></div>
+				<div class="offset-md-7 col-md-2" style="text-align: center;">
+					<button type="button" class="btn btn-outline-info" id="all-list-btn" style="font-size: 0.7em; font-weight: bold;">전체 게시글 목록</button>
+				</div>
 			</div>
 			
 			<table class="table table-hover table-striped" id="board-table">
@@ -95,19 +87,7 @@
 	        					<c:out value="${num }" />
 								<c:set var="num" value="${num - 1 }" />
 	        				</td>
-	        				<td> <%--글 제목 --%>
-	        					<c:if test="${b.category == 0 }">
-									[전시회]
-								</c:if>
-								<c:if test="${b.category == 1 }">
-									[박람회]
-								</c:if>
-								<c:if test="${b.category == 2 }">
-									[버스킹]
-								</c:if>
-								<c:if test="${b.category == 3 }">
-									[연극/공연]
-								</c:if>	        				
+	        				<td> <%--글 제목 --%>       				
 	        					<a href="BoardDetailAction.bo?num=${b.board_id }"><c:out value="${b.title }" /></a>
 	        				</td>
 	        				<td> <%--작성자 아이디 --%>
@@ -139,7 +119,7 @@
 					</c:if>					
 					<c:if test="${page > 1 }">
 						<li class="page-item">
-							<a href="BoardList.bo?page=${page - 1 }&orderby=${orderby }" class="page-link">이전&nbsp;</a>
+							<a href="BoardCategoryList.bo?page=${page - 1 }&orderby=${orderby }&category=${category }" class="page-link">이전&nbsp;</a>
 						</li>
 					</c:if>
 					
@@ -151,7 +131,7 @@
 						</c:if>
 						<c:if test="${a != page }">
 							<li class="page-item">
-								<a href="BoardList.bo?page=${a }&orderby=${orderby }" class="page-link">${a }</a>
+								<a href="BoardCategoryList.bo?page=${a }&orderby=${orderby }&category=${category }" class="page-link">${a }</a>
 							</li>
 						</c:if>
 					</c:forEach>
@@ -163,7 +143,7 @@
 					</c:if>
 					<c:if test="${page < maxpage }">
 						<li class="page-item">
-							<a href="BoardList.bo?page=${page + 1 }&orderby=${orderby }" class="page-link">&nbsp;다음</a>
+							<a href="BoardCategoryList.bo?page=${page + 1 }&orderby=${orderby }&category=${category }" class="page-link">&nbsp;다음</a>
 						</li>
 					</c:if>
 				</ul>
@@ -175,74 +155,27 @@
 		</c:if>
 	</div>
 	
-	<div class="container hide-container" id="notice-container" style="margin-top: 50px;">
-		<div style="width: 100%; height: 500px; overflow: auto;">
-			<table class="table table-hover">
-				<thead>
-		            <tr>
-		                <th scope="col">번호</th>
-		                <th scope="col">제목</th>
-		                <th scope="col">작성일</th>
-		            </tr>
-        		</thead>
-		        <tbody>		            
-		        </tbody>
-			</table>
-		</div>
-	</div>
-	
 	<script>
-		$(document).ready(function () {			
-			$("#orderby").change(function () {
-				goBoard(1);
-			});			
-			
-			$("input[type='radio'][name='select_what']").change(function() {
-			    if (this.value == "board") {
-			        goBoard(1, 0);
-			        $("#orderby").val("0").prop("selected", true);
-			        $("#writebtn").removeClass("hide-container");
-			        $("#board-container").removeClass("hide-container");			        
-			        $("#notice-container").addClass("hide-container");			       
-			    } else if (this.value == "notice") {
-			    	showNotice();
-			    	$("#writebtn").addClass("hide-container");
-			    	$("#board-container").addClass("hide-container");	
-			    	$("#notice-container").removeClass("hide-container");		
-			    }
-			}); // 게시글 혹은 공지사항 라디오 버튼을 눌렀을 경우 처리.
-		}); // document.ready ends
-		
-		function showNotice() {
-			$.ajax({
-				url: "NoticeList.bo",
-				dataType: "json",
-				cache: "false",
-				
-				success: function (data) {
-					if (data.listcount > 0) {
-						console.log("notice list success!");
-						$("#notice-container table tbody").empty();
-						var num = data.listcount;
-						var output = "";
-						$(data.noticelist).each(function (index, item) {
-							output += "<tr>";
-							output += "		<td>" + (num--) + "</td>";
-							output += "		<td><a href='NoticeDetailAction.bo?num=" + item.notice_id + "'>" + textLengthOverCut(item.title) + "</a></td>";
-							output += "		<td>" + (item.write_date) + "</td>";
-							output += "</tr>";
-						}); // each ends
-						$("#notice-container table tbody").append(output);
-					} // if ends
-				} // success ends
+		$(document).ready(function () {
+			$("#all-list-btn").click(function () {
+				location.href = "BoardList.bo";
 			});
-		}
+			
+			$("#orderby").change(function () {
+				var category = '<%=request.getAttribute("category") %>';
+				console.log("typeof category: " + typeof category);
+				goBoard(1, $("#orderby option:selected").val(), category);
+			});
+		});
 		
-		function goBoard(page, orderby) {
+		function goBoard(page, orderby, category) {
 			if (orderby === undefined) {
 				orderby = $("#orderby option:selected").val();
 			}
-			var sendData = "page=" + page + "&state=ajax&orderby=" + orderby;
+			if (category === undefined) {
+				category = '<%=request.getAttribute("category") %>';
+			}
+			var sendData = "page=" + page + "&state=ajax&orderby=" + orderby + "&category=" + category;
 			ajaxBoard(sendData);
 		} // function goBoard ends
 		
@@ -251,7 +184,7 @@
 			$.ajax({
 				type: "post",
 				data: sendData,
-				url: "BoardList.bo",
+				url: "BoardCategoryList.bo",
 				dataType: "json",
 				cache: "false",
 				
@@ -264,18 +197,7 @@
 						var output = "<tbody>";
 						var category = "";
 						
-						$(data.boardlist).each(function (index, item) {
-							// 게시글의 카테고리를 구분해주는 부분
-							if (item.category == 0) {
-								category = "[전시회] ";
-							} else if (item.category == 1) {
-								category = "[박람회] ";
-							} else if (item.category == 2) {
-								category = "[버스킹] ";
-							} else if (item.category == 3) {
-								category = "[연극/공연] ";
-							}
-							
+						$(data.boardlist).each(function (index, item) {							
 							output += "<tr>";
 							output += "		<td>" + (num--) + "</td>";
 							output += "		<td><a href='BoardDetailAction.bo?num=" + item.board_id + "'>" + category + textLengthOverCut(item.title) + "</a></td>";

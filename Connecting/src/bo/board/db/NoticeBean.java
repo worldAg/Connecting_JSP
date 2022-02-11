@@ -2,12 +2,12 @@ package bo.board.db;
 
 public class NoticeBean {
 
-	private String notice_id;
+	private int notice_id;
 	private String title;
 	private String content;
 	private String write_date;
 
-	public String getNotice_id() {
+	public int getNotice_id() {
 		return notice_id;
 	}
 
@@ -23,7 +23,7 @@ public class NoticeBean {
 		return write_date;
 	}
 
-	public void setNotice_id(String notice_id) {
+	public void setNotice_id(int notice_id) {
 		this.notice_id = notice_id;
 	}
 

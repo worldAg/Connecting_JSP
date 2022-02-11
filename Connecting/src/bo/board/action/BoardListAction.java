@@ -42,8 +42,7 @@ public class BoardListAction implements Action {
 			page = Integer.parseInt(request.getParameter("page").trim());
 		}		
 		System.out.println("보여줄 페이지 - page: " + page);
-		
-		// 추가
+
 		if (request.getParameter("limit") != null) {
 			limit = Integer.parseInt(request.getParameter("limit").trim());
 		}
