@@ -1601,9 +1601,12 @@ public class BoardDAO {
 		ResultSet rs = null;
 		
 		String selectSQL = "select * "
-				         + "from ( select rownum rnum, board.* from board order by write_date desc ) "
-				         + "where rnum >= 1 and rnum <=6";
-		
+				         + "from "
+				         + "(select rownum rnum, b1.* "
+				         + "from (select * "
+				         + "      from board " 
+				         + "      order by write_date desc) b1) "
+				         + "      where rnum >= 1 and rnum <= 6";
 		List<BoardBean> list = new ArrayList<>();
 
 		

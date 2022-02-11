@@ -149,6 +149,22 @@ $(document).ready(function() {
 			}
 		}
 		
-	})
+	});
+	
+	//시작 날짜 변경시 유효성 검사
+	   $('input[name = start_date]').change(function(){
+	      var sysdate = new Date(+new Date() + 3240 * 10000).toISOString().split("T")[0];
+
+	      var end_date = $('input[name = end_date]').val();
+	      var start_date = $('input[name = start_date]').val();
+	      
+	      
+	      if(start_date != "" && end_date != ""){
+	         if(start_date > end_date){
+	            alert("시작날짜를 종료날짜와 같거나 이후로 설정해 주세요.")
+	            $('input[name = start_date]').val("");
+	         }
+	      }	      
+	   });
 	
 })
