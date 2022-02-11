@@ -11,7 +11,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-
 public class NoticeDAO {
 	private DataSource ds;
 
@@ -65,8 +64,6 @@ public class NoticeDAO {
 		}
 		return false;
 	}
-	
-	
 	
 	public List<NoticeBean> getNoticeList() {
 		Connection conn = null;
@@ -142,6 +139,91 @@ public class NoticeDAO {
 		}
 		return result;
 	}
+	
+	public NoticeBean noticeDetail(int notice_id) {
+		NoticeBean n = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = ds.getConnection();
+			
+			String sql = "SELECT * FROM NOTICE WHERE NOTICE_ID = ? ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, notice_id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				n = new NoticeBean();
+				n.setNotice_id(rs.getInt("notice_id"));
+				n.setTitle(rs.getString("title"));
+				n.setContent(rs.getString("content"));
+				n.setWrite_date(rs.getString("write_date"));
+			}
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+		}
+		return n;
+	}
+	
+	public boolean noticeModify(NoticeBean noticedata) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE NOTICE " 
+				   + "SET TITLE = ?, CONTENT = ? "
+				   + "WHERE NOTICE_ID = ?";
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, noticedata.getTitle());
+			pstmt.setString(2, noticedata.getContent());
+			pstmt.setInt(3, noticedata.getNotice_id());
+			int result = pstmt.executeUpdate();
+			if (result == 1) {
+				System.out.println("성공 업데이트");
+				return true;
+			}
+		} catch (Exception e) {
+			System.out.println("noticeModify() 에러 : " + e);
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+		}
+		return false;
+	}
+	
+	
 	
 	
 }

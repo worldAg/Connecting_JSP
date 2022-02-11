@@ -25,26 +25,29 @@ public class MemberUpdateAction implements Action {
 		MemberDAO mdao = new MemberDAO();
 		Member m = new Member();
 		
-		m = mdao.getUser("hh");
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("id"); 
 		
-		//글 내용 불러오기 실패한 경우
+		m = mdao.getUser(id);
+		
+
 		if(m == null) {
-			System.out.println("회원정보 보기 실패");
+			System.out.println("회원정보 불러오기 실패");
 			forward = new ActionForward();
 			forward.setRedirect(false);
-			request.setAttribute("message", "회원정보 보기 실패입니다.");
+			request.setAttribute("message", "회원정보 불러오기에 실패하였습니다.");
 			forward.setPath("error/error.jsp");
 			return forward;
 		}
 		
 		
-		System.out.println("회원정보 보기 성공");
+		System.out.println("회원정보 불러오기 성공");
 		
 		
 		request.setAttribute("memberInfo", m);
 		forward.setRedirect(false);
 
-		forward.setPath("updateForm.jsp");
+		forward.setPath("mypage/updateForm.jsp");
 		
 		return forward;
 	}

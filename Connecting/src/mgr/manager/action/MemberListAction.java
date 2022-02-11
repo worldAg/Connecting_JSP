@@ -12,7 +12,7 @@ import mgr.manager.db.*;
 public class MemberListAction implements Action {
 
 	@Override
-	public ActionForward excute(HttpServletRequest request, HttpServletResponse response)
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		ActionForward forward = new ActionForward();
 		MemberDAO mdao = new MemberDAO();

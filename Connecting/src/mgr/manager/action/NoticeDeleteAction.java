@@ -11,7 +11,7 @@ import mgr.manager.db.NoticeDAO;
 public class NoticeDeleteAction implements Action {
 
 	@Override
-	public ActionForward excute(HttpServletRequest request, HttpServletResponse response)
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		NoticeDAO ndao = new NoticeDAO();
 		int notice_id = Integer.parseInt(request.getParameter("notice_id"));
