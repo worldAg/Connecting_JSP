@@ -10,27 +10,25 @@ CREATE TABLE MEMBER (
 	PROFILE_IMG VARCHAR2(20) 
 );
 
-insert into member (id, password, email,name,profile_img) 
-values('hh','1234','hhyy@naver.com','hy',null);
 
 select * from MEMBER;
 
 
-CREATE TABLE HEART ( -- »ç¿ëÀÚ°¡ ÇÏÆ® ¹öÆ° Å¬¸¯ÇÑ °Ô½Ã¹°À» ¸ð¾ÆÁÖ´Â Å×ÀÌºí --
+CREATE TABLE HEART ( -- ì‚¬ìš©ìžê°€ í•˜íŠ¸ ë²„íŠ¼ í´ë¦­í•œ ê²Œì‹œë¬¼ì„ ëª¨ì•„ì£¼ëŠ” í…Œì´ë¸” --
 	ID VARCHAR2(20),
-	HEART VARCHAR2(30), -- ÇÏÆ® ¹öÆ° ´©¸¥ °Ô½Ã¹°ÀÇ BOARD_ID (ÄÄ¸¶·Î ±¸ºÐ) 100,200,300 --
+	HEART VARCHAR2(30), -- í•˜íŠ¸ ë²„íŠ¼ ëˆ„ë¥¸ ê²Œì‹œë¬¼ì˜ BOARD_ID (ì»´ë§ˆë¡œ êµ¬ë¶„) 100,200,300 --
 	FOREIGN KEY(ID) REFERENCES MEMBER(ID)
 );
 
 
 CREATE TABLE BOARD (
-	BOARD_ID     NUMBER PRIMARY KEY, -- MAX°ª °¡Á®¿À±â, ¸¸¾à NULLÀÌ¸é 0¹øºÎÅÍ ½ÃÀÛ --
-	CATEGORY     NUMBER(5) CHECK(CATEGORY IN (0, 1, 2, 3)), --0:Àü½ÃÈ¸, 1:¹Ú¶÷È¸, 2:¹ö½ºÅ·, 3:¿¬±Ø/°ø¿¬ -- 
-	LOC          NUMBER(5) CHECK(LOC IN (0, 1, 2, 3, 4)), --0:¼­¿ï, 1:°æ±â/ÀÎÃµ, 2:´ëÀü/ÃæÃ»/°­¿ø, 3:ºÎ»ê/´ë±¸/°æ»ó 4:±¤ÁÖ/Àü¶ó/Á¦ÁÖ --
-	ID           VARCHAR2(20), --MEMBERÅ×ÀÌºíÀÇ ÀÛ¼ºÀÚ ID--
+	BOARD_ID     NUMBER PRIMARY KEY, -- MAXê°’ ê°€ì ¸ì˜¤ê¸°, ë§Œì•½ NULLì´ë©´ 0ë²ˆë¶€í„° ì‹œìž‘ --
+	CATEGORY     NUMBER(5) CHECK(CATEGORY IN (0, 1, 2, 3)), --0:ì „ì‹œíšŒ, 1:ë°•ëžŒíšŒ, 2:ë²„ìŠ¤í‚¹, 3:ì—°ê·¹/ê³µì—° -- 
+	LOC          NUMBER(5) CHECK(LOC IN (0, 1, 2, 3, 4)), --0:ì„œìš¸, 1:ê²½ê¸°/ì¸ì²œ, 2:ëŒ€ì „/ì¶©ì²­/ê°•ì›, 3:ë¶€ì‚°/ëŒ€êµ¬/ê²½ìƒ 4:ê´‘ì£¼/ì „ë¼/ì œì£¼ --
+	ID           VARCHAR2(20), --MEMBERí…Œì´ë¸”ì˜ ìž‘ì„±ìž ID--
 	TITLE        VARCHAR2(50),
-	HOST_NAME    VARCHAR2(10), -- ÁÖÃÖÀÚÀÇ ÀÌ¸§ --
-	ADDRESS      VARCHAR2(30), -- »ó¼¼ÁÖ¼Ò --
+	HOST_NAME    VARCHAR2(10), -- ì£¼ìµœìžì˜ ì´ë¦„ --
+	ADDRESS      VARCHAR2(30), -- ìƒì„¸ì£¼ì†Œ --
 	START_DATE   VARCHAR2(20),
 	END_DATE     VARCHAR2(20),
 	START_TIME   VARCHAR2(20),
@@ -38,12 +36,9 @@ CREATE TABLE BOARD (
 	WRITE_DATE   DATE DEFAULT SYSDATE,
 	CONTENT      VARCHAR2(399),
 	BOARD_IMG    VARCHAR2(30),
-	FOREIGN KEY(ID) REFERENCES MEMBER(ID) ON DELETE CASCADE -- È¸¿ø Å»Åð ½Ã ÀÛ¼º ±Ûµµ ³¯¾Æ°¨ --
+	FOREIGN KEY(ID) REFERENCES MEMBER(ID) ON DELETE CASCADE -- íšŒì› íƒˆí‡´ ì‹œ ìž‘ì„± ê¸€ë„ ë‚ ì•„ê° --
 );
 
-insert into board (board_id,category,loc,id,title,
-start_date,end_date) 
-values(3,1,0,'hh','2¿ù¹Ú¶÷È¸','2022-02-01','2022-02-31');
 
 select * from board;
 

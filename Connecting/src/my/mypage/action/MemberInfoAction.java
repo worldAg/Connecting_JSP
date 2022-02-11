@@ -36,8 +36,8 @@ public class MemberInfoAction implements Action {
 		request.setAttribute("memberInfo", m);
 		request.setAttribute("myboard", boardlist);
 		
-		forward.setRedirect(false);//주소 변경없이 jsp페이지의 내용을 보여줍니다.
-		forward.setPath("mypage.jsp");
+		forward.setRedirect(false);
+		forward.setPath("mypage/mypage.jsp");
 		return forward;
 	}
 

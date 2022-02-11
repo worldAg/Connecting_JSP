@@ -1,7 +1,8 @@
 eclipse.preferences.version=1
-encoding//WebContent/mylist.jsp=UTF-8
-encoding//WebContent/mypage.jsp=UTF-8
-encoding//WebContent/updateForm.jsp=UTF-8
+encoding//WebContent/js/bo_write.js=UTF-8
+encoding//WebContent/mypage/mylist.jsp=UTF-8
+encoding//WebContent/mypage/mypage.jsp=UTF-8
+encoding//WebContent/mypage/updateForm.jsp=UTF-8
 encoding//src/bo/board/action/ActionForward.java=UTF-8
 encoding//src/bo/board/action/BoardDetailAction.java=UTF-8
 encoding//src/bo/board/action/BoardFrontController.java=UTF-8
