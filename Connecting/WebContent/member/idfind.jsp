@@ -60,7 +60,7 @@ span {
 
 </head>
 <body>
-<jsp:include page="../header.jsp" />
+<jsp:include page="../main/header.jsp" />
 	<form class="border-info" action="idfindProcess.net" method="post"
 		id="idfind_form">
 		<h1>아이디 찾기</h1>

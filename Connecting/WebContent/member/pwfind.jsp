@@ -61,7 +61,7 @@ span {
 
 </head>
 <body>
-<jsp:include page="../header.jsp" />
+<jsp:include page="../main/header.jsp" />
 	<form class="border-info" action="pwfindProcess.net" method="post"
 		id="pwfind_form">
 		<h1>비밀번호 찾기</h1>

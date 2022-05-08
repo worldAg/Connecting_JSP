@@ -3,10 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>Welcome</title>
 </head>
 <body>
-	<jsp:forward page="/main.jsp"></jsp:forward>
+	<jsp:forward page="/main/main_page.jsp"></jsp:forward>
 </body>
 </html>

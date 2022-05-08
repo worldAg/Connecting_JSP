@@ -24,7 +24,7 @@
 	</style>
 </head>
 <body>
-	 <jsp:include page="../header.jsp" />
+	 <jsp:include page="../main/header.jsp" />
 	 <div class="container justify-content-center">
 	 
 		<h2 style="margin-top: 50px;"> 공지사항 </h2>

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import net.member.db.MemberDAO;
 
-public class MemberLoginAction implements Action {
+public class LoginAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)

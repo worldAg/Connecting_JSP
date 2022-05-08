@@ -1,77 +1,42 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
-
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Header</title>
     
     <style>
-        body {
-            font-size: 30px;
-        }
-
-        .nav-item {
+    	body {
+    		font-size: 20px;
+    	}
+    
+		#searchForm {
+			text-align: center;
+		}
+		
+		#searchBar {
+			width: 350px;
+			height: 36px;
+		}
+		
+		#logo {
+			margin: 20px;		
+		}
+		
+		.nav-item {
             display: inline-block;
             float: left !important;
             margin-left: 20px;
+            font-size: 24px;
         }
-
-        #headingThree {
-            display: inline-block;
-            float: right !important;
-        }
-
+        
         #collapseThree {
             position: absolute;
             z-index: 99;
             background-color: white;
         }
-
-        .card {
-            display: inline-block;
-            margin-left: 40px;
-        }
-
-        #boards {
-            margin-top: 200px;
-            text-align: center;
-        }
-
-        .accordion-body {
-            height: 500px;
-            width: 100vw;
-        }
-
-        .s-container {
-            width: 500px;
-            margin: 50px 50px;
-        }
-
-        #sarch {
-            display: inline-block !important;
-        }
-
-        #logo {
-            display: inline-block;
-        }
-
-        .form-group {
-            display: inline-block;
-        }
-
-        h1 {
-            font-size: 50px;
-        }
-
-        .cont {
-            display: inline-block;
-            float: right !important;
-        }
-
+        
         .accordion-body {
             height: 500px;
             width: 100vw;
@@ -95,56 +60,52 @@
 </head>
 
 <body>
+	<!-- 로그인 nav -->
+	<nav>
+		<!-- 로그인하지 않은 사용자일 경우 -->
+		<c:if test="${empty id}">
+		    <div class="d-flex flex-row-reverse bd-highlight">
+		        <div class="p-2 bd-highlight"><a href="register.net">회원가입</a></div>
+		        <div class="p-2 bd-highlight"><a href="login.net">로그인</a></div>
+		    </div>
+	    </c:if>
+	    <!-- 로그인한 사용자일 경우 -->
+	    <c:if test="${!empty id}">
+			<div class="d-flex flex-row-reverse bd-highlight">
+		 		<c:if test='${ id !="admin" && empty email}'>
+		 			<div class="p-2 bd-highlight">
+		 				<a class="nav-link" href="memberInfo.my">마이페이지</a>
+		 			</div>
+		 		</c:if>
+		 	    <c:if test='${id=="admin"}'>
+		 	    	<div class="p-2 bd-highlight">
+		 				<a class="nav-link" href="mgrMain.mgr">관리자페이지</a>
+		 			</div>
+				</c:if>
+				<div class="p-2 bd-highlight">
+		 			<a class="nav-link" href="logout.net">로그아웃</a>
+		 		</div>
+		 		<div class="p-2 bd-highlight">
+		 			<a class="nav-link">${id} 님</a> 
+		 		</div>
+		 	</div>
+		</c:if>
+    </nav>
 
+    <!-- 로고 및 검색바 -->
+    <div id="logoAndSerch">
+    	<form action="BoardSearchBarListAction.bo" id="searchForm">
+    	 	<a href="main_page.jsp">
+		      	<img id="logo" src="<%=request.getContextPath()%>/resources/img/logo.png" alt="Connecting" height="100">
+		    </a>
+        	<input type="text" placeholder=" 검색어를 입력해보세요!" id="searchBar">
+        	<button type="submit">
+        		<img src="<%=request.getContextPath()%>/resources/img/search1.png">
+        	</button>
+      	</form>	
+	</div>
 
-	<c:if test="${!empty id}">
-	 	 <div class="d-flex flex-row-reverse bd-highlight">
-	 	    <c:if test='${id=="admin"}'>
-	 	       <div class="p-2 bd-highlight">
-	 		   <a class="nav-link" href="mgrMain.mgr">관리자 페이지</a>
-	 		  </div>
-	 	 </c:if>
-	 
-	 		  <div class="p-2 bd-highlight">
-	 		   <a class="nav-link" href="logout.net">로그아웃</a>
-	 		  </div>
-	 		  
-	 		  <c:if test='${ id !="admin" && empty email}'>
-	 		  <div class="p-2 bd-highlight">
-	 		   <a class="nav-link" href="memberInfo.my">마이페이지</a>
-	 		   </div>
-	 		   </c:if>
-	 		  <div class="p-2 bd-highlight">
-	 		    <a class="nav-link">${id } 님 </a> 
-	 		  </div>
-	 	</div>
-	</c:if>
-	<c:if test="${empty id}">
-    <div class="d-flex flex-row-reverse bd-highlight">
-
-        <div class="p-2 bd-highlight"><a href="register.net">register</a></div>
-        <div class="p-2 bd-highlight"><a href="login.net">login</a></div>
-
-    </div>
-    </c:if>
-    <div class="container" style="margin-bottom: 44px;">
-        <div class="row align-items-center">
-            <div class="col-lg-5 col-md-12">
-                <a href="main.jsp">
-                    <h1 id="logo" style="font-size: 5rem">Connecting</h1>
-                </a>
-            </div>
-            <div class="col-lg-7 col-md-12">
-                <div>
-                    <form action="BoardSearchBarListAction.bo" id="searchform">
-                        <input type="text" style="width:84%" placeholder="Search" name="keyword"/>
-                        <button type="submit" id="searchbtn">Search</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
+	<!-- 카테고리 nav -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#"></a>
@@ -160,14 +121,17 @@
                     <li class="nav-item"><a class="nav-link" href="BoardCategoryList.bo?category=2">버스킹</a></li>
                     <li class="nav-item"><a class="nav-link" href="BoardCategoryList.bo?category=3">연극&공연</a></li>
                 </ul>
+                
+                <h2 class="accordion-header" id="headingThree">
+	                <button class="bg-dark accordion-button" type="button" data-bs-toggle="collapse"
+	                    data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree"
+	                    style="color: #fff; font-size: 24px; border-radius: 30%">
+	                    조건 검색&nbsp;<img src="<%=request.getContextPath()%>/resources/img/search2.png">  
+	                </button>
+            	</h2>
+               
             </div>
 
-            <h2 class="accordion-header" id="headingThree">
-                <button class="bg-dark accordion-button" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree"
-                    style="color: #fff; font-size: 1.5rem; border-radius: 30%">
-                    스마트서치</button>
-            </h2>
         </div>
     </nav>
 
@@ -266,6 +230,7 @@
 					
 				}
 			});
+			
 		})
 	</script>
 </body>

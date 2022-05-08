@@ -37,7 +37,7 @@
 	</style>
 </head>
 <body>
-	<jsp:include page="../header.jsp" />
+	<jsp:include page="../main/header.jsp" />
 	
 	<div class="container">
 			<div class="btn-group" role="group" aria-label="Basic radio toggle button group">

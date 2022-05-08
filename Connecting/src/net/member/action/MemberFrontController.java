@@ -10,43 +10,42 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("*.net")
-public class NetFrontController extends HttpServlet {
+public class MemberFrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
-	
-    	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
  
-    		String RequestURI = request.getRequestURI();
-    		System.out.println("RequestURI = " + RequestURI);
+		String RequestURI = request.getRequestURI();
+    	System.out.println("RequestURI = " + RequestURI);
     	
-    		String contextPath = request.getContextPath();
-    		System.out.println("contextPath = " + contextPath);
+    	String contextPath = request.getContextPath();
+    	System.out.println("contextPath = " + contextPath);
     		
-    		String command = RequestURI.substring(contextPath.length());
-    		System.out.println("command = " + command);
+    	String command = RequestURI.substring(contextPath.length());
+    	System.out.println("command = " + command);
     		
     		
-    		ActionForward forward = null;
-    		Action action = null;
+    	ActionForward forward = null;
+    	Action action = null;
     		
-    		switch (command) {
+    	switch (command) {
+	    	case "/login.net":
+	    		action = new LoginAction();
+	    		break;
+	    	case "/loginProcess.net":
+	    		action = new LoginProcessAction();
+	    		break;
+	    	case "/logout.net":
+	    		action = new LogoutAction();
+	    		break;
     		case "/register.net":
     			action = new MemberJoinAction();
-    			break;
-    		case "/idcheck.net":
-    			action = new MemberIdCheckAction();
-    			break;
-    		case "/login.net":
-    			action = new MemberLoginAction();
     			break;
     		case "/joinProcess.net":
     			action = new MemberJoinProcessAction();
     			break;
-    		case "/loginProcess.net":
-    			action = new MemberLoginProcessAction();
-    			break;
-    		case "/logout.net":
-    			action = new MemberLogoutAction();
+    		case "/idcheck.net":
+    			action = new MemberIdCheckAction();
     			break;
     		case "/emailcheck.net":
     			action = new EmailCheckAction();

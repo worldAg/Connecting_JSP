@@ -61,7 +61,7 @@
 	</style>
 </head>
 <body>
-    <jsp:include page="../header.jsp" />
+    <jsp:include page="../main/header.jsp" />
     
     <div class="container cont_form">
     	<form class="board_form" name="boardWrite" action="boardAddAction.bo" method="post" style="font-size:23px" enctype="Multipart/form-data">

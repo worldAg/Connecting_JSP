@@ -67,7 +67,7 @@
 		String pagefile = (String)request.getAttribute("pagefile");
 	%>
 	<header>
-		<jsp:include page="../header.jsp" /><br><br>
+		<jsp:include page="../main/header.jsp" /><br><br>
 	</header>
 	<div class="container" style="margin-top:10px">
 		<div class="row">

@@ -27,7 +27,7 @@
 	</style>
 </head>
 <body>
-	<jsp:include page="../header.jsp" />
+	<jsp:include page="../main/header.jsp" />
 	<h2 style="margin-top: 50px;"> 공지사항 수정 </h2>
 	<form name="noticeUpdate" action="noticeModifyAction.mgr" method="post">
   		<fieldset>

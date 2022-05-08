@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import net.member.db.MemberDAO;
 
-public class MemberLoginProcessAction implements Action {
+public class LoginProcessAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
@@ -19,8 +19,8 @@ public class MemberLoginProcessAction implements Action {
 		ActionForward forward = new ActionForward();
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
-		MemberDAO mdao = new MemberDAO();
-		int result = mdao.isId(id, password);
+		MemberDAO dao = new MemberDAO();
+		int result = dao.isId(id, password);
 		System.out.println("결과는 " + result);
 
 		// 로그인 성공
@@ -29,7 +29,7 @@ public class MemberLoginProcessAction implements Action {
 			session.setAttribute("id", id);
 			
 			forward.setRedirect(true);
-			forward.setPath("main.jsp");
+			forward.setPath("main/main_page.jsp");
 			return forward;
 		} else {
 			String message = "비밀번호가 일치하지 않습니다.";

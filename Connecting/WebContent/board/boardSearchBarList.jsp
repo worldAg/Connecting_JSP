@@ -30,7 +30,7 @@
 </head>
 
 <body>
-	<jsp:include page="../header.jsp" />
+	<jsp:include page="../main/header.jsp" />
 	
 	<div class="container" id="board-container">	
 		<c:if test="${listcount >= 1 }">	
