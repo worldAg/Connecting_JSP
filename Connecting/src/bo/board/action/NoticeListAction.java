@@ -11,6 +11,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import action.Action;
+import action.ActionForward;
 import bo.board.db.NoticeBean;
 import bo.board.db.NoticeDAO;
 

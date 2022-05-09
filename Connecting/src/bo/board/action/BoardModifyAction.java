@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import action.Action;
+import action.ActionForward;
 import bo.board.db.Board;
 import bo.board.db.BoardDAO;
 

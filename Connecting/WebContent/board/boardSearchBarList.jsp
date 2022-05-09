@@ -8,15 +8,11 @@
 	<meta charset="utf-8">
 	<title>boardSearchBarList.jsp</title>
 	
-	<script src="<%=request.getContextPath() %>/jQuery/jquery-3.6.0.js"></script>	
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-    </script>
 	
 	<link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
 	<link href="https://fonts.googleapis.com/css2?family=Gaegu&display=swap" rel="stylesheet">
 	
-	<link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>resources/css/bootstrap.css" />
 	
 	<style>
 		* {
@@ -27,6 +23,10 @@
 			text-decoration : none;
 		}
 	</style>
+	<script src="<%=request.getContextPath() %>/resources/js/jquery-3.6.0.js"></script>	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
 </head>
 
 <body>

@@ -1,9 +1,9 @@
-package mgr.manager.action;
+package action;
 
 public class ActionForward {
+	
 	private boolean redirect = false;
 	private String path = null;
-	
 	
 	public boolean isRedirect() {
 		return redirect;

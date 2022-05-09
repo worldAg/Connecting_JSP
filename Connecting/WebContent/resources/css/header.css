@@ -1,0 +1,49 @@
+body {
+    font-size: 20px;
+}
+    		
+#searchForm {
+	text-align: center;
+}
+		
+#searchBar {
+	width: 350px;
+	height: 36px;
+}
+	
+#logo {
+	margin: 20px;		
+}
+	
+.nav-item {
+	display: inline-block;
+	float: left !important;
+	margin-left: 20px;
+	font-size: 22px;
+}
+        
+#collapseThree {
+	position: absolute;
+	z-index: 99;
+	background-color: #FFF5EE;
+}
+        
+.accordion-body {
+	height: 350px;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+}
+
+#radio_1 {
+	margin-right: 200px;
+}
+
+#smartBtn_div {
+	text-align: center;
+	margin: 20px;
+}
+        
+#smartBtn {
+	font-size: 20px;
+}		

@@ -16,8 +16,8 @@
 			font-family: 'Gaegu', cursive !important;
 		}
 		a {
-			text-decoration-line : none!important;
-			text-decoration : none!important;
+			text-decoration-line : none !important;
+			text-decoration : none !important;
 		}
 	</style>
 </head>

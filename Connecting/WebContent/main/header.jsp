@@ -4,59 +4,8 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/header.css" />
     <title>Header</title>
-    
-    <style>
-    	body {
-    		font-size: 20px;
-    	}
-    
-		#searchForm {
-			text-align: center;
-		}
-		
-		#searchBar {
-			width: 350px;
-			height: 36px;
-		}
-		
-		#logo {
-			margin: 20px;		
-		}
-		
-		.nav-item {
-            display: inline-block;
-            float: left !important;
-            margin-left: 20px;
-            font-size: 24px;
-        }
-        
-        #collapseThree {
-            position: absolute;
-            z-index: 99;
-            background-color: white;
-        }
-        
-        .accordion-body {
-            height: 500px;
-            width: 100vw;
-            display: flex;
-            justify-content: center;
-        }
-
-        #radio_1 {
-            margin-right: 200px;
-        }
-
-        #smart_btn {
-            float: right;
-            margin-right: 200px;
-            margin-bottom: 50px;
-            padding: 0px;
-            width: 80px;
-            font-size: 20px;
-        }
-    </style>
 </head>
 
 <body>
@@ -95,10 +44,10 @@
     <!-- 로고 및 검색바 -->
     <div id="logoAndSerch">
     	<form action="BoardSearchBarListAction.bo" id="searchForm">
-    	 	<a href="main_page.jsp">
+    	 	<a href="/main_page.jsp">
 		      	<img id="logo" src="<%=request.getContextPath()%>/resources/img/logo.png" alt="Connecting" height="100">
 		    </a>
-        	<input type="text" placeholder=" 검색어를 입력해보세요!" id="searchBar">
+        	<input type="text" placeholder=" 검색어를 입력해보세요!" name="keyword" id="searchBar">
         	<button type="submit">
         		<img src="<%=request.getContextPath()%>/resources/img/search1.png">
         	</button>
@@ -108,7 +57,6 @@
 	<!-- 카테고리 nav -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
                 aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -121,20 +69,18 @@
                     <li class="nav-item"><a class="nav-link" href="BoardCategoryList.bo?category=2">버스킹</a></li>
                     <li class="nav-item"><a class="nav-link" href="BoardCategoryList.bo?category=3">연극&공연</a></li>
                 </ul>
-                
                 <h2 class="accordion-header" id="headingThree">
 	                <button class="bg-dark accordion-button" type="button" data-bs-toggle="collapse"
 	                    data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree"
-	                    style="color: #fff; font-size: 24px; border-radius: 30%">
+	                    style="color: #fff; font-size: 22px; border-radius: 30%">
 	                    조건 검색&nbsp;<img src="<%=request.getContextPath()%>/resources/img/search2.png">  
 	                </button>
             	</h2>
-               
             </div>
-
         </div>
     </nav>
 
+	<!-- 스마트서치 -->
     <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
         data-bs-parent="#accordionExample" style="">
         <div class="accordion-body">
@@ -204,15 +150,16 @@
                     </label>
                 </div>
             </fieldset>
-
         </div>
-        <button type="button" class="btn btn-primary" id="smart_btn">검색하기</button>
+        <div id="smartBtn_div" >
+          	<button type="button" class="btn btn-info" id="smartBtn">검색하기</button>
+        </div>
     </div>
 	
 	<script>
 		$(document).ready(function () {
 			
-			$("#smart_btn").click(function () {
+			$("#smartBtn").click(function () {
 				var category = $("input[name='category']:checked").val();
 				var loc = $("input[name='loc']:checked").val();				
 				console.log(category);
@@ -220,14 +167,12 @@
 				location.href = "BoardSmartSearchListAction.bo?category=" + category + "&loc=" + loc;
 			});
 			
-			$("#searchform").submit(function () {
-				var keyword = $("#searchbar").val();
+			$("#searchForm").submit(function () {
+				var keyword = $("#searchBar").val();
 				if (keyword == "") {
-					alert("검색어를 입력해 주세요.");
-					$("#searchbar").focus();
+					alert("검색어를 입력해주세요.");
+					$("#searchBar").focus();
 					return false;
-				} else {
-					
 				}
 			});
 			

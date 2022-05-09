@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import action.Action;
+import action.ActionForward;
 import bo.board.db.BoardBean;
 import bo.board.db.BoardDAO;
 
@@ -20,7 +22,6 @@ public class BoardAddAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		// 하연님 ,
 		BoardDAO boarddao = new BoardDAO();
 		BoardBean boarddata = new BoardBean();
 		ActionForward forward = new ActionForward();

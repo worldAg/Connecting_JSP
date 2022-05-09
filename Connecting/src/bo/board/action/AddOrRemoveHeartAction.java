@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.JsonObject;
 
+import action.Action;
+import action.ActionForward;
 import bo.board.db.BoardDAO;
 
 public class AddOrRemoveHeartAction implements Action {

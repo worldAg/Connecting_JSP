@@ -5,6 +5,9 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import action.Action;
+import action.ActionForward;
 import mgr.manager.db.*;
 
 public class MemberInfoAction implements Action {

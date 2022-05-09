@@ -2,10 +2,9 @@ package bo.board.db;
 
 public class Board {
 
-	private int board_id;
+	private int board_id; // 글 고유 id
 	private int category;
 	private int loc;
-
 	private String id;
 	private String title;
 	private String host_name;
@@ -14,12 +13,10 @@ public class Board {
 	private String end_date;
 	private String start_time;
 	private String end_time;
-
 	private String write_date;
 	private String content;
 	private String board_img;
-	
-	private int heart_num; // 하트수
+	private int heart_num; // 관심 개수
 
 	public int getBoard_id() {
 		return board_id;
@@ -140,4 +137,5 @@ public class Board {
 	public void setHeart_num(int heart_num) {
 		this.heart_num = heart_num;
 	}
+	
 }

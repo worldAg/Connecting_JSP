@@ -12,6 +12,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import action.Action;
+import action.ActionForward;
 import bo.board.db.BoardBean;
 import bo.board.db.BoardDAO;
 
@@ -26,11 +28,11 @@ public class BoardListAction implements Action {
 		List<BoardBean> boardlist = new ArrayList<BoardBean>();		
 		
 		/*
-		 * 게시물 작성 순: 0;
-		 * 관심 많은 순: 1;
-		 * 시작 일자 임박 순: 2;
-		 * 종료 일자 임박 순: 3;
-		 */
+			게시물 작성 순: 0;
+			관심 많은 순: 1;
+			시작 일자 임박 순: 2;
+			종료 일자 임박 순: 3;
+		*/
 		String orderby = request.getParameter("orderby");
 		System.out.println("orderby: " + orderby);		
 		
