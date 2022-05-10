@@ -84,74 +84,74 @@
     <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
         data-bs-parent="#accordionExample" style="">
         <div class="accordion-body">
-            <fieldset id="radio_1" class="form-group">
+            <fieldset id="radio1" class="form-group">
                 <legend class="mt-4">카테고리</legend>
                 <div class="form-check">
-                    <label class="form-check-label"> <input type="radio" class="form-check-input" name="category"
-                            id="optionsRadios1" value="all"> 전체
+                    <label class="form-check-label"> 
+                    	<input type="radio" class="form-check-input" name="category" id="optionsRadios1" value="all"> 전체
                     </label>
                 </div>
                 <div class="form-check">
-                    <label class="form-check-label"> <input type="radio" class="form-check-input" name="category"
-                            id="optionsRadios1" value="0"> 전시회
+                    <label class="form-check-label">
+                    	<input type="radio" class="form-check-input" name="category" id="optionsRadios1" value="0"> 전시회
                     </label>
                 </div>
                 <div class="form-check">
-                    <label class="form-check-label"> <input type="radio" class="form-check-input" name="category"
-                            id="optionsRadios2" value="1"> 박람회
+                    <label class="form-check-label"> 
+                    	<input type="radio" class="form-check-input" name="category" id="optionsRadios2" value="1"> 박람회
                     </label>
                 </div>
                 <div class="form-check">
-                    <label class="form-check-label"> <input type="radio" class="form-check-input" name="category"
-                            id="optionsRadios3" value="2"> 버스킹
+                    <label class="form-check-label">
+                    	<input type="radio" class="form-check-input" name="category" id="optionsRadios3" value="2"> 버스킹
                     </label>
                 </div>
                 <div class="form-check">
-                    <label class="form-check-label"> <input type="radio" class="form-check-input" name="category"
-                            id="optionsRadios3" value="3"> 연극/공연
+                    <label class="form-check-label"> 
+                    	<input type="radio" class="form-check-input" name="category" id="optionsRadios3" value="3"> 연극/공연
                     </label>
                 </div>
                 <div style="visibility:hidden" class="form-check">
-                    <label class="form-check-label"> <input type="radio" class="form-check-input" name="category"
-                            id="optionsRadios3" value="-1"> 
+                    <label class="form-check-label">
+                    	<input type="radio" class="form-check-input" name="category" id="optionsRadios3" value="-1"> 
                     </label>
                 </div>
             </fieldset>
             <fieldset class="form-group">
-                <legend class="mt-4">지역별</legend>
+                <legend class="mt-4">지역</legend>
                 <div class="form-check">
-                    <label class="form-check-label"> <input type="radio" class="form-check-input" name="loc"
-                            id="optionsRadios1" value="all"> 전체
+                    <label class="form-check-label">
+                    	<input type="radio" class="form-check-input" name="loc" id="optionsRadios1" value="all"> 전체
                     </label>
                 </div>
                 <div class="form-check">
-                    <label class="form-check-label"> <input type="radio" class="form-check-input" name="loc"
-                            id="optionsRadios2" value="0"> 서울
+                    <label class="form-check-label">
+                    	<input type="radio" class="form-check-input" name="loc" id="optionsRadios2" value="0"> 서울
                     </label>
                 </div>
                 <div class="form-check">
-                    <label class="form-check-label"> <input type="radio" class="form-check-input" name="loc"
-                            id="optionsRadios3" value="1"> 경기/인천
+                    <label class="form-check-label">
+                    	<input type="radio" class="form-check-input" name="loc" id="optionsRadios3" value="1"> 경기/인천
                     </label>
                 </div>
                 <div class="form-check">
-                    <label class="form-check-label"> <input type="radio" class="form-check-input" name="loc"
-                            id="optionsRadios3" value="2"> 대전/충청/강원
+                    <label class="form-check-label">
+                    	<input type="radio" class="form-check-input" name="loc" id="optionsRadios3" value="2"> 대전/충청/강원
                     </label>
                 </div>
                 <div class="form-check">
-                    <label class="form-check-label"> <input type="radio" class="form-check-input" name="loc"
-                            id="optionsRadios3" value="3"> 부산/대구/경상
+                    <label class="form-check-label">
+                    	<input type="radio" class="form-check-input" name="loc" id="optionsRadios3" value="3"> 부산/대구/경상
                     </label>
                 </div>
                 <div class="form-check">
-                    <label class="form-check-label"> <input type="radio" class="form-check-input" name="loc"
-                            id="optionsRadios3" value="4"> 광주/전라/제주
+                    <label class="form-check-label">
+                    	<input type="radio" class="form-check-input" name="loc" id="optionsRadios3" value="4"> 광주/전라/제주
                     </label>
                 </div>
             </fieldset>
         </div>
-        <div id="smartBtn_div" >
+        <div id="smartBtn-div" >
           	<button type="button" class="btn btn-info" id="smartBtn">검색하기</button>
         </div>
     </div>

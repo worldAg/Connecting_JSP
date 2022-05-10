@@ -4,6 +4,7 @@ body {
     		
 #searchForm {
 	text-align: center;
+	margin: 0;
 }
 		
 #searchBar {
@@ -16,8 +17,6 @@ body {
 }
 	
 .nav-item {
-	display: inline-block;
-	float: left !important;
 	margin-left: 20px;
 	font-size: 22px;
 }
@@ -35,11 +34,11 @@ body {
 	justify-content: center;
 }
 
-#radio_1 {
+#radio1 {
 	margin-right: 200px;
 }
 
-#smartBtn_div {
+#smartBtn-div {
 	text-align: center;
 	margin: 20px;
 }

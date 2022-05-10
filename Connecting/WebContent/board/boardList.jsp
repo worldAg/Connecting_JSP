@@ -18,14 +18,18 @@
 			text-decoration-line: none !important;
 		}
 		
-		#radioBtn_div {
+		#radioBtn-div {
 			margin-top: 50px;
 		}
 		
+		.radioBtn {
+			width: 100px;
+			font-size: 18px;
+		}
 		
 		#board-container {
-			border: 1px solid;
-			
+			border: 2px solid;
+			border-radius: 20px;
 		}
 		
 		.hide-container {
@@ -38,17 +42,22 @@
 			-ms-text-align-last: center;
 			-moz-text-align-last: center;
 		}
+		
+		.alert {
+		
+		}
+		
 	</style>
 </head>
 <body>
 	<jsp:include page="../main/header.jsp" />
 	
-	<div class="container" id="radioBtn_div">
+	<div class="container" id="radioBtn-div">
 		<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-			<input type="radio" class="btn-check" name="select_what" id="radioBtn_board" value="board" checked />
-	  		<label class="btn btn-outline-primary" for="radioBtn_board" checked>게시글</label>
-	  		<input type="radio" class="btn-check" name="select_what" id="radioBtn_notice" value="notice" />
-	  		<label class="btn btn-outline-primary" for="radioBtn_notice">공지사항</label>
+			<input type="radio" class="btn-check" name="select_what" id="radioBtn-board"  value="board" checked />
+	  		<label class="btn btn-outline-primary radioBtn" for="radioBtn-board" checked>게시글</label>
+	  		<input type="radio" class="btn-check" name="select_what" id="radioBtn-notice" value="notice" />
+	  		<label class="btn btn-outline-primary radioBtn" for="radioBtn-notice">공지사항</label>
 		</div>
 			
 		<c:if test="${!empty sessionScope.id}">
@@ -114,19 +123,19 @@
 									</c:if>	        				
 		        					<a href="BoardDetailAction.bo?num=${ b.board_id }"><c:out value="${ b.title }" /></a>
 		        				</td>
-		        				<td> <%--작성자 아이디 --%>
+		        				<td>
 		        					<c:out value="${ b.id }" />
 		        				</td>
-		        				<td> <%--작성일자 --%>
+		        				<td>
 		        					<c:out value="${ b.write_date }" />
 		        				</td>	        				
-		        				<td> <%--시작일자 --%>
+		        				<td>
 		        					<c:out value="${ b.start_date }" />
 		        				</td>	        				
-		        				<td> <%--종료일자 --%>
+		        				<td>
 		        					<c:out value="${ b.end_date }" />
 		        				</td>	        				
-		        				<td style="text-align:right;"> <%--관심수 --%>
+		        				<td style="text-align:right;">
 		        					<c:out value="${ b.heart_num }" />
 		        				</td>
 		        			</tr>
