@@ -7,14 +7,14 @@ $(document).ready(function () {
 			
 			
 			
-			$("#orderby").change(function () {
+			$("#sort").change(function () {
 				goBoard(1);
 			});			
 			
 			$("input[type='radio'][name='select_what']").change(function() {
 			    if (this.value == "board") {
 			        goBoard(1, 0);
-			        $("#orderby").val("0").prop("selected", true);
+			        $("#sort").val("0").prop("selected", true);
 			        $("#writeBtn").removeClass("hide-container");
 			        $("#board-container").removeClass("hide-container");			        
 			        $("#notice-container").addClass("hide-container");			       
@@ -52,11 +52,11 @@ $(document).ready(function () {
 			});
 		}
 		
-		function goBoard(page, orderby) {
-			if (orderby === undefined) {
-				orderby = $("#orderby option:selected").val();
+		function goBoard(page, sort) {
+			if (sort === undefined) {
+				sort = $("#sort option:selected").val();
 			}
-			var sendData = "page=" + page + "&state=ajax&orderby=" + orderby;
+			var sendData = "page=" + page + "&state=ajax&sort=" + sort;
 			ajaxBoard(sendData);
 		} // function goBoard ends
 		
