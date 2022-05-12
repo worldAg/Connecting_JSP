@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.ActionForward;
-import bo.board.db.BoardBean;
+import bo.board.db.Board;
 import bo.board.db.BoardDAO;
 import my.mypage.db.Member;
 import my.mypage.db.MemberDAO;
@@ -22,7 +22,7 @@ public class BoardDetailAction implements Action {
 		int boardId = Integer.parseInt(request.getParameter("num").trim());
 		BoardDAO dao = new BoardDAO();
 
-		BoardBean boarddata = dao.getDetail(boardId);
+		Board boarddata = dao.getDetail(boardId);
 		
 		MemberDAO memberDAO = new MemberDAO();
 		Member member = memberDAO.getUser((String) request.getSession().getAttribute("id"));

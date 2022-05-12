@@ -15,27 +15,30 @@
 		<c:if test="${empty id}">
 		    <div class="d-flex flex-row-reverse bd-highlight">
 		        <div class="p-2 bd-highlight"><a href="register.net">회원가입</a></div>
-		        <div class="p-2 bd-highlight"><a href="login.net">로그인</a></div>
+		        <div class="p-2 bd-highlight"><a href="login.net">로그인 |</a></div>
 		    </div>
 	    </c:if>
 	    <!-- 로그인한 사용자일 경우 -->
 	    <c:if test="${!empty id}">
 			<div class="d-flex flex-row-reverse bd-highlight">
+				<div class="p-2 bd-highlight">
+		 			<a class="nav-link">고객센터</a> 
+		 		</div>
 		 		<c:if test='${ id !="admin" && empty email}'>
 		 			<div class="p-2 bd-highlight">
-		 				<a class="nav-link" href="memberInfo.my">마이페이지</a>
+		 				<a class="nav-link" href="memberInfo.my">마이페이지 |</a>
 		 			</div>
 		 		</c:if>
 		 	    <c:if test='${id=="admin"}'>
 		 	    	<div class="p-2 bd-highlight">
-		 				<a class="nav-link" href="mgrMain.mgr">관리자페이지</a>
+		 				<a class="nav-link" href="mgrMain.mgr">관리자페이지 |</a>
 		 			</div>
 				</c:if>
 				<div class="p-2 bd-highlight">
-		 			<a class="nav-link" href="logout.net">로그아웃</a>
+		 			<a class="nav-link" href="logout.net">로그아웃 |</a>
 		 		</div>
 		 		<div class="p-2 bd-highlight">
-		 			<a class="nav-link">${id} 님</a> 
+		 			${id} 님 |
 		 		</div>
 		 	</div>
 		</c:if>
@@ -44,7 +47,7 @@
     <!-- 로고 및 검색바 -->
     <div id="logoAndSerch">
     	<form action="BoardSearchBarListAction.bo" id="searchForm">
-    	 	<a href="/main_page.jsp">
+    	 	<a href="<%=request.getContextPath()%>/index.jsp">
 		      	<img id="logo" src="<%=request.getContextPath()%>/resources/img/logo.png" alt="Connecting" height="100">
 		    </a>
         	<input type="text" placeholder=" 검색어를 입력해보세요!" name="keyword" id="searchBar">
@@ -151,11 +154,11 @@
                 </div>
             </fieldset>
         </div>
-        <div id="smartBtn-div" >
+        <div id="smartBtn-div">
           	<button type="button" class="btn btn-info" id="smartBtn">검색하기</button>
         </div>
     </div>
-	
+	<script src="/Connecting/resources/js/jquery-3.6.0.js"></script>
 	<script>
 		$(document).ready(function () {
 			

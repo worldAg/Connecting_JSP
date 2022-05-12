@@ -14,7 +14,7 @@ import com.google.gson.JsonObject;
 
 import action.Action;
 import action.ActionForward;
-import bo.board.db.BoardBean;
+import bo.board.db.Board;
 import bo.board.db.BoardDAO;
 
 
@@ -25,7 +25,7 @@ public class BoardListAction implements Action {
 			throws ServletException, IOException {		
 
 		BoardDAO boarddao = new BoardDAO();
-		List<BoardBean> boardlist = new ArrayList<BoardBean>();		
+		List<Board> boardlist = new ArrayList<Board>();		
 		
 		/*
 			게시물 작성 순: 0;
@@ -38,7 +38,7 @@ public class BoardListAction implements Action {
 		
 		// 로그인 성공 시 파라미터 page가 없습니다. 그래서 초기 값이 필요.
 		int page = 1; // 보여줄 페이지
-		int limit = 5; // 한 페이지에 보여줄 게시판 글 목록의 수
+		int limit = 10; // 한 페이지에 보여줄 게시판 글 목록의 수
 		
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page").trim());

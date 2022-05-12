@@ -1,97 +1,127 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>boardCategoryList.jsp</title>
-	
-	<script src="<%=request.getContextPath() %>/jQuery/jquery-3.6.0.js"></script>	
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-    </script>
-	
+	<title>Board List</title>	
 	<link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-	<link href="https://fonts.googleapis.com/css2?family=Gaegu&display=swap" rel="stylesheet">
-	
-	<link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css" />
-	
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gaegu&display=swap">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap.css" />
+	<link rel="icon" href="<%=request.getContextPath()%>/resources/img/favicon.ico">
 	<style>
 		* {
-			font-family: 'Gaegu', cursive!important;
+			font-family: 'Gaegu', cursive !important;
 		}
 		
 		a {
-			text-decoration : none;
+			text-decoration-line: none !important;
 		}
+		
+		#board-container {
+			margin-top: 30px;
+			margin-bottom: 50px;
+		}
+		
+		.write-orderby {
+			margin-top: 10px;
+			margin-left: 10px;
+			text-align: right;
+		}
+		
+		#writeBtn {
+			font-weight: bold;
+		}
+		
+		#orderby {
+			text-align-last: center;
+			text-align: center;
+			-ms-text-align-last: center;
+			-moz-text-align-last: center;
+			width: auto; 
+			display: inline-block;
+			
+		}
+		
+		.alert {
+			padding: 0px; 
+			font-size: 18px;
+			text-align: center;
+			width: 350px;
+		}
+		
+		#listCount {
+			font-weight: normal;
+		}
+		
+		tr, td {
+			font-size: 20px;
+		}
+		
 	</style>
 </head>
 <body>
 	<jsp:include page="../main/header.jsp" />
 	
-	<div class="container" id="board-container">	
-		<c:if test="${listcount >= 1 }">
-			
-			<div class="rows" style="text-align: right; margin-top: 20px;">
-				<select class="form-control" id="orderby" style="width:auto; margin-bottom: 2em; display: inline-block;">
-					<option value="0">게시글 작성 순 &#8595;</option>
-					<option value="1">관심 많은 순 &#8595;</option>
-					<option value="2">시작 일자 임박 순 &#8595;</option>
-					<option value="3">종료 일자 임박 순 &#8595;</option>
+	<div class="container" id="board-container">
+		<div class="rows write-orderby">
+			<c:if test="${!empty sessionScope.id}">
+				<button type="button" class="btn btn-info" id="writeBtn">
+					글쓰기 <img src="<%=request.getContextPath()%>/resources/img/edit.png">
+				</button>
+			</c:if>			 
+			<c:if test="${listcount >= 1}">
+				<select class="form-control" id="orderby">
+					<option value="0">작성순 &#8595;</option>
+					<option value="1">관심순 &#8595;</option>
+					<option value="2">시작 임박순 &#8595;</option>
+					<option value="3">마감 임박순 &#8595;</option>
 				</select>
-			</div>			
-			
-			<div class="row">
-				<div class="col-md-3">
-					<div class="alert alert-info" style="padding: 0px; font-size: 1.5rem; text-align: center;">
-						<c:if test="${category == '0' }">
-							<strong>전시회  게시글: </strong>
-						</c:if>
-						<c:if test="${category == '1' }">
-							<strong>박람회  게시글: </strong>
-						</c:if>	
-						<c:if test="${category == '2' }">
-							<strong>버스킹  게시글: </strong>
-						</c:if>	
-						<c:if test="${category == '3' }">
-							<strong>연극/공연  게시글: </strong>
-						</c:if>		
-						<span id="num-list" style="font-weight: normal;">${listcount }개</span>
-					</div>
-				</div>
-				<div class="offset-md-7 col-md-2" style="text-align: center;">
-					<button type="button" class="btn btn-outline-info" id="all-list-btn" style="font-size: 0.7em; font-weight: bold;">전체 게시글 목록</button>
-				</div>
+			</c:if>
+		</div>	
+		
+		<!-- 게시글 목록 -->
+		<c:if test="${listcount >= 1}">
+			<div class="alert alert-info">
+				<c:if test="${category == '0' }">
+					<strong>전시회 : </strong>
+				</c:if>
+				<c:if test="${category == '1' }">
+					<strong>박람회 : </strong>
+				</c:if>	
+				<c:if test="${category == '2' }">
+					<strong>버스킹 : </strong>
+				</c:if>	
+				<c:if test="${category == '3' }">
+					<strong>연극/공연 : </strong>
+				</c:if>		
+				<span id="listCount">${ listcount }개</span>
 			</div>
 			
 			<table class="table table-hover table-striped" id="board-table">
 				<thead>
-		            <tr>
-		                <th scope="col">번호</th>
-		                <th scope="col">제목</th>
-		                <th scope="col">작성자</th>
-		                <th scope="col">작성일</th>		                
-		                <th scope="col">시작일</th>
-		                <th scope="col">종료일</th>		                
-		               	<th scope="col">관심수</th>
-		            </tr>
-	        	</thead>
-	        	
+					<tr>
+						<th scope="col">번호</th>
+						<th scope="col">제목</th>
+						<th scope="col">작성자</th>
+						<th scope="col">작성일</th>		                
+						<th scope="col">시작일</th>
+						<th scope="col">종료일</th>		                
+						<th scope="col">관심</th>
+					</tr>
+		        </thead>
 	        	<tbody>
-	        		<c:set var="num" value="${listcount - (page - 1) * limit }" />
-	        		<c:forEach var="b" items="${boardlist }">
+	        		<c:set var="num" value="${listcount - (page - 1) * limit}" />
+	        		<c:forEach var="b" items="${boardlist}">
 	        			<tr>
 	        				<td> <%--글 번호 --%>
-	        					<c:out value="${num }" />
-								<c:set var="num" value="${num - 1 }" />
+	        					<c:out value="${num}" />
+								<c:set var="num" value="${num - 1}" />
 	        				</td>
 	        				<td> <%--글 제목 --%>       				
-	        					<a href="BoardDetailAction.bo?num=${b.board_id }"><c:out value="${b.title }" /></a>
+	        					<a href="BoardDetailAction.bo?num=${b.board_id }"><c:out value="${b.title}" /></a>
 	        				</td>
 	        				<td> <%--작성자 아이디 --%>
-	        					<c:out value="${b.id }" />
+	        					<c:out value="${b.id}" />
 	        				</td>
 	        				<td> <%--작성일자 --%>
 	        					<c:out value="${b.write_date }" />

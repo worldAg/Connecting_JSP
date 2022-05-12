@@ -13,7 +13,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import action.Action;
 import action.ActionForward;
-import bo.board.db.BoardBean;
+import bo.board.db.Board;
 import bo.board.db.BoardDAO;
 
 public class BoardAddAction implements Action {
@@ -23,7 +23,7 @@ public class BoardAddAction implements Action {
 			throws ServletException, IOException {
 		
 		BoardDAO boarddao = new BoardDAO();
-		BoardBean boarddata = new BoardBean();
+		Board boarddata = new Board();
 		ActionForward forward = new ActionForward();
 
 		String realFolder = "";

@@ -13,7 +13,7 @@ import com.google.gson.JsonObject;
 
 import action.Action;
 import action.ActionForward;
-import bo.board.db.BoardBean;
+import bo.board.db.Board;
 import bo.board.db.BoardDAO;
 
 public class RecentBoardAction implements Action {
@@ -23,7 +23,7 @@ public class RecentBoardAction implements Action {
 			throws ServletException, IOException {
 		
 		BoardDAO dao = new BoardDAO();
-		List<BoardBean> boardlist = null;
+		List<Board> boardlist = null;
 		
 		boardlist = dao.getRecentBoard();
 		

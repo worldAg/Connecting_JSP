@@ -1,6 +1,10 @@
 body {
     font-size: 20px;
 }
+
+.nav-link {
+	padding: 0;
+}
     		
 #searchForm {
 	text-align: center;

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.ActionForward;
-import bo.board.db.BoardBean;
+import bo.board.db.Board;
 import bo.board.db.BoardDAO;
 
 public class BoardSearchBarListAction implements Action {
@@ -22,7 +22,7 @@ public class BoardSearchBarListAction implements Action {
 		String keyword = request.getParameter("keyword").trim();
 
 		BoardDAO boarddao = new BoardDAO();
-		List<BoardBean> boardlist = new ArrayList<BoardBean>();
+		List<Board> boardlist = new ArrayList<Board>();
 
 		int page = 1; // 보여줄 페이지
 		int limit = 5; // 한 페이지에 보여줄 게시판 글 목록의 수
@@ -83,7 +83,7 @@ public class BoardSearchBarListAction implements Action {
 			forward.setRedirect(false);
 
 			// 글 목록 페이지로 이동하기 위해 경로 지정
-			forward.setPath("board/boardSearchBarList.jsp");
+			forward.setPath("board/boardList.jsp");
 			return forward;
 		} else {
 			return null;

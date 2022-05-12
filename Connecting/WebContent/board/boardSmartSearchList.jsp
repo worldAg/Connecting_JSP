@@ -1,8 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -50,38 +47,38 @@
 				<div class="col-md-3">
 					<div class="alert alert-info" style="padding: 0px; font-size: 1.5rem; text-align: center;">
 						<c:if test="${category == 'all' }">
-							<c:set var="cate" value="카테고리: 전체" />
+							<c:set var="cate" value="카테고리-전체" />
 						</c:if>
 						<c:if test="${category == '0' }">
-							<c:set var="cate" value="카테고리: 전시회" />
+							<c:set var="cate" value="카테고리-전시회" />
 						</c:if>
 						<c:if test="${category == '1' }">
-							<c:set var="cate" value="카테고리: 박람회" />
+							<c:set var="cate" value="카테고리-박람회" />
 						</c:if>	
 						<c:if test="${category == '2' }">
-							<c:set var="cate" value="카테고리: 버스킹" />
+							<c:set var="cate" value="카테고리-버스킹" />
 						</c:if>	
 						<c:if test="${category == '3' }">
-							<c:set var="cate" value="카테고리: 연극/공연" />
+							<c:set var="cate" value="카테고리-연극/공연" />
 						</c:if>	
 						
 						<c:if test="${loc == 'all' }">
-							<c:set var="loca" value="지역: 전체 " />
+							<c:set var="loca" value="지역-전체 " />
 						</c:if>
 						<c:if test="${loc == '0' }">
-							<c:set var="loca" value="지역: 서울 " />
+							<c:set var="loca" value="지역-서울 " />
 						</c:if>
 						<c:if test="${loc == '1' }">
-							<c:set var="loca" value="지역: 경기/인천 " />
+							<c:set var="loca" value="지역-경기/인천 " />
 						</c:if>	
 						<c:if test="${loc == '2' }">
-							<c:set var="loca" value="지역: 대전/충청/강원 " />
+							<c:set var="loca" value="지역-대전/충청/강원 " />
 						</c:if>	
 						<c:if test="${loc == '3' }">
-							<c:set var="loca" value="지역: 부산/대구/경상 " />
+							<c:set var="loca" value="지역-부산/대구/경상 " />
 						</c:if>
 						<c:if test="${loc == '4' }">
-							<c:set var="loca" value="지역: 광주/전라/제주 " />
+							<c:set var="loca" value="지역-광주/전라/제주 " />
 						</c:if>	
 						<span id="num-list" style="font-weight: normal;">${cate }<br />${loca }<br />조회 결과: ${listcount }개</span>
 					</div>

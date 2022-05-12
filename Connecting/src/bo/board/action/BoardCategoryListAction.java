@@ -14,7 +14,7 @@ import com.google.gson.JsonObject;
 
 import action.Action;
 import action.ActionForward;
-import bo.board.db.BoardBean;
+import bo.board.db.Board;
 import bo.board.db.BoardDAO;
 
 public class BoardCategoryListAction implements Action {
@@ -27,7 +27,7 @@ public class BoardCategoryListAction implements Action {
 		String orderby = request.getParameter("orderby");
 
 		BoardDAO boarddao = new BoardDAO();
-		List<BoardBean> boardlist = new ArrayList<BoardBean>();
+		List<Board> boardlist = new ArrayList<Board>();
 
 		int page = 1; // 보여줄 페이지
 		int limit = 5; // 한 페이지에 보여줄 게시판 글 목록의 수
@@ -103,7 +103,7 @@ public class BoardCategoryListAction implements Action {
 			forward.setRedirect(false);
 
 			// 글 목록 페이지로 이동하기 위해 경로 지정
-			forward.setPath("board/boardCategoryList.jsp");
+			forward.setPath("board/boardList.jsp");
 			return forward;
 		} else {
 			System.out.println("state == ajax");
