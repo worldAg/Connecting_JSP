@@ -1,21 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="bo.board.db.*" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
-<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Insert title here</title>
-	
-	<script src="<%=request.getContextPath() %>/jQuery/jquery-3.6.0.js"></script>
-	
-	<link rel="stylesheet" href="<%=request.getContextPath() %>/css/bootstrap.css" />
-	
-	<link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-	<link href="https://fonts.googleapis.com/css2?family=Gaegu&display=swap" rel="stylesheet">
-	
+	<title>Board Detail Page</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gaegu&display=swap">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap.css" />
+	<link rel="icon" href="<%=request.getContextPath()%>/resources/img/favicon.ico">
 	<style>
 		* {
 			font-family: 'Gaegu', cursive!important;
@@ -30,14 +24,14 @@
 </head>
 <body>
 	<jsp:include page="../main/header.jsp" />
-	
-	<div class="container" style="margin-top: 100px; margin-bottom: 100px;">
+	<div>
+	<div style="margin-top: 100px; margin-bottom: 100px; width: 1200px">
 		<div class="row">
 			<div class="col-md-4">
 				<img src="./boardupload/${boarddata.board_img }" style="width: 100%; height: 300px; border-radius: 10%" />
 			</div>
 			<div class="offset-md-1 col-md-7">
-				<h2 style="font-weight: bold; overflow: hidden;">
+				<h4 style="font-weight: bold; overflow: hidden;">
 					<c:if test="${boarddata.category == 0 }">
 						[전시회]
 					</c:if>
@@ -50,18 +44,16 @@
 					<c:if test="${boarddata.category == 3 }">
 						[연극/공연]
 					</c:if>
-					<c:out value="${boarddata.title }" />
+					<c:out value="${boarddata.title}" />
 					
-					<%--로그인해야 관심글 등록 가능 --%>
+					<%-- 로그인한 사용자의 경우 관심글 등록 가능 --%>
 					<c:if test="${!empty sessionScope.id }">
 						<div id="heart" style="float: right;">
 							<span id="heart-text" style="font-size: 1.5rem">관심글</span>
 							<img src="./images/beforeheart.png" id="heart-img" style="width: 50px; height: 50px;" />
 						</div>
-					</c:if>
-					
-					
-				</h2>
+					</c:if>	
+				</h4>
 				<hr />
 				<div class="d-flex justify-content-center align-items-center">
 					<c:if test='${empty member.profile_img }'> 
@@ -73,10 +65,10 @@
 					<img id="profile_img" src="${src}" alt="profile" style="width: 150px; height: 150px; display: inline-block; border-radius: 50%;" />
 					
 					<div style="display: inline-block; padding-left: 10%">
-					    <h3>주최자: ${boarddata.host_name }</h3>
-						<h3>장소: ${boarddata.address }</h3>
-						<h3>날짜: ${boarddata.start_date } ~ ${boarddata.end_date }</h3>
-						<h3>시간: ${boarddata.start_time } ~ ${boarddata.end_time }</h3>
+					    <h5>주최: ${boarddata.host_name }</h5>
+						<h5>장소: ${boarddata.address }</h5>
+						<h5>날짜: ${boarddata.start_date } ~ ${boarddata.end_date }</h5>
+						<h5>시간: ${boarddata.start_time } ~ ${boarddata.end_time }</h5>
 					</div>
 				</div>
 			</div>
@@ -84,7 +76,7 @@
 		
 		<div class="mb-3" style="margin-top: 50px;">
 			<label for="exampleFormControlTextarea1" class="form-label">본문</label>
-			<textarea class="form-control" id="text-content" rows="3" style="font-size: 1.5rem; font-weight: normal" readonly><c:out value="${boarddata.content }" /></textarea>
+			<textarea class="form-control" id="text-content" rows="3" style="font-size: 20px; font-weight: normal" readonly><c:out value="${boarddata.content }" /></textarea>
 		</div>
 		
 		<c:if test="${sessionScope.id ==  boarddata.id }">
@@ -104,13 +96,14 @@
 		</c:if>
 	</div>
 	
+	<script src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.js"></script>	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
     
     <script>
 	    var userId = '<%=(String) request.getSession().getAttribute("id") %>';
-		var boardId = '<%=((BoardBean) request.getAttribute("boarddata")).getBoard_id() %>';
+		var boardId = '<%=((Board) request.getAttribute("boarddata")).getBoard_id() %>';
     	var checked = "";
     	
     	$(document).ready(function () {

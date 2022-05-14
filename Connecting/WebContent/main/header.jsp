@@ -47,9 +47,7 @@
     <!-- 로고 및 검색바 -->
     <div id="logoAndSerch">
     	<form action="BoardSearchBarListAction.bo" id="searchForm">
-    	 	<a href="<%=request.getContextPath()%>/index.jsp">
-		      	<img id="logo" src="<%=request.getContextPath()%>/resources/img/logo.png" alt="Connecting" height="100">
-		    </a>
+    		<img id="logo" src="<%=request.getContextPath()%>/resources/img/logo.png" alt="Connecting" height="100">
         	<input type="text" placeholder=" 검색어를 입력해보세요!" name="keyword" id="searchBar">
         	<button type="submit">
         		<img src="<%=request.getContextPath()%>/resources/img/search1.png">
@@ -161,6 +159,10 @@
 	<script src="/Connecting/resources/js/jquery-3.6.0.js"></script>
 	<script>
 		$(document).ready(function () {
+			
+			$("#logo").click(function () {
+				location.href="<%=request.getContextPath()%>/index.jsp";
+			});
 			
 			$("#smartBtn").click(function () {
 				var category = $("input[name='category']:checked").val();
