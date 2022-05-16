@@ -8,24 +8,26 @@ $(document).ready(function () {
 	$(".all-list").click(function () {
 		location.href = "BoardList.bo";
 	});
+	
+	$("#viewcount").change(function () {
+		goBoard(1);
+	});
 			
 	$("#orderby").change(function () {
 		goBoard(1);
 	});
-	
 
-	
 }); // ready end
 
-function goBoard(page, orderby) {
-			if (orderby === undefined) {
-				orderby = $("#orderby option:selected").val();
-			}
-			var sendData = "page=" + page + "&state=ajax&orderby=" + orderby;
-			ajaxBoard(sendData);
-		} // function goBoard ends
+function goBoard(page) {
+	limit = $("#viewcount option:selected").val();		
+	orderby = $("#orderby option:selected").val();		
+	
+	var sendData = "page=" + page + "&state=ajax&limit=" + limit + "&orderby=" + orderby;
+	ajaxList(sendData);
+} 
 		
-function ajaxBoard(sendData) {
+function ajaxList(sendData) {
 	console.log("sendData: " + sendData);
 	$.ajax({
 		type: "post",
@@ -34,14 +36,14 @@ function ajaxBoard(sendData) {
 		dataType: "json",
 		cache: "false",
 		success: function (data) {
-		console.log("AJAX success!");
+			$("#viewcount").val(data.limit);
 			if (data.listcount > 0) {
 				$("#board-table tbody").remove();
 				var num = data.listcount - (data.page - 1) * data.limit;
 				var output = "<tbody>";
 				var category = "";
 				$(data.boardlist).each(function (index, item) {
-					// 게시글의 카테고리를 구분해주는 부분
+					// 게시글의 카테고리를 구분
 					if (item.category == 0) {
 						category = "[전시회] ";
 					} else if (item.category == 1) {
@@ -51,22 +53,18 @@ function ajaxBoard(sendData) {
 					} else if (item.category == 3) {
 						category = "[연극/공연] ";
 					}
-							
 					output += "<tr>";
 					output += "		<td>" + (num--) + "</td>";
 					output += "		<td><a href='BoardDetailAction.bo?num=" + item.board_id + "'>" + category + textLengthOverCut(item.title) + "</a></td>";
-					output += "		<td>" + item.id + "</td>";
-					output += "		<td>" + item.write_date + "</td>";
 					output += "		<td>" + item.start_date + "</td>";
 					output += "		<td>" + item.end_date + "</td>";
-					output += "		<td style='text-align:right;'>" + item.heart_num + "</td>";
+					output += "		<td>" + textLengthOverCut(item.address, 10, "...") + "</td>";
+					output += "		<td>" + item.heart_num + "</td>";
 					output += "</tr>";
 				});
 						
 				output += "</tbody>";
 				$("#board-table").append(output);						
-						
-				// 페이징 처리 부분
 				$("ul.pagination").empty();
 				output = "";
 				var digit = "이전&nbsp;";
@@ -76,29 +74,29 @@ function ajaxBoard(sendData) {
 					href = "href=javascript:goBoard(" + (data.page - 1) + ")";
 				} 
 						
-						output += setPagingBoard(href, digit);
+				output += setPagingBoard(href, digit);
 						
-						for (var i = data.startpage; i <= data.endpage; i++) {
-							digit = i;
-							href = "";
-							if (i != data.page) {
-								href = "href=javascript:goBoard(" + i + ")";
-							}
-							output += setPagingBoard(href, digit);
-						}
+				for (var i = data.startpage; i <= data.endpage; i++) {
+					digit = i;
+					href = "";
+					if (i != data.page) {
+						href = "href=javascript:goBoard(" + i + ")";
+					}
+					output += setPagingBoard(href, digit);
+				}
 						
-						digit = "&nbsp;다음&nbsp;";
-						href = "";
-						if (data.page < data.maxpage) {
-							href = "href=javascript:goBoard(" + (data.page + 1) + ")";
-						}
-						output += setPagingBoard(href, digit);
+				digit = "&nbsp;다음&nbsp;";
+				href = "";
+				if (data.page < data.maxpage) {
+					href = "href=javascript:goBoard(" + (data.page + 1) + ")";
+				}
+				output += setPagingBoard(href, digit);
 						
-						$("ul.pagination").append(output);
-					} // if data.listcount > 0 ends
-				} // success function ends
-			}); // $.ajax ends
-		} // function ajax ends
+				$("ul.pagination").append(output);
+			} // if data.listcount > 0 ends
+		} // success function ends
+	}); // $.ajax ends
+} 
 		
 		function setPagingBoard(href, digit) {
 			// 이전/다음을 클릭할 수 없으면 <a>에 class gray
@@ -123,15 +121,15 @@ function ajaxBoard(sendData) {
 			return output;
 		}
 		
-		function textLengthOverCut(txt, len, lastTxt) {
-	        if (len == "" || len == null) { // 기본값
-	            len = 12;
-	        }
-	        if (lastTxt == "" || lastTxt == null) { // 기본값
-	            lastTxt = "...";
-	        }
-	        if (txt.length > len) {
-	            txt = txt.substr(0, len) + lastTxt;
-	        }
-	        return txt;
-	    }
+function textLengthOverCut(txt, len, lastTxt) {
+	if (len == "" || len == null) { // 기본값
+		len = 15;
+	}
+	if (lastTxt == "" || lastTxt == null) { // 기본값
+		lastTxt = "...";
+	}
+	if (txt.length > len) {
+		txt = txt.substr(0, len) + lastTxt;
+	}
+	return txt;
+}

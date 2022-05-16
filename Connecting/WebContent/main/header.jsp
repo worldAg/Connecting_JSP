@@ -4,8 +4,8 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/header.css" />
     <title>Header</title>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/header.css" />
 </head>
 
 <body>
@@ -15,7 +15,7 @@
 		<c:if test="${empty id}">
 		    <div class="d-flex flex-row-reverse bd-highlight">
 		        <div class="p-2 bd-highlight"><a href="register.net">회원가입</a></div>
-		        <div class="p-2 bd-highlight"><a href="login.net">로그인 |</a></div>
+		        <div class="p-2 bd-highlight"><a href="login.net">로그인 &#124;</a></div>
 		    </div>
 	    </c:if>
 	    <!-- 로그인한 사용자일 경우 -->
@@ -24,21 +24,21 @@
 				<div class="p-2 bd-highlight">
 		 			<a class="nav-link">고객센터</a> 
 		 		</div>
-		 		<c:if test='${ id !="admin" && empty email}'>
+		 		<c:if test='${ id != "admin" && empty email}'>
 		 			<div class="p-2 bd-highlight">
-		 				<a class="nav-link" href="memberInfo.my">마이페이지 |</a>
+		 				<a class="nav-link" href="memberInfo.my">마이페이지 &#124;</a>
 		 			</div>
 		 		</c:if>
-		 	    <c:if test='${id=="admin"}'>
+		 	    <c:if test='${id == "admin"}'>
 		 	    	<div class="p-2 bd-highlight">
-		 				<a class="nav-link" href="mgrMain.mgr">관리자페이지 |</a>
+		 				<a class="nav-link" href="mgrMain.mgr">관리자페이지 &#124;</a>
 		 			</div>
 				</c:if>
 				<div class="p-2 bd-highlight">
-		 			<a class="nav-link" href="logout.net">로그아웃 |</a>
+		 			<a class="nav-link" href="logout.net">로그아웃 &#124;</a>
 		 		</div>
 		 		<div class="p-2 bd-highlight">
-		 			${id} 님 |
+		 			${id} 님 &#124;
 		 		</div>
 		 	</div>
 		</c:if>
@@ -65,15 +65,15 @@
 
             <div class="collapse navbar-collapse" id="navbarColor02">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link" href="BoardCategoryList.bo?category=0">전시회</a></li>
-                    <li class="nav-item"><a class="nav-link" href="BoardCategoryList.bo?category=1">박람회</a></li>
-                    <li class="nav-item"><a class="nav-link" href="BoardCategoryList.bo?category=2">버스킹</a></li>
-                    <li class="nav-item"><a class="nav-link" href="BoardCategoryList.bo?category=3">연극&공연</a></li>
+                    <li class="nav-item"><a class="nav-link" href="BoardList.bo?category=0">전시회</a></li>
+                    <li class="nav-item"><a class="nav-link" href="BoardList.bo?category=1">박람회</a></li>
+                    <li class="nav-item"><a class="nav-link" href="BoardList.bo?category=2">버스킹</a></li>
+                    <li class="nav-item"><a class="nav-link" href="BoardList.bo?category=3">연극&#38;공연</a></li>
                 </ul>
-                <h2 class="accordion-header" id="headingThree">
+                <h2 class="accordion-header nav-item" id="headingThree">
 	                <button class="bg-dark accordion-button" type="button" data-bs-toggle="collapse"
 	                    data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree"
-	                    style="color: #fff; font-size: 22px; border-radius: 30%">
+	                    style="color: #fff; font-size: 1.5rem; border-radius: 30%">
 	                    조건 검색&nbsp;<img src="<%=request.getContextPath()%>/resources/img/search2.png">  
 	                </button>
             	</h2>
@@ -109,7 +109,7 @@
                 </div>
                 <div class="form-check">
                     <label class="form-check-label"> 
-                    	<input type="radio" class="form-check-input" name="category" id="optionsRadios3" value="3"> 연극/공연
+                    	<input type="radio" class="form-check-input" name="category" id="optionsRadios3" value="3"> 연극&#47;공연
                     </label>
                 </div>
                 <div style="visibility:hidden" class="form-check">
@@ -132,22 +132,22 @@
                 </div>
                 <div class="form-check">
                     <label class="form-check-label">
-                    	<input type="radio" class="form-check-input" name="loc" id="optionsRadios3" value="1"> 경기/인천
+                    	<input type="radio" class="form-check-input" name="loc" id="optionsRadios3" value="1"> 경기&#47;인천
                     </label>
                 </div>
                 <div class="form-check">
                     <label class="form-check-label">
-                    	<input type="radio" class="form-check-input" name="loc" id="optionsRadios3" value="2"> 대전/충청/강원
+                    	<input type="radio" class="form-check-input" name="loc" id="optionsRadios3" value="2"> 대전&#47;충청&#47;강원
                     </label>
                 </div>
                 <div class="form-check">
                     <label class="form-check-label">
-                    	<input type="radio" class="form-check-input" name="loc" id="optionsRadios3" value="3"> 부산/대구/경상
+                    	<input type="radio" class="form-check-input" name="loc" id="optionsRadios3" value="3"> 부산&#47;대구&#47;경상
                     </label>
                 </div>
                 <div class="form-check">
                     <label class="form-check-label">
-                    	<input type="radio" class="form-check-input" name="loc" id="optionsRadios3" value="4"> 광주/전라/제주
+                    	<input type="radio" class="form-check-input" name="loc" id="optionsRadios3" value="4"> 광주&#47;전라&#47;제주
                     </label>
                 </div>
             </fieldset>
@@ -169,7 +169,7 @@
 				var loc = $("input[name='loc']:checked").val();				
 				console.log(category);
 				console.log(loc);				
-				location.href = "BoardSmartSearchListAction.bo?category=" + category + "&loc=" + loc;
+				location.href = "BoardList.bo?category=" + category + "&loc=" + loc;
 			});
 			
 			$("#searchForm").submit(function () {
