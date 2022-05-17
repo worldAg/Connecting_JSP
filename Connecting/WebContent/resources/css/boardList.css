@@ -1,0 +1,48 @@
+@charset "UTF-8";
+* {
+	font-family: 'Gaegu', cursive !important;
+}
+		
+a {
+	text-decoration-line: none !important;
+}
+
+#board-container {
+	margin-top: 30px;
+	margin-bottom: 50px;
+}
+		
+.write-orderby {
+	margin-top: 10px;
+	margin-left: 10px;
+	text-align: right;
+}
+		
+#writeBtn {
+	font-weight: bold;
+	margin-right: 20px;
+}
+		
+#orderby, #viewcount {
+	text-align-last: center;
+	text-align: center;
+	-ms-text-align-last: center;
+	-moz-text-align-last: center;
+	width: auto; 
+	display: inline-block;		
+}
+		
+.alert {
+	padding: 0px; 
+	font-size: 18px;
+	text-align: center;
+	width: 400px;
+}
+		
+.list-count {
+	font-weight: normal;
+}
+		
+tr, td {
+	font-size: 20px;
+}

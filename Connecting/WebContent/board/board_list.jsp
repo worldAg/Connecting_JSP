@@ -4,61 +4,12 @@
 <head>
 	<meta charset="utf-8">
 	<title>Board List</title>	
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gaegu&display=swap">
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap.css">
-	<link rel="icon" href="<%=request.getContextPath()%>/resources/img/favicon.ico">
-	<style>
-		* {
-			font-family: 'Gaegu', cursive !important;
-		}
-		
-		a {
-			text-decoration-line: none !important;
-		}
-		
-		#board-container {
-			margin-top: 30px;
-			margin-bottom: 50px;
-		}
-		
-		.write-orderby {
-			margin-top: 10px;
-			margin-left: 10px;
-			text-align: right;
-		}
-		
-		#writeBtn {
-			font-weight: bold;
-		}
-		
-		#orderby, #viewcount {
-			text-align-last: center;
-			text-align: center;
-			-ms-text-align-last: center;
-			-moz-text-align-last: center;
-			width: auto; 
-			display: inline-block;
-			
-		}
-		
-		.alert {
-			padding: 0px; 
-			font-size: 18px;
-			text-align: center;
-			width: 400px;
-		}
-		
-		.list-count {
-			font-weight: normal;
-		}
-		
-		tr, td {
-			font-size: 20px;
-		}
-		
-	</style>
+	<link rel="icon" href="<%=request.getContextPath()%>/resources/img/favicon.ico" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> 
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gaegu&display=swap" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap.css" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/boardList.css" />
 </head>
 <body>
 	<jsp:include page="../main/header.jsp" />
@@ -181,7 +132,7 @@
 		        				<c:out value="${ b.address }" />
 		        			</td>
 		        			<td>
-		        				<c:out value="${ b.heart_num }" />
+		        				<c:out value="${ b.heart_count }" />
 		        			</td>
 		        		</tr>
 		        	</c:forEach>
@@ -192,13 +143,13 @@
 			<div class="center-block">
 				<ul class="pagination justify-content-center" id="board-pagination">
 					<c:if test="${page <= 1}">
-						<li class="page-item">
+						<li class="page-item disabled">
 							<a class="page-link gray">이전&nbsp;</a>
 						</li>
 					</c:if>					
 					<c:if test="${page > 1}">
 						<li class="page-item">
-							<a href="BoardList.bo?page=${page - 1}&orderby=${orderby}" class="page-link">이전&nbsp;</a>
+							<a href="BoardList.bo?page=${page - 1}&orderby=${orderby}&category=${category}&loc=${loc}" class="page-link">이전&nbsp;</a>
 						</li>
 					</c:if>
 					
@@ -210,19 +161,19 @@
 						</c:if>
 						<c:if test="${a != page}">
 							<li class="page-item">
-								<a href="BoardList.bo?page=${a}&orderby=${orderby}" class="page-link">${a}</a>
+								<a href="BoardList.bo?page=${a}&orderby=${orderby}&category=${category}&loc=${loc}" class="page-link">${a}</a>
 							</li>
 						</c:if>
 					</c:forEach>
 					
 					<c:if test="${page >= maxpage}">
-						<li class="page-item">
+						<li class="page-item disabled">
 							<a class="page-link gray">&nbsp;다음</a>
 						</li>
 					</c:if>
 					<c:if test="${page < maxpage}">
 						<li class="page-item">
-							<a href="BoardList.bo?page=${page + 1}&orderby=${orderby}" class="page-link">&nbsp;다음</a>
+							<a href="BoardList.bo?page=${page + 1}&orderby=${orderby}&category=${category}&loc=${loc}" class="page-link">&nbsp;다음</a>
 						</li>
 					</c:if>
 				</ul>
