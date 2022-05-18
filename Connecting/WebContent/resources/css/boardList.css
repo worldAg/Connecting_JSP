@@ -1,12 +1,4 @@
 @charset "UTF-8";
-* {
-	font-family: 'Gaegu', cursive !important;
-}
-		
-a {
-	text-decoration-line: none !important;
-}
-
 #board-container {
 	margin-top: 30px;
 	margin-bottom: 50px;

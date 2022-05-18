@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Header</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> 
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gaegu&display=swap" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap.css" />
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/header.css" />
 </head>
 
@@ -47,7 +51,7 @@
     <!-- 로고 및 검색바 -->
     <div id="logoAndSerch">
     	<form action="BoardSearchBarListAction.bo" id="searchForm">
-    		<img id="logo" src="<%=request.getContextPath()%>/resources/img/logo.png" alt="Connecting" height="100">
+    		<img id="logo" src="<%=request.getContextPath()%>/resources/img/connecting/logo.png" alt="Connecting" height="100">
         	<input type="text" placeholder=" 검색어를 입력해보세요!" name="keyword" id="searchBar">
         	<button type="submit">
         		<img src="<%=request.getContextPath()%>/resources/img/search1.png">
@@ -157,6 +161,11 @@
         </div>
     </div>
 	<script src="/Connecting/resources/js/jquery-3.6.0.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous">		
+	</script>
 	<script>
 		$(document).ready(function () {
 			

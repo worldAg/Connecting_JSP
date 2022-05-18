@@ -3,12 +3,8 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Board List</title>	
-	<link rel="icon" href="<%=request.getContextPath()%>/resources/img/favicon.ico" />
-	<link rel="preconnect" href="https://fonts.googleapis.com" />
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> 
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gaegu&display=swap" />
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap.css" />
+	<title>Board List</title>
+	<link rel="icon" href="<%=request.getContextPath()%>/resources/img/connecting/favicon.ico" />
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/boardList.css" />
 </head>
 <body>
@@ -185,10 +181,6 @@
 		</c:if>
 	</div>
 	
-	<script src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.js"></script>	
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-    </script>
 	<script src="<%=request.getContextPath()%>/resources/js/board_list.js"></script>	
 </body>
 </html>

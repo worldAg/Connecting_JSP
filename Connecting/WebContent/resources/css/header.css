@@ -1,3 +1,12 @@
+@charset "UTF-8";
+* {
+	font-family: 'Gaegu', cursive !important;
+}
+		
+a {
+	text-decoration-line: none !important;
+}
+
 body {
     font-size: 20px;
 }
@@ -5,7 +14,7 @@ body {
 .nav-link {
 	padding: 0;
 }
-    		
+ 		
 #searchForm {
 	text-align: center;
 	margin: 0;
@@ -21,16 +30,21 @@ body {
 }
 	
 .nav-item {
-	margin-left: 20px;
+	margin-left: 50px;
 	font-size: 22px;
 }
-        
+     
 #collapseThree {
 	position: absolute;
 	z-index: 99;
 	background-color: #FFF5EE;
 }
-        
+
+.accordion-header {
+	margin-right: 200px;
+	
+}
+     
 .accordion-body {
 	height: 350px;
 	width: 100vw;
