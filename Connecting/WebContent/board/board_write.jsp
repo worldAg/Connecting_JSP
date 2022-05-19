@@ -1,23 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
 <html>
 <head>
-	<title>게시판 작성</title>
-	<link rel="stylesheet" href="css/bootstrap.css" />
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-	        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-	</script>
-	<script src="js/jquery-3.6.0.js"></script>
-	<script src="js/bo_write.js"></script>
-	<link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-    <link href="https://fonts.googleapis.com/css2?family=Gaegu&display=swap" rel="stylesheet">
+	<meta charset="utf-8">
+	<title>Board Write</title>
+	<link rel="icon" href="<%=request.getContextPath()%>/resources/img/connecting/favicon.ico" />
 	<style>
-		 * {
-	         font-family: 'Gaegu', cursive!important;
-	      }
-	      
+		
 		.a {
 			border:none;
 		}
@@ -64,18 +53,16 @@
     <jsp:include page="../main/header.jsp" />
     
     <div class="container cont_form">
-    	<form class="board_form" name="boardWrite" action="boardAddAction.bo" method="post" style="font-size:23px" enctype="Multipart/form-data">
+    	<form class="board_form" name="boardWrite" action="boardAddAction.bo" method="post" enctype="Multipart/form-data">
 
     	<div class="sel">
-    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	   		<select name="category">
 	   			<option value="">카테고리</option>
 	   			<option value="0">전시회</option>
 	   			<option value="1">박람회</option>
 	   			<option value="2">버스킹</option>
 	   			<option value="3">연극&#47;공연</option>
-	   		</select>		
-	  		&nbsp;&nbsp;&nbsp;
+	   		</select>
 	  		<select name="loc">
 	      		<option value="">지역</option>
 	   			<option value="0">서울</option>
@@ -111,7 +98,7 @@
 	      <tbody>
 	         <tr>
 	            <th>주최자명</th>
-	            <td><input class="a" type="text" name="host_name"></td>
+	            <td><input class="a" type="text" name="host"></td>
 	         </tr>
 	         <tr>
 	            <th>장소</th>
@@ -148,6 +135,6 @@
 		</form>
     </div>
  	
-	
+	<script src="<%=request.getContextPath()%>/resources/js/board_write.js"></script>
 </body>
 </html>

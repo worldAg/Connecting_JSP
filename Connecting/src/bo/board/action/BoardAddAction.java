@@ -22,13 +22,13 @@ public class BoardAddAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		BoardDAO boarddao = new BoardDAO();
-		Board boarddata = new Board();
 		ActionForward forward = new ActionForward();
+		BoardDAO dao = new BoardDAO();
+		Board data = new Board();
 
 		String realFolder = "";
-		String saveFolder = "boardupload";
-		int fileSize = 5 * 1024 * 1024;
+		String saveFolder = "resources/board_upload";
+		int fileSize = 5 * 1024 * 1024; // 업로드할 파일의 최대 사이즈(5MB)
 
 		// 실제 저장 경로 지정
 		ServletContext sc = request.getServletContext();
@@ -37,49 +37,46 @@ public class BoardAddAction implements Action {
 		boolean result = false;
 		
 		HttpSession session = request.getSession(); 
-		String id = (String) session.getAttribute("id");
+		String user_id = (String) session.getAttribute("id");
 		
 		try {
 			MultipartRequest multi = new MultipartRequest(request, realFolder, fileSize, "utf-8",
 					new DefaultFileRenamePolicy());
 			
-			
-			boarddata.setCategory(Integer.parseInt(multi.getParameter("category")));
-			boarddata.setLoc(Integer.parseInt(multi.getParameter("loc")));
-			boarddata.setId(id);
-			boarddata.setTitle(multi.getParameter("title"));
-			boarddata.setHost_name(multi.getParameter("host_name"));
-			boarddata.setAddress(multi.getParameter("address"));
-			boarddata.setStart_date(multi.getParameter("start_date"));
-			boarddata.setEnd_date(multi.getParameter("end_date"));
-			boarddata.setStart_time(multi.getParameter("start_time"));
-			boarddata.setEnd_time(multi.getParameter("end_time"));
-			boarddata.setContent(multi.getParameter("content"));
+			data.setUser_id(user_id);
+			data.setTitle(multi.getParameter("title"));
+			data.setCategory(Integer.parseInt(multi.getParameter("category")));
+			data.setLoc(Integer.parseInt(multi.getParameter("loc")));
+			data.setHost(multi.getParameter("host"));
+			data.setAddress(multi.getParameter("address"));
+			data.setStart_time(multi.getParameter("start_time"));
+			data.setEnd_time(multi.getParameter("end_time"));
+			data.setStart_date(multi.getParameter("start_date"));
+			data.setEnd_date(multi.getParameter("end_date"));
+			data.setContent(multi.getParameter("content"));
 
-			String filename = multi.getFilesystemName("board_img");
-			boarddata.setBoard_img(filename);
+			String filename = multi.getFilesystemName("board_img"); // 시스템 상에 업로드된 실제 파일명 얻어오기
+			data.setBoard_img(filename);
 
-			result = boarddao.boardInsert(boarddata);
+			result = dao.boardInsert(data);
 
 			// 글 등록에 실패할 경우
 			if (result == false) {
-				System.out.println("게시판 등록 실패");
-				forward.setPath("boardWriteAction.bo");
-				request.setAttribute("message", "게시판 등록 실패입니다.");
+				System.out.println("글 등록 실패");
+				forward.setPath("error/error500.jsp");
+				request.setAttribute("message", "글 등록 실패입니다.");
 				forward.setRedirect(false);
 				return forward;
 			}
-
+			
 			System.out.println("게시판 등록 완료");
-
-			// 글 등록이 완료되면 글 상세페이지로 이동
-			forward.setRedirect(true);
-			forward.setPath("BoardList.bo");
+			forward.setRedirect(true); 
+			forward.setPath("boardList.bo"); // 글 등록이 완료되면 게시글 목록 페이지로 이동
 			return forward;
-
+			
 		} catch (IOException ex) {
-			forward.setPath("boardWrite.bo");
-			request.setAttribute("message", "게시판 업로드 실패입니다.");
+			forward.setPath("error/error500.jsp");
+			request.setAttribute("message", "데이터 업로드 실패입니다.");
 			forward.setRedirect(false);
 			return forward;
 		}
