@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import action.ActionForward;
 
-
 @WebServlet("*.bo")
 public class BoardFrontController extends HttpServlet {
 	
@@ -35,36 +34,36 @@ public class BoardFrontController extends HttpServlet {
 		ActionForward forward = null;
 		
 		switch (command) {			
-			case "/BoardList.bo": 
+			case "/boardList.bo": 
 				action = new BoardListAction();
 				break;
-			case "/BoardSearchBarListAction.bo":
+			case "/boardSearchBarListAction.bo":
 				action = new BoardSearchBarListAction();
 				break;
-			case "/BoardDetailAction.bo":
+			case "/boardDetail.bo":
 				action = new BoardDetailAction();
 				break;
-			case "/IsAddedToMemberTable.bo":
-				action = new IsAddedToMemberTableAction();
+			case "/boardWrite.bo" :
+				action = new BoardWriteAction();
 				break;
-			case "/AddOrRemoveHeart.bo":
-				action = new AddOrRemoveHeartAction();
-				break;				
 			case "/boardAddAction.bo" :
-	    		action = new BoardAddAction();
-	    		break;
-	    	case "/boardWrite.bo" :
-	    		action = new BoardWriteAction();
-	    		break;
-	    	case "/BoardModifyView.bo": 
+				action = new BoardAddAction();
+				break;
+	    	case "/boardModifyView.bo": 
 	    		action = new BoardModifyView(); 
 	    		break; 
-	    	case "/BoardModifyAction.bo": 
+	    	case "/boardModifyAction.bo": 
 	    		action = new BoardModifyAction(); 
 	    		break; 
-	    	case "/BoardDelete.bo":
+	    	case "/boardDelete.bo":
 	    		action = new BoardDeleteAction(); 
 	    		break;
+	    	case "/heartForBoard.bo":
+	    		action = new HeartForBoardAction();
+	    		break;
+	    	case "/heartAddOrRemove.bo":
+	    		action = new HeartAddOrRemoveAction();
+	    		break;				
 	    	case "/RecentBoard.bo":
 	    		action = new RecentBoardAction();
 	    		break;
@@ -73,7 +72,6 @@ public class BoardFrontController extends HttpServlet {
 		forward = action.execute(request, response);
 		
 		if (action != null) {
-			
 			if (forward != null) {
 				if (forward.isRedirect()) {
 					response.sendRedirect(forward.getPath());

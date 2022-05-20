@@ -114,7 +114,7 @@
 								<c:if test="${b.category == 1}">&#91;박람회&#93;</c:if>
 								<c:if test="${b.category == 2}">&#91;버스킹&#93;</c:if>
 								<c:if test="${b.category == 3}">&#91;연극/공연&#93;</c:if>	        				
-		        				<a href="BoardDetailAction.bo?num=${ b.board_id }">
+		        				<a href="boardDetail.bo?num=${ b.board_id }">
 		        					<c:out value="${ b.title }" />
 		        				</a>
 		        			</td>        				
@@ -145,7 +145,7 @@
 					</c:if>					
 					<c:if test="${page > 1}">
 						<li class="page-item">
-							<a href="BoardList.bo?page=${page - 1}&orderby=${orderby}&category=${category}&loc=${loc}" class="page-link">이전&nbsp;</a>
+							<a href="boardList.bo?page=${page - 1}&orderby=${orderby}&category=${category}&loc=${loc}" class="page-link">이전&nbsp;</a>
 						</li>
 					</c:if>
 					
@@ -157,7 +157,7 @@
 						</c:if>
 						<c:if test="${a != page}">
 							<li class="page-item">
-								<a href="BoardList.bo?page=${a}&orderby=${orderby}&category=${category}&loc=${loc}" class="page-link">${a}</a>
+								<a href="boardList.bo?page=${a}&orderby=${orderby}&category=${category}&loc=${loc}" class="page-link">${a}</a>
 							</li>
 						</c:if>
 					</c:forEach>
@@ -169,7 +169,7 @@
 					</c:if>
 					<c:if test="${page < maxpage}">
 						<li class="page-item">
-							<a href="BoardList.bo?page=${page + 1}&orderby=${orderby}&category=${category}&loc=${loc}" class="page-link">&nbsp;다음</a>
+							<a href="boardList.bo?page=${page + 1}&orderby=${orderby}&category=${category}&loc=${loc}" class="page-link">&nbsp;다음</a>
 						</li>
 					</c:if>
 				</ul>

@@ -11,7 +11,7 @@ $(document).ready(function () {
 	});
 	
 	$(".all-list").click(function () {
-		location.href = "BoardList.bo";
+		location.href = "boardList.bo";
 	});
 	
 	$("#viewcount").change(function () {
@@ -39,7 +39,7 @@ function ajaxList(sendData) {
 	$.ajax({
 		type: "post",
 		data: sendData,
-		url: "BoardList.bo",
+		url: "boardList.bo",
 		dataType: "json",
 		cache: "false",
 		success: function (data) {
@@ -62,7 +62,7 @@ function ajaxList(sendData) {
 					}
 					output += "<tr>";
 					output += "		<td>" + (num--) + "</td>";
-					output += "		<td><a href='BoardDetailAction.bo?num=" + item.board_id + "'>" + category + textLengthOverCut(item.title) + "</a></td>";
+					output += "		<td><a href='boardDetail.bo?num=" + item.board_id + "'>" + category + textLengthOverCut(item.title) + "</a></td>";
 					output += "		<td>" + item.start_date + "</td>";
 					output += "		<td>" + item.end_date + "</td>";
 					output += "		<td>" + textLengthOverCut(item.address, 10, "...") + "</td>";

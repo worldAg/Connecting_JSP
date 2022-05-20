@@ -22,6 +22,8 @@ import javax.sql.DataSource;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import bo.board.db.Board;
+
 
 public class BoardDAO {
 	

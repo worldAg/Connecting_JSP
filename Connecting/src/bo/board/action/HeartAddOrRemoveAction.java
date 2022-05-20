@@ -10,9 +10,9 @@ import com.google.gson.JsonObject;
 
 import action.Action;
 import action.ActionForward;
-import bo.board.db.BoardDAO;
+import bo.board.db.HeartDAO;
 
-public class AddOrRemoveHeartAction implements Action {
+public class HeartAddOrRemoveAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
@@ -22,7 +22,7 @@ public class AddOrRemoveHeartAction implements Action {
 		String boardId = request.getParameter("boardId");
 		String process = request.getParameter("process");
 
-		BoardDAO dao = new BoardDAO();
+		HeartDAO dao = new HeartDAO();
 		JsonObject object = new JsonObject();
 
 		if (process.equals("remove")) {
