@@ -12,57 +12,108 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class MemberDAO {
-private DataSource ds;
 	
-	//생성자에서 JNDI 리소스를 참조하여 Connection 객체를 얻어옵니다.
+	private DataSource ds;
+	
 	public MemberDAO() {
 		try {
-				Context init = new InitialContext();
-				ds = (DataSource) init.lookup("java:comp/env/jdbc/OracleDB");
-		}catch (Exception ex) {
-			System.out.println("DB_연결 실패 :" + ex);
+			Context init = new InitialContext();
+			ds = (DataSource) init.lookup("java:comp/env/jdbc/OracleDB");
+		} catch (Exception e) {
+			System.out.println("Oracle DB 연결 실패: " + e.getMessage());
 		}
 	}
+
+	// 아이디 존재 여부 확인
 	public int isId(String id) {
-		Connection con =null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		int result=-1;//DB에 해당id가 없습니다.
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = -1; // DB에 해당 id 없음
 		try {
-			con = ds.getConnection();
-			
-			String sql = "select id from member where id = ? ";
-			pstmt = con.prepareStatement(sql);
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement("SELECT ID FROM MEMBER WHERE ID = ?");
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()){
-				result = 0; //DB에 해당 id가 있습니다.
+			if (rs.next()) {
+				result = 0; // DB에 해당 id가 있음
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			if (rs != null)
 				try {
 					rs.close();
-				}catch (SQLException ex) {
+				} catch (SQLException ex) {
 					ex.printStackTrace();
 				}
 			if (pstmt != null)
 				try {
 					pstmt.close();
-				}catch (SQLException ex) {
+				} catch (SQLException ex) {
 					ex.printStackTrace();
 				}
-			if (con != null)
+			if (conn != null)
 				try {
-					con.close();
-				} catch(SQLException ex) {
+					conn.close();
+				} catch (SQLException ex) {
 					ex.printStackTrace();
 				}
-		}//finally
+		}
 		return result;
-	}//isId end
+	}
+	
+	// 아이디와 비밀번호 조회(로그인 시 사용) 
+	public int isId(String id, String pass) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null; 
+		int result = -1; // DB에 해당 id가 없음
+		try {
+			conn = ds.getConnection();
+			
+			String sql = "SELECT ID, PASSWORD FROM MEMBER WHERE ID = ? ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				if (rs.getString(2).equals(pass)) {
+					result = 1;
+				} else {
+					result = 0; // DB에 해당 id가 있음
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+		}
+		return result;
+	}
+
+	
+	
+	
+	
  public int insert(Member m) {
 	 Connection con=null;
 	 PreparedStatement pstmt=null;
@@ -99,50 +150,7 @@ private DataSource ds;
 		}//finally
 		return result;
 	}//insert end
- public int isId(String id, String pw) {
-	 Connection con=null;
-	 PreparedStatement pstmt=null;
-	 ResultSet rs=null;
-	 int result=-1;//아이디가 존재하지 않습니다.
-	 try {
-		 con = ds.getConnection();
-		 
-		 String sql = "select id, password from member where id = ? ";
-		 pstmt = con.prepareStatement(sql);
-		 pstmt.setString(1, id);
-		 rs = pstmt.executeQuery();
-		 
-		 if(rs.next()){
-			 if(rs.getString(2).contentEquals(pw)){
-				 result = 1; //아이디와 비밀번호 일치하는 경우
-			 }else {
-				 result = 0; //비밀번호가 일치하지 않는 경우
-			 }
-		 }
-	 } catch (Exception e) {
-		 e.printStackTrace();
-		 } finally {
-			 if (rs != null)
-				 try {
-					 rs.close();
-				 } catch (SQLException ex) {
-					 ex.printStackTrace();
-				 }
-			 if (pstmt != null)
-					try {
-						pstmt.close();
-					}catch (SQLException ex) {
-						ex.printStackTrace();
-					}
-				if (con != null)
-					try {
-						con.close();
-					} catch(SQLException ex) {
-						ex.printStackTrace();
-					}
-			}//finally
-			return result;
-		}//isId end
+
 public String searchID(String email, String name) {
 	Connection con=null;
 	 PreparedStatement pstmt=null;

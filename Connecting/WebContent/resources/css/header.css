@@ -11,6 +11,10 @@ body {
     font-size: 20px;
 }
 
+header {
+	margin-bottom: 30px;
+}
+
 .nav-link {
 	padding: 0;
 }
@@ -39,12 +43,7 @@ body {
 	z-index: 99;
 	background-color: #FFF5EE;
 }
-
-.accordion-header {
-	margin-right: 200px;
-	
-}
-     
+ 
 .accordion-body {
 	height: 350px;
 	width: 100vw;
