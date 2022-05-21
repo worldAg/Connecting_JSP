@@ -72,7 +72,6 @@ public class MemberDAO {
 		int result = -1; // DB에 해당 id가 없음
 		try {
 			conn = ds.getConnection();
-			
 			String sql = "SELECT ID, PASSWORD FROM MEMBER WHERE ID = ? ";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -111,125 +110,123 @@ public class MemberDAO {
 	}
 
 	
-	
-	
-	
- public int insert(Member m) {
-	 Connection con=null;
-	 PreparedStatement pstmt=null;
-	 int result=0;
-	 try {
-		 	con = ds.getConnection();
-		 	System.out.println("getConnection : insert()");
-		 	
-		 	pstmt = con.prepareStatement(
-		 			"INSERT INTO MEMBER (id, password, name, email) VALUES (?,?,?,?)");
-		 	pstmt.setString(1, m.getID());
-		 	pstmt.setString(2, m.getPASSWORD());
-		 	pstmt.setString(3, m.getNAME());
-		 	pstmt.setString(4, m.getEMAIL());
-		 	result = pstmt.executeUpdate(); //삽입 성공시 result는 1
-	 }catch(java.sql.SQLIntegrityConstraintViolationException e) {
-		 result = -1;
-		 System.out.println("멤버 아이디 중복 에러입니다.");
-	 }catch (Exception e) {
-		 e.printStackTrace();
-		}finally {
+	// 아이디 찾기(입력된 이름과 이메일에 해당하는 아이디)
+	public String searchID(String name, String email) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = ds.getConnection();
+			String sql = "SELECT ID FROM MEMBER WHERE NAME = ? AND EMAIL = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setString(2, email);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				return rs.getString(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
 			if (pstmt != null)
 				try {
 					pstmt.close();
-				}catch (SQLException ex) {
+				} catch (SQLException ex) {
 					ex.printStackTrace();
 				}
 			if (con != null)
 				try {
 					con.close();
-				} catch(SQLException ex) {
+				} catch (SQLException ex) {
 					ex.printStackTrace();
 				}
-		}//finally
-		return result;
-	}//insert end
+		}
+		return null;
+	}
+	
+	// 비밀번호 찾기
+	public String searchPW(String id, String name, String email) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = ds.getConnection();
+			String sql = "SELECT PASSWORD FROM MEMBER " + "WHERE ID = ? AND NAME = ? AND EMAIL = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, name);
+			pstmt.setString(3, email);
+			rs = pstmt.executeQuery();
 
-public String searchID(String email, String name) {
-	Connection con=null;
-	 PreparedStatement pstmt=null;
-	 ResultSet rs=null;
-	 try {
-		 con = ds.getConnection();
-		 
-		 String sql = "select id from member where email = ? and name = ?";
-		 pstmt = con.prepareStatement(sql);
-		 pstmt.setString(1, email);
-		 pstmt.setString(2, name);
-		 rs = pstmt.executeQuery();
-		 
-		 if(rs.next()){
-			 return rs.getString(1);
-		 }
-	 } catch (Exception e) {
-		 e.printStackTrace();
-		 } finally {
-			 if (rs != null)
-				 try {
-					 rs.close();
-				 } catch (SQLException ex) {
-					 ex.printStackTrace();
-				 }
-			 if (pstmt != null)
-					try {
-						pstmt.close();
-					}catch (SQLException ex) {
-						ex.printStackTrace();
-					}
-				if (con != null)
-					try {
-						con.close();
-					} catch(SQLException ex) {
-						ex.printStackTrace();
-					}
-			}//finally
-	 return null;
-		}//searchid end
-public String searchPW(String name , String id, String email) {
-	Connection con=null;
-	 PreparedStatement pstmt=null;
-	 ResultSet rs=null;
-	 try {
-		 con = ds.getConnection();
-		 
-		 String sql = "select password from member where name=? and id = ? and email = ?";
-		 pstmt = con.prepareStatement(sql);
-		 pstmt.setString(1, name);
-		 pstmt.setString(2, id);
-		 pstmt.setString(3, email);
-		 rs = pstmt.executeQuery();
-		 
-		 if(rs.next()){
-			 return rs.getString(1);
-		 }
-	 } catch (Exception e) {
-		 e.printStackTrace();
-		 } finally {
-			 if (rs != null)
-				 try {
-					 rs.close();
-				 } catch (SQLException ex) {
-					 ex.printStackTrace();
-				 }
-			 if (pstmt != null)
-					try {
-						pstmt.close();
-					}catch (SQLException ex) {
-						ex.printStackTrace();
-					}
-				if (con != null)
-					try {
-						con.close();
-					} catch(SQLException ex) {
-						ex.printStackTrace();
-					}
-			}//finally
-	 return null;
-		}//searchPW end
+			if (rs.next()) {
+				return rs.getString(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			if (con != null)
+				try {
+					con.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+		}
+		return null;
+	}
+	
+	// 회원가입
+	public int memberInsert(Member member) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			con = ds.getConnection();
+			String sql = "INSERT INTO MEMBER (ID, PASSWORD, NAME, EMAIL) VALUES (?,?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, member.getId());
+			pstmt.setString(2, member.getPassword());
+			pstmt.setString(3, member.getName());
+			pstmt.setString(4, member.getEmail());
+			result = pstmt.executeUpdate(); // 삽입 성공 시 result = 1
+		} catch (java.sql.SQLIntegrityConstraintViolationException e) { // primary key 제약조건을 위반 시 발생하는 예외
+			result = -1;
+			System.out.println("아이디 중복 에러입니다.");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			if (con != null)
+				try {
+					con.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+		}
+		return result;
+	}
+	
 }
