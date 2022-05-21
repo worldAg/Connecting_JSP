@@ -1,32 +1,59 @@
 package net.member.db;
-//MemberBean
+
 public class Member {
-	private String ID ;
-	private String PASSWORD;
-	private String NAME;
-	private String EMAIL;
-	public String getID() {
-		return ID;
+	private String id;
+	private String password;
+	private String email;
+	private String name;
+	private String profile_img;
+	private String reg_date;
+	
+	public String getId() {
+		return id;
 	}
-	public void setID(String ID) {
-		this.ID = ID;
+	
+	public void setId(String id) {
+		this.id = id;
 	}
-	public String getPASSWORD() {
-		return PASSWORD;
+	
+	public String getPassword() {
+		return password;
 	}
-	public void setPASSWORD(String PASSWORD) {
-		this.PASSWORD = PASSWORD;
+	
+	public void setPassword(String password) {
+		this.password = password;
 	}
-	public String getNAME() {
-		return NAME;
+	
+	public String getEmail() {
+		return email;
 	}
-	public void setNAME(String NAME) {
-		this.NAME = NAME;
+	
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public String getEMAIL() {
-		return EMAIL;
+	
+	public String getName() {
+		return name;
 	}
-	public void setEMAIL(String EMAIL) {
-		this.EMAIL = EMAIL;
+	
+	public void setName(String name) {
+		this.name = name;
 	}
+	
+	public String getProfile_img() {
+		return profile_img;
+	}
+	
+	public void setProfile_img(String profile_img) {
+		this.profile_img = profile_img;
+	}
+	
+	public String getReg_date() {
+		return reg_date;
+	}
+	
+	public void setReg_date(String reg_date) {
+		this.reg_date = reg_date.substring(0, 10);
+	}
+	
 }
