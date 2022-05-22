@@ -20,7 +20,7 @@
 				<img class="mb-4" src="<%=request.getContextPath()%>/resources/img/connecting/logo.png" 
 					alt="Connecting" width="280" height="101">
 			</a>
-    		<h1 class="h3 mb-3 fw-normal">Login</h1>
+    		<h1 class="h3 mb-3 fw-normal">로그인</h1>
     		
 		    <div class="form-floating">
 				<input type="text" class="form-control" id="floatingId" name="id" placeholder="Id">
@@ -54,7 +54,7 @@
 	<script src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.js"></script>
 	<script>
 		$(function() {
-			var id = '${id}';
+			const id = '${id}';
 			if (id) { // 쿠키에 값이 저장된 경우
 				$("#floatingId").val(id);
 				$("#remember").prop('checked', true);

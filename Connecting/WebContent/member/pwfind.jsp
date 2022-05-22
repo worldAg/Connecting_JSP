@@ -26,12 +26,12 @@
 			</div>
 			
 			<div class="form-floating mb-2">
-				<input type="text" class="form-control" id="floatingName" name="name" placeholder="Id">
+				<input type="text" class="form-control" id="floatingName" name="name" placeholder="Name">
 				<label for="floatingName">이름</label>
 			</div>
 			
 			<div class="form-floating mb-3">
-				<input type="text" class="form-control" id="floatingEmail" name="email" placeholder="Id">
+				<input type="text" class="form-control" id="floatingEmail" name="email" placeholder="Email">
 				<label for="floatingEmail">이메일</label>
 			</div>
 			
