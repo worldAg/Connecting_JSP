@@ -229,4 +229,51 @@ public class MemberDAO {
 		return result;
 	}
 	
+	// 회원 정보 조회
+	public Member getUserInfo(String id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Member member = null;
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement("SELECT * FROM MEMBER WHERE ID = ?");
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				member = new Member();
+				member.setId(rs.getString("id"));
+				member.setPassword(rs.getString("password"));
+				member.setName(rs.getString("name"));
+				member.setEmail(rs.getString("email"));
+				member.setProfile_img(rs.getString("profile_img"));
+				member.setReg_date(rs.getString("reg_date"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) rs.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+			try {
+				if (pstmt != null) pstmt.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+			try {
+				if (conn != null) conn.close(); 
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return member;
+	}
+	
+	
+	
+	
+
 }

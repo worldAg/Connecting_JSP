@@ -1,4 +1,4 @@
-package my.mypage.action;
+package net.member.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -7,10 +7,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import my.mypage.db.Member;
-import my.mypage.db.MemberDAO;
-
-
+import action.Action;
+import action.ActionForward;
+import net.member.db.Member;
+import net.member.db.MemberDAO;
 
 public class MemberUpdateProcessAction implements Action {
 
@@ -40,7 +40,7 @@ public class MemberUpdateProcessAction implements Action {
 			out.println("alert('수정되었습니다.');");
 			out.println("location.href='memberInfo.my';");
 		} else {
-			out.println("alert('회원 정보 수정에 실패했습니다.');");
+			out.println("alert('회원정보 수정에 실패했습니다.');");
 			out.println("history.back()");//비밀번호를 제외한 다른 데이터는 유지 되어 있습니다.
 		}
 		out.println("</script>");
