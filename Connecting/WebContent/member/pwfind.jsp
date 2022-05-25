@@ -9,10 +9,10 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> 
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gaegu&display=swap" />
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap.css" />
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/signin.css" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/memberForm.css" />
 </head>
 <body>
-	<main class="form-signin w-100 m-auto">
+	<main class="form-member w-100 m-auto">
 		<form name="pwform" action="pwfindProcess.net" method="post">
 			<a href="<%=request.getContextPath()%>/index.jsp">
 				<img class="mb-4" src="<%=request.getContextPath()%>/resources/img/connecting/logo.png" 
