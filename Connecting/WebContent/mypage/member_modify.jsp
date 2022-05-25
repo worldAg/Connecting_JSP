@@ -23,14 +23,15 @@
     		
     		<!-- 프로필 이미지 변경 -->
     		<div class="mb-4">
+    			<c:set var="resourcesPath" value='${pageContext.request.contextPath}${"/resources/"}'/>
 				<c:if test='${empty memberInfo.profile_img}'>
-					<c:set var='src' value='./resources/img/profile.png' />
+					<c:set var='imgPath' value='${resourcesPath}img/profile.png' />
 				</c:if>  
 				<c:if test='${!empty memberInfo.profile_img}'>
-					<c:set var='src' value='${"resources/member_upload/"}${memberInfo.profile_img}'/>
+					<c:set var='imgPath' value='${resourcesPath}${"profile_upload/"}${memberInfo.profile_img}'/>
 				</c:if>
 	    		<div id="showImage">
-	    			<img id="profileImg" src="${src}" alt="profile">
+	    			<img id="profileImg" src="${imgPath}" alt="profile">
 				</div>
 					
 				<%-- accept 속성은 업로드할 파일 타입을 설정함
