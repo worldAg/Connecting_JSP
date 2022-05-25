@@ -272,6 +272,39 @@ public class MemberDAO {
 		return member;
 	}
 	
+	// 회원 정보 수정
+	public int memberUpdateInfo(Member member) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			conn = ds.getConnection();
+
+			String sql = "UPDATE MEMBER SET PASSWORD = ?, NAME = ?, EMAIL = ?, PROFILE_IMG = ? WHERE ID = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member.getPassword());
+			pstmt.setString(2, member.getName());
+			pstmt.setString(3, member.getEmail());
+			pstmt.setString(4, member.getProfile_img());
+			pstmt.setString(5, member.getId());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) pstmt.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+			try {
+				if (conn != null) conn.close();
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return result;
+	}
+	
 	
 	
 	
