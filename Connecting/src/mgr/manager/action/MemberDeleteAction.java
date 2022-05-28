@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.ActionForward;
-import mgr.manager.db.*;
+import net.member.db.MemberDAO;
 
 
 public class MemberDeleteAction implements Action {

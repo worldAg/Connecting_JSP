@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.ActionForward;
-import mgr.manager.db.*;
+import net.member.db.Member;
+import net.member.db.MemberDAO;
 
 public class MemberListAction implements Action {
 
