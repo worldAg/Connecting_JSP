@@ -5,7 +5,7 @@ $(function() {
 	let checkpass = false;
 	
 	// 아이디 유효성 검사
-	$("input:eq(0)").on('keyup', function() {
+	$("input[id='floatingId']").on('keyup', function() {
 		$(".id-message").empty();
 		const pattern = /^\w{5,12}$/; // \w는 [A-Za-z0-9_]의 의미
 		const id = $("input:eq(0)").val();
@@ -79,7 +79,30 @@ $(function() {
 		}
 	}); // email keyup ends
 	
+	// 프로필 이미지
+	$('input[type=file]').change(function(event) {
+		const inputfile = $(this).val().split('\\');
+		const filename = inputfile[inputfile.length - 1];
+		const pattern = /(gif|jpg|jpeg|png)$/i;
+		if(pattern.test(filename)) {
+			$('#filename').text(filename); // inputfile.length - 1 = 2
+			const reader = new FileReader(); // 파일을 읽기 위한 객체 생성
+			// DataURL 형식으로 파일 읽어오기
+			reader.readAsDataURL(event.target.files[0]);
+			reader.onload = function(event) {// 읽기에 성공했을 때 실행되는 이벤트 핸들러
+				$('#showImage').html('<img id="profileImg" src="' + event.target.result + '">');	
+			};
+		} else {
+			alert('확장자는 gif, jpg, jpeg, png 사용 가능합니다.')
+			$(this).val("");
+		}
+	});
+	
 	$('form').submit(function() {
+		// 회원 정보 수정 페이지에서는 id를 변경하지 못하므로 checkid 값을 true로 변경
+		const inputId = $("input[name='id']").attr('id');
+		if (inputId == "modifyId") checkid = true;
+
 		if (!checkid) {
 			alert("아이디를 확인해주세요.");
 			$("input:eq(0)").val('').focus();
