@@ -1,139 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
 <html>
 <head>
-<title>Insert title here</title>
-<link rel="stylesheet" href="css/bootstrap.css" />
-<link rel="preconnect" href="https://fonts.googleapis.com"> 
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-<link href="https://fonts.googleapis.com/css2?family=Gaegu&display=swap" rel="stylesheet">
-
-
-<script src="https://kit.fontawesome.com/ea52943e30.js"
-	crossorigin="anonymous"></script>
-	
-<script src="js/jquery-3.6.0.js"></script>
-
-<style>
-
-
-
-body {
-	font-size: 30px;
-	font-family: 'Gaegu', cursive!important;
-}
-
-h1 {
-
-	font-family: 'Gaegu', cursive!important;
-	font-size: 5rem;
-	display: inline-block;
-}
-
-h2 {
-	font-family: 'Gaegu', cursive!important;
-}
-
-.header {
-	grid-area: header;
-	margin-bottom: 150px;
-	margin-top: 20px;
-}
-
-.my_info {
-	grid-area: a;
-}
-
-.main {
-	display: flex;
-	justify-content: center;
-	grid-area: main;
-}
-
-.my_board {
-	grid-area: b;
-	text-align: center;
-}
-
-.rayout {
-	display: grid;
-	box-sizing: content-box;
-	grid-template-columns: 1fr 1fr 1fr;
-	grid-template-areas: "header header header" "   a    main    b   ";
-	width: 1500px;
-	margin: auto;
-}
-
-.item {
-	
-}
-
-.p-2 {
-	display: inline-block;
-	float: right;
-}
-
-.col-lg-4 {
-	text-align: center;
-}
-
-#info_t {
-	float: right;
-	width: 350px !important;
-	text-align: center;
-}
-
-.fa-cog {
-	position: relative;
-	z-index: 2;
-	bottom: 50px;
-	margin-left: 90px;
-}
-
-
-.ch_img {
-	height: 160px;
-	padding-top: 20px;
-}
-
-#img_submit{
-	position: relative;
-	z-index: 3;
-}
-
-.fa-heart {
-	color: red;
-}
-
-.hidden {display:none;}
-
-#profile_img{
-	width:140px;
-	height:140px;
-	border-radius: 50%;
-
-}
-.t_head{
-	margin-bottom:0px;
-}
-</style>
+	<meta charset="utf-8">
+	<title>Mypage</title>
+	<link rel="icon" href="<%=request.getContextPath()%>/resources/img/connecting/favicon.ico" />
 </head>
 <body>
-
-
-	<div class="rayout">
-		<div class="header">
-			<a href="/Connecting">
-				<h1 id="forms">Connecting</h1>
-			</a>
+	<jsp:include page="../main/header.jsp" />
 
 
 
 			<div class="p-2 bd-highlight">
-				<a href="updateMemberInfo.my" style="margin-right: 50px">회원정보 변경 </a>
+				<a href="memberModify.net" style="margin-right: 50px">회원정보 변경 </a>
 			</div>
 			<div class="p-2 bd-highlight" id="reg">
 				<a href="logout.net">logout</a>
@@ -185,7 +64,7 @@ h2 {
 							<c:if test='${!empty memberInfo.profile_img }'>
 								<c:set var='src' value='${"memberupload/"}${memberInfo.profile_img}'/>
 							</c:if>
-							<img id="profile_img" src="${src}" alt="profile"> 
+							<img id="profileImg" src="${src}" alt="profile"> 
 							<i class="fas fa-cog fa-lg" aria-hidden="true"></i>
 			
 						</span>
@@ -236,36 +115,42 @@ h2 {
 	</div>
 
 	<script>
-		$('input[type=file]').change(function(event){
-		var inputfile = $(this).val().split('\\');
-		var filename=inputfile[inputfile.length -1];
-		var pattern = /(gif|jpg|jpeg|png)$/i;
-		if (pattern.test(filename)){
-			
-			var reader = new FileReader();
-			reader.readAsDataURL(event.target.files[0]);
-			
-			reader.onload = function(event) {
-				$("#sub_info").addClass("hidden");
-				var button_ = '<button id="img_submit" class="btn btn-outline-info">확인</button>'
-				$('#showImage').html('<img src="'
-									+ event.target.result + '" style ="width:140px; height:140px;'
-									+ ' border-radius: 50%;">'
-									+'<i class="fas fa-cog fa-lg"></i>'
-									+ button_);
-			};
-			
-		}else{
-			alert('확장자는 gif, jpg, jpeg, png가 가능합니다.');
-			$(this).val("");
-		}
-	})
-	
-	$('#img_form').submit(function(event){
-		$("#sub_info").removeClass("hidden");
+
 		
-	})
-		
+		$('input[type=file]')
+				.change(
+						function(event) {
+							var inputfile = $(this).val().split('\\');
+							var filename = inputfile[inputfile.length - 1];
+							var pattern = /(gif|jpg|jpeg|png)$/i;
+							if (pattern.test(filename)) {
+
+								var reader = new FileReader();
+								reader.readAsDataURL(event.target.files[0]);
+
+								reader.onload = function(event) {
+									$("#sub_info").addClass("hidden");
+									var button_ = '<button id="img_submit" class="btn btn-outline-info">확인</button>'
+									$('#showImage')
+											.html(
+													'<img src="'
+															+ event.target.result
+															+ '" style ="width:140px; height:140px;'
+															+ ' border-radius: 50%;">'
+															+ '<i class="fas fa-cog fa-lg"></i>'
+															+ button_);
+								};
+
+							} else {
+								alert('확장자는 gif, jpg, jpeg, png가 가능합니다.');
+								$(this).val("");
+							}
+						})
+
+		$('#img_form').submit(function(event) {
+			$("#sub_info").removeClass("hidden");
+
+		})
 	</script>
 
 
