@@ -1,14 +1,4 @@
 $(document).ready(function () {	
-	const userId = '<%=(String) request.getSession().getAttribute("id")%>';
-	// 글쓰기 버튼 클릭 시 글쓰기 페이지로 이동
-	$("#goWrite").click(function () {
-		if (userId == "null") {
-			alert("로그인 후 이용 가능한 서비스입니다.");
-			location.href = "login.net";
-		} else {
-			location.href = "boardWrite.bo";
-		}
-	});
 	
 	$(".all-list").click(function () {
 		location.href = "boardList.bo";
@@ -23,16 +13,6 @@ $(document).ready(function () {
 	});
 
 }); // ready end
-
-function goBoard(page) {
-	const limit = $("#viewcount option:selected").val();		
-	const orderby = $("#orderby option:selected").val();
-	const category = '<%=(String) request.getAttribute("category")%>';
-	const loc = '<%=(String) request.getAttribute("loc")%>';
-	
-	const sendData = "page=" + page + "&state=ajax&limit=" + limit + "&orderby=" + orderby + "&category=" + category + "&loc=" + loc;
-	ajaxList(sendData);
-} 
 		
 function ajaxList(sendData) {
 	console.log("sendData: " + sendData);
