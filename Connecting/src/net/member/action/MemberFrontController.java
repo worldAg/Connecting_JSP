@@ -52,28 +52,34 @@ public class MemberFrontController extends HttpServlet {
     			action = new MemberIdCheckAction();
     			break;
     		case "/emailcheck.net":
-    			action = new EmailCheckAction();
+    			action = new MemberEmailCheckAction();
     			break;
     		case "/idfind.net":
-    			action = new IdfindAction();
+    			action = new MemberIdfindView();
     			break;
     		case "/idfindProcess.net":
-    			action = new IdfindProcessAction();
+    			action = new MemberIdfindAction();
     			break;
     		case "/pwfind.net":
-    			action = new PwfindAction();
+    			action = new MemberPwfindView();
     			break;
     		case "/pwfindProcess.net":
-    			action = new PwfindProcessAction();
+    			action = new MemberPwfindAction();
     			break;
-		/*
-		 * case "/sendmail.net": action = new SendmailAction(); break;
-		 */
     		case "/naverlogin.net":
     			action = new NaverloginAction();
     			break;
     		case "/naverloginProcess.net":
     			action = new NaverloginProcessAction();
+    			break;
+    		case "/mypage.net":
+    			action = new MemberInfoAction();
+    			break;
+    		case "/memberModify.net":
+    			action = new MemberUpdateAction();
+    			break;
+    		case "/memberModifyAction.net":
+    			action = new MemberUpdateProcessAction();
     			break;
     	} // switch ends
     	

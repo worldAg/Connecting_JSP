@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import action.Action;
+import action.ActionForward;
 import net.member.db.MemberDAO;
 
 public class NaverloginProcessAction implements Action {
@@ -18,14 +20,15 @@ public class NaverloginProcessAction implements Action {
 		ActionForward forward = new ActionForward();
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
-		
-			HttpSession session = request.getSession();
-			
-			session.setAttribute("email", email);
-			session.setAttribute("id", name);
-			forward.setRedirect(true);
-			forward.setPath("main.jsp");
-			return forward;
-		
+
+		HttpSession session = request.getSession();
+
+		session.setAttribute("email", email);
+		session.setAttribute("id", name);
+		forward.setRedirect(true);
+		forward.setPath("main.jsp");
+		return forward;
+
 	}
+
 }
