@@ -104,7 +104,7 @@
 		        <tbody>
 		        	<c:set var="num" value="${listcount - (page - 1) * limit}" />
 		        	<c:forEach var="b" items="${boardlist}">
-		        		<tr>
+		        		<tr onClick="location.href='boardDetail.bo?num=${b.board_id}'">
 		        			<td> <%--글 번호 --%>
 		        				<c:out value="${num}" />
 								<c:set var="num" value="${num - 1}" />
@@ -114,9 +114,7 @@
 								<c:if test="${b.category == 1}">&#91;박람회&#93;</c:if>
 								<c:if test="${b.category == 2}">&#91;버스킹&#93;</c:if>
 								<c:if test="${b.category == 3}">&#91;연극/공연&#93;</c:if>	        				
-		        				<a href="boardDetail.bo?num=${ b.board_id }">
-		        					<c:out value="${ b.title }" />
-		        				</a>
+		        				<c:out value="${ b.title }" />
 		        			</td>        				
 		        			<td>
 		        				<c:out value="${ b.start_date }" />
@@ -205,6 +203,6 @@
 			ajaxList(sendData);
 		}
 	</script>
-	<script src="<%=request.getContextPath()%>/resources/js/board_list.js"></script>	
+	<script src="<%=request.getContextPath()%>/resources/js/board_list.js"?v=<%=System.currentTimeMillis() %>></script>	
 </body>
 </html>

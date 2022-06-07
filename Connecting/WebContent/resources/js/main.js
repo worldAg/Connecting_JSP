@@ -37,13 +37,12 @@ function ajaxList(sendData) {
 					local = "[광주/전라/제주] ";
 				}
 				output += '<div class="col">';
-				output += '   <div class="card">';
+				output += `   <div class="card" onClick="location.href='boardDetail.bo?num=${item.board_id}'" style="cursor:pointer;">`;
 				output += '      <img src="./resources/board_upload/' + item.board_img + '" class="card-img-top">';
 				output += '      <div class="card-body">';
 				output += '         <h5 class="card-title">' + item.title + '</h5>';
 				output += '         <h6>' + local + '</h6>';
 				output += '         <h6>' + item.start_date + ' &#126; ' + item.end_date + '</h6>';
-				output += '         <a href="boardDetail.bo?num=' + item.board_id + '" class="btn btn-info">상세보기 &#62; </a>';
 				output += '</div></div></div>'
 			});
 			$("#mainBoard").append(output);						

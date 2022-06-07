@@ -40,13 +40,13 @@ function ajaxList(sendData) {
 					} else if (item.category == 3) {
 						category = "[연극/공연] ";
 					}
-					output += "<tr>";
+					output += `<tr onClick='location.href="boardDetail.bo?num=${item.board_id}"'>`;
 					output += "		<td>" + (num--) + "</td>";
-					output += "		<td><a href='boardDetail.bo?num=" + item.board_id + "'>" + category + textLengthOverCut(item.title) + "</a></td>";
+					output += "		<td>" + category + textLengthOverCut(item.title) + "</td>";
 					output += "		<td>" + item.start_date + "</td>";
 					output += "		<td>" + item.end_date + "</td>";
 					output += "		<td>" + textLengthOverCut(item.address, 10, "...") + "</td>";
-					output += "		<td>" + item.heart_num + "</td>";
+					output += "		<td>" + item.heart_count + "</td>";
 					output += "</tr>";
 				});
 						
