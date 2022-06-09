@@ -5,162 +5,60 @@
 	<meta charset="utf-8">
 	<title>Mypage</title>
 	<link rel="icon" href="<%=request.getContextPath()%>/resources/img/connecting/favicon.ico" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/mypage.css" />
 </head>
 <body>
 	<jsp:include page="../main/header.jsp" />
-
-
-
-			<div class="p-2 bd-highlight">
-				<a href="memberModify.net" style="margin-right: 50px">회원정보 변경 </a>
+	<div class="container menu-title">
+		<h1>마이페이지</h1>
+	</div>
+	<div class="container">
+		<div class="row">
+		
+			<!-- 프로필 이미지 등 회원정보 -->
+			<div class="col-md-6">
+				<div id="showImage">
+					<c:if test='${empty memberInfo.profile_img }'>
+						<img id="profileImg" src="<%=request.getContextPath()%>/resources/img/profile.png">
+					</c:if>  
+					<c:if test='${!empty memberInfo.profile_img }'>
+						<img id="profileImg" src="<%=request.getContextPath()%>/resources/profile_upload/${memberInfo.profile_img}">
+					</c:if>
+				</div>
+				<div>
+					<div class="info">
+						<span id="info-id">${memberInfo.id}</span>
+						<span id="info-name">&#47;${memberInfo.name}</span>
+					</div>
+					<div class="info">
+						${memberInfo.email}
+					</div>
+					<div class="info">
+						${memberInfo.reg_date} 가입
+					</div>
+				</div>
+				<div id="goModify">
+					<a type="button" href="memberModify.net" class="btn btn-success">프로필 및 정보 변경</a>
+				</div>
 			</div>
-			<div class="p-2 bd-highlight" id="reg">
-				<a href="logout.net">logout</a>
-			</div>
-			<div class="p-2 bd-highlight" id="reg">
-				<p>${memberInfo.id}님</p>
-			</div>
-		</div>
-
-		<div class="item my_info">
-			<table class="table caption-top" id="info_t">
-				<thead class="table-dark">
-					<tr>
-						<th colspan="2" scope="row">회원정보</th>
-					</tr>
-				</thead>
-				<tr class="table-light">
-					<th>name:</th>
-					<td>${memberInfo.name}</td>
-				</tr>
-				<tr class="table-light">
-					<th>id:</th>
-					<td>${memberInfo.id}</td>
-				</tr>
-				<tr class="table-light">
-					<th>email:</th>
-					<td>${memberInfo.email}</td>
-				</tr>
-				<tr class="table-light">
-					<th>register date:</th>
-					<td>${memberInfo.reg_date}</td>
-				</tr>
-			</table>
-		</div>
-		<div class="item main">
-			<div class="col-lg-4">
-				<div class="ch_img">
-
-
-					
-					<form id="img_form" action="updateImg.my" method="post" enctype="multipart/form-data">
-						<input type="text" style="display: none" name="id" value="${sessionScope.id }">
-						<label for="profile"> 
-						<span id="showImage">
-							
-							<c:if test='${empty memberInfo.profile_img }'>
-								<c:set var='src' value='images/profile.png' />
-							</c:if>  
-							<c:if test='${!empty memberInfo.profile_img }'>
-								<c:set var='src' value='${"memberupload/"}${memberInfo.profile_img}'/>
-							</c:if>
-							<img id="profileImg" src="${src}" alt="profile"> 
-							<i class="fas fa-cog fa-lg" aria-hidden="true"></i>
 			
-						</span>
-							<input type="file" style="display: none" id="profile"
-							name="profile" accept="image/*">
-						</label>
-					</form>
+			<!-- 작성글 리스트 및 관심글 리스트 -->
+			<div class="col-md-6">
+				<ul class="nav nav-tabs">
+					<li class="nav-item">
+						<a class="nav-link active" data-bs-toggle="tab" href="#myList">나의 게시글</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" data-bs-toggle="tab" href="#myHeart">나의 관심글</a>
+					</li>
+				</ul>
+				<div id="myTabContent" class="tab-content">
+					<div class="tab-pane fade active show" id="myList"></div>
+					<div class="tab-pane fade" id="myHeart"></div>
 				</div>
-				<div id="sub_info">
-					<h2>${memberInfo.name}</h2>
-					<p>
-						<a class="btn btn-secondary" href="myHeartList.my">관심글 <i
-							class="fas fa-heart fa-lg" aria-hidden="true"></i></a>
-					</p>
-				</div>
-				
-			</div>
-		</div>
-
-
-		<div class="item my_board" >
-			<table class="table t_head">
-				<thead class="table-dark">
-					<tr>
-						<th>내가 작성한 게시글</th>
-					</tr>
-				</thead>
-			</table>
-			<div style="height: 450px; overflow: scroll">
-			<table class="table table-hover">
-				
-				
-				<c:forEach var="b" items="${myboard}">
-					<tr class="table-info">
-						<td>
-							<a href="BoardDetailAction.bo?num=${b.board_id }" class="list-group-item">
-									<p>${b.title}</p> <small id="emailHelp"
-									class="form-text text-muted"> ${b.start_date} ~
-										${b.end_date}</small>
-							</a>
-						</td>
-					</tr>
-
-				</c:forEach>				
-			</table>
 			</div>
 		</div>
 	</div>
-
-	<script>
-
-		
-		$('input[type=file]')
-				.change(
-						function(event) {
-							var inputfile = $(this).val().split('\\');
-							var filename = inputfile[inputfile.length - 1];
-							var pattern = /(gif|jpg|jpeg|png)$/i;
-							if (pattern.test(filename)) {
-
-								var reader = new FileReader();
-								reader.readAsDataURL(event.target.files[0]);
-
-								reader.onload = function(event) {
-									$("#sub_info").addClass("hidden");
-									var button_ = '<button id="img_submit" class="btn btn-outline-info">확인</button>'
-									$('#showImage')
-											.html(
-													'<img src="'
-															+ event.target.result
-															+ '" style ="width:140px; height:140px;'
-															+ ' border-radius: 50%;">'
-															+ '<i class="fas fa-cog fa-lg"></i>'
-															+ button_);
-								};
-
-							} else {
-								alert('확장자는 gif, jpg, jpeg, png가 가능합니다.');
-								$(this).val("");
-							}
-						})
-
-		$('#img_form').submit(function(event) {
-			$("#sub_info").removeClass("hidden");
-
-		})
-	</script>
-
-
-
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-		crossorigin="anonymous">
-		
-	</script>
-	
+	<script src="<%=request.getContextPath()%>/resources/js/mypage.js"></script>
 </body>
 </html>
