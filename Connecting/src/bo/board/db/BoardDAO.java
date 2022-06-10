@@ -11,6 +11,9 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 public class BoardDAO {
 
 	private DataSource ds;
@@ -139,6 +142,7 @@ public class BoardDAO {
 				board.setBoard_id(rs.getInt("board_id"));
 				board.setUser_id(rs.getString("user_id"));
 				board.setTitle(textLengthOverCut(rs.getString("title"), 15));
+				board.setBoard_img(rs.getString("board_img"));
 				board.setCategory(rs.getInt("category"));
 				board.setLoc(rs.getInt("loc"));
 				board.setHost(rs.getString("host"));
@@ -460,6 +464,51 @@ public class BoardDAO {
 				}
 		}
 		return result;
+	}
+	
+	// 회원이 작성한 게시글 불러오기
+	public JsonArray getMyBoard(String user_id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		JsonArray array = new JsonArray();
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement("SELECT * FROM BOARD WHERE USER_ID = ?");
+			pstmt.setString(1, user_id);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				JsonObject object = new JsonObject();
+				object.addProperty("board_id", rs.getInt("board_id"));
+				object.addProperty("user_id", rs.getString("user_id"));
+				object.addProperty("title", rs.getString("title"));
+				object.addProperty("write_date", rs.getString("write_date"));
+				array.add(object);
+			}
+		} catch (Exception e) {
+			System.out.println("getMyBoard() exception: " + e.getMessage());
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+		}
+		return array;
 	}
 	
 }

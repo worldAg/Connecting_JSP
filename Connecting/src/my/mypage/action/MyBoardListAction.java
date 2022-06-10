@@ -39,6 +39,7 @@ public class MyBoardListAction implements Action {
 		out.print(object.toString());
 		System.out.println("ajax 결과: " + object.toString());
 		return null;
+		
 	}
 
 }
