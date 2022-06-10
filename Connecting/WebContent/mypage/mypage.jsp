@@ -38,7 +38,7 @@
 					</div>
 				</div>
 				<div id="goModify">
-					<a type="button" href="memberModify.net" class="btn btn-success">프로필 및 정보 변경</a>
+					<a type="button" href="memberModify.my" class="btn btn-success">프로필 및 정보 변경</a>
 				</div>
 			</div>
 			

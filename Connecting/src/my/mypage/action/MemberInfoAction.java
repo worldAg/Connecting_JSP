@@ -1,4 +1,4 @@
-package net.member.action;
+package my.mypage.action;
 
 import java.io.IOException;
 
@@ -12,24 +12,25 @@ import action.ActionForward;
 import net.member.db.Member;
 import net.member.db.MemberDAO;
 
-public class MemberUpdateAction implements Action {
+public class MemberInfoAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		ActionForward forward = new ActionForward();
+		
+		MemberDAO memberDao = new MemberDAO();
+		Member member = new Member();
+		
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 		
-		MemberDAO dao = new MemberDAO();
-		Member data = dao.getUserInfo(id);
-
-		forward.setPath("mypage/member_modify.jsp");
-		forward.setRedirect(false);
-		request.setAttribute("memberInfo", data);
-		return forward;
+		member = memberDao.getUserInfo(id);
+		request.setAttribute("memberInfo", member);
 		
+		ActionForward forward = new ActionForward();
+		forward.setRedirect(false);
+		forward.setPath("mypage/mypage.jsp");
+		return forward;
 	}
 
 }

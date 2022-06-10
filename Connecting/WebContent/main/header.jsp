@@ -2,10 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Header</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Header</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> 
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gaegu&display=swap" />
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap.css" />
@@ -19,7 +19,7 @@
 			<!-- 로그인하지 않은 사용자일 경우 -->
 			<c:if test="${empty id}">
 			    <div class="d-flex flex-row-reverse bd-highlight">
-			        <div class="p-2 bd-highlight"><a href="register.net">회원가입</a></div>
+			        <div class="p-2 bd-highlight"><a href="register.net">회원가입 &nbsp;</a></div>
 			        <div class="p-2 bd-highlight"><a href="login.net">로그인 &#124;</a></div>
 			    </div>
 		    </c:if>
@@ -27,11 +27,11 @@
 		    <c:if test="${!empty id}">
 				<div class="d-flex flex-row-reverse bd-highlight">
 					<div class="p-2 bd-highlight">
-			 			<a class="nav-link">고객센터</a> 
+			 			<a class="nav-link">고객센터 &nbsp;</a> 
 			 		</div>
-			 		<c:if test='${ id != "admin" && empty email}'>
+			 		<c:if test='${id != "admin" && empty email}'>
 			 			<div class="p-2 bd-highlight">
-			 				<a class="nav-link" href="memberInfo.my">마이페이지 &#124;</a>
+			 				<a class="nav-link" href="mypage.my">마이페이지 &#124;</a>
 			 			</div>
 			 		</c:if>
 			 	    <c:if test='${id == "admin"}'>
@@ -51,7 +51,7 @@
 	
 	    <!-- 로고 및 검색바 -->
 	    <div id="logoAndSerch">
-	    	<form action="BoardSearchBarListAction.bo" id="searchForm">
+	    	<form action="boardSearchBarListAction.bo" id="searchForm">
 	    		<img id="logo" src="<%=request.getContextPath()%>/resources/img/connecting/logo.png" alt="Connecting" height="100">
 	        	<input type="text" placeholder=" 검색어를 입력해보세요!" name="keyword" id="searchBar">
 	        	<button type="submit">
@@ -157,17 +157,17 @@
 	                </div>
 	            </fieldset>
 	        </div>
-	        <div id="smartBtn-div">
-	          	<button type="button" class="btn btn-info" id="smartBtn">검색하기</button>
-	        </div>
-	    </div>
-    </header>
+			<div id="smartBtn-div">
+				<button type="button" class="btn btn-info" id="smartBtn">검색하기</button>
+			</div>
+		</div>
+	</header>
     
 	<script src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-		crossorigin="anonymous">		
+		crossorigin="anonymous">
 	</script>
 	<script>
 		$(document).ready(function () {

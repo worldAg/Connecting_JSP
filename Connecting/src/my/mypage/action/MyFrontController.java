@@ -1,4 +1,4 @@
-package net.member.action;
+package my.mypage.action;
 
 import java.io.IOException;
 
@@ -15,65 +15,38 @@ import my.mypage.action.MemberInfoAction;
 import my.mypage.action.MemberUpdateAction;
 import my.mypage.action.MemberUpdateProcessAction;
 
-@WebServlet("*.net")
-public class MemberFrontController extends HttpServlet {
+@WebServlet("*.my")
+public class MyFrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
  
 		String RequestURI = request.getRequestURI();
-    	System.out.println("RequestURI = " + RequestURI);	// ex. /Connecting/login.net
+    	System.out.println("RequestURI = " + RequestURI);	// ex. /Connecting/mypage.my
     	
     	String contextPath = request.getContextPath();
     	System.out.println("contextPath = " + contextPath);	// ex. /Connecting
     		
     	String command = RequestURI.substring(contextPath.length());
-    	System.out.println("command = " + command);			// ex. /login.net
+    	System.out.println("command = " + command);			// ex. /mypage.my
     		
     	// 초기화
     	Action action = null;
     	ActionForward forward = null;
     		
     	switch (command) {
-	    	case "/login.net":
-	    		action = new LoginAction();
-	    		break;
-	    	case "/loginProcess.net":
-	    		action = new LoginProcessAction();
-	    		break;
-	    	case "/logout.net":
-	    		action = new LogoutAction();
-	    		break;
-    		case "/register.net":
-    			action = new MemberJoinAction();
+    		case "/mypage.my":
+    			action = new MemberInfoAction();
     			break;
-    		case "/joinProcess.net":
-    			action = new MemberJoinProcessAction();
+    		case "/memberModify.my":
+    			action = new MemberUpdateAction();
     			break;
-    		case "/idcheck.net":
-    			action = new MemberIdCheckAction();
+    		case "/memberModifyAction.my":
+    			action = new MemberUpdateProcessAction();
     			break;
-    		case "/emailcheck.net":
-    			action = new MemberEmailCheckAction();
-    			break;
-    		case "/idfind.net":
-    			action = new MemberIdfindView();
-    			break;
-    		case "/idfindProcess.net":
-    			action = new MemberIdfindAction();
-    			break;
-    		case "/pwfind.net":
-    			action = new MemberPwfindView();
-    			break;
-    		case "/pwfindProcess.net":
-    			action = new MemberPwfindAction();
-    			break;
-    		case "/naverlogin.net":
-    			action = new NaverloginAction();
-    			break;
-    		case "/naverloginProcess.net":
-    			action = new NaverloginProcessAction();
+    		case "/mylist.my":
+    			action = new MyBoardListAction();
     			break;
     	} // switch ends
     	

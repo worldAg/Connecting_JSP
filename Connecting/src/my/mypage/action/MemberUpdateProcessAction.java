@@ -1,4 +1,4 @@
-package net.member.action;
+package my.mypage.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
