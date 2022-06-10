@@ -17,9 +17,9 @@ $(document).ready(function () {
 function ajaxList(sendData) {
 	console.log("sendData: " + sendData);
 	$.ajax({
-		type: "post",
-		data: sendData,
 		url: "boardList.bo",
+		type: "POST",
+		data: sendData,
 		dataType: "json",
 		cache: "false",
 		success: function (data) {
@@ -42,10 +42,10 @@ function ajaxList(sendData) {
 					}
 					output += `<tr onClick='location.href="boardDetail.bo?num=${item.board_id}"'>`;
 					output += "		<td>" + (num--) + "</td>";
-					output += "		<td>" + category + textLengthOverCut(item.title) + "</td>";
+					output += "		<td>" + category + item.title + "</td>";
 					output += "		<td>" + item.start_date + "</td>";
 					output += "		<td>" + item.end_date + "</td>";
-					output += "		<td>" + textLengthOverCut(item.address, 10, "...") + "</td>";
+					output += "		<td>" + item.address + "</td>";
 					output += "		<td>" + item.heart_count + "</td>";
 					output += "</tr>";
 				});
@@ -106,17 +106,4 @@ function setPaging(href, digit) {
 	let anchor = "<a class='page-link'" + href + ">" + digit + "</a></li>";	
 	output += anchor;
 	return output;
-}
-		
-function textLengthOverCut(txt, len, lastTxt) {
-	if (len == "" || len == null) { // 기본값
-		len = 15;
-	}
-	if (lastTxt == "" || lastTxt == null) { // 기본값
-		lastTxt = "...";
-	}
-	if (txt.length > len) {
-		txt = txt.substr(0, len) + lastTxt;
-	}
-	return txt;
 }
