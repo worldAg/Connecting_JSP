@@ -64,9 +64,6 @@ public class BoardFrontController extends HttpServlet {
 	    	case "/heartAddOrRemove.bo":
 	    		action = new HeartAddOrRemoveAction();
 	    		break;				
-	    	case "/RecentBoard.bo":
-	    		action = new RecentBoardAction();
-	    		break;
 		} // switch ends
 		
 		forward = action.execute(request, response);
