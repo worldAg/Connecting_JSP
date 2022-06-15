@@ -1,125 +1,101 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page import="bo.board.db.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="bo.board.db.*" %>
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Board Detail Page</title>
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gaegu&display=swap">
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap.css" />
-	<link rel="icon" href="<%=request.getContextPath()%>/resources/img/favicon.ico">
-	<style>
-		* {
-			font-family: 'Gaegu', cursive!important;
-		}
-		
-		teatarea#text-content {	
-			min-height: 1rem!important;
-			overflow-y: hidden!important;
-			resize: none!important;
-		}
-	</style>
+	<title>Board Detail</title>
+	<link rel="icon" href="<%=request.getContextPath()%>/resources/img/connecting/favicon.ico" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/boardView.css" />
 </head>
 <body>
 	<jsp:include page="../main/header.jsp" />
-	<div>
-	<div style="margin-top: 100px; margin-bottom: 100px; width: 1200px">
+	<div class="container">
+		<div class="d-flex justify-content-end btns">
+			<c:if test="${sessionScope.id == boardData.user_id}">
+				<button type="button" class="btn btn-info" id="edit">수정</button>
+			</c:if>
+			<c:if test="${sessionScope.id == 'admin' || sessionScope.id == boardData.user_id}">
+				<button type="button" class="btn btn-danger" id="delete">삭제</button>
+			</c:if>
+		</div>
+	
 		<div class="row">
-			<div class="col-md-4">
-				<img src="./boardupload/${boarddata.board_img }" style="width: 100%; height: 300px; border-radius: 10%" />
+			<!-- 게시글 이미지 -->
+			<div class="col-md-5" id="showMainImg">
+				<img id="boardImg" src="<%=request.getContextPath()%>/resources/board_upload/${boardData.board_img}" />
 			</div>
-			<div class="offset-md-1 col-md-7">
-				<h4 style="font-weight: bold; overflow: hidden;">
-					<c:if test="${boarddata.category == 0 }">
-						[전시회]
-					</c:if>
-					<c:if test="${boarddata.category == 1 }">
-						[박람회]
-					</c:if>
-					<c:if test="${boarddata.category == 2 }">
-						[버스킹]
-					</c:if>
-					<c:if test="${boarddata.category == 3 }">
-						[연극/공연]
-					</c:if>
-					<c:out value="${boarddata.title}" />
-					
+			
+			<!-- 게시글 정보 -->
+			<div class="col-md-7">		
+				<div class="d-flex justify-content-end">
 					<%-- 로그인한 사용자의 경우 관심글 등록 가능 --%>
-					<c:if test="${!empty sessionScope.id }">
-						<div id="heart" style="float: right;">
-							<span id="heart-text" style="font-size: 1.5rem">관심글</span>
-							<img src="./images/beforeheart.png" id="heart-img" style="width: 50px; height: 50px;" />
+					<c:if test="${!empty sessionScope.id}">
+						<div id="heart">
+							<span>관심글</span>
+							<img class="heart-img" src="<%=request.getContextPath()%>/resources/img/beforeheart.png" />
 						</div>
-					</c:if>	
-				</h4>
-				<hr />
-				<div class="d-flex justify-content-center align-items-center">
-					<c:if test='${empty member.profile_img }'> 
-						<c:set var='src' value='images/profile.png' /> 
-					</c:if> 
-					<c:if test='${!empty member.profile_img }'> 
-						<c:set var='src' value='${"memberupload/"}${member.profile_img}'/> 
 					</c:if>
-					<img id="profile_img" src="${src}" alt="profile" style="width: 150px; height: 150px; display: inline-block; border-radius: 50%;" />
-					
-					<div style="display: inline-block; padding-left: 10%">
-					    <h5>주최: ${boarddata.host_name }</h5>
-						<h5>장소: ${boarddata.address }</h5>
-						<h5>날짜: ${boarddata.start_date } ~ ${boarddata.end_date }</h5>
-						<h5>시간: ${boarddata.start_time } ~ ${boarddata.end_time }</h5>
+				</div>		
+				<h4 id="boardTitle">
+					<c:if test="${boardData.category == 0}">&#91;전시회&#93;</c:if>
+					<c:if test="${boardData.category == 1}">&#91;박람회&#93;</c:if>
+					<c:if test="${boardData.category == 2}">&#91;버스킹&#93;</c:if>
+					<c:if test="${boardData.category == 3}">&#91;연극	&#47;공연&#93;</c:if>
+					<c:out value="${ boardData.title }" />
+				</h4>
+				
+				<hr />
+				
+				<!-- 게시글 정보  -->
+				<div class="d-flex justify-content-center align-items-center">
+					<div class="member-info">
+						<c:set var="resourcesPath" value='${pageContext.request.contextPath}${"/resources/"}'/>
+						<c:if test='${empty memberInfo.profile_img}'>
+							<c:set var='imgPath' value='${resourcesPath}img/profile.png' />
+						</c:if>  
+						<c:if test='${!empty memberInfo.profile_img}'>
+							<c:set var='imgPath' value='${resourcesPath}${"profile_upload/"}${memberInfo.profile_img}'/>
+						</c:if>
+	    				<div id="showProfile">
+	    					<img id="profileImg" src="${imgPath}" alt="profile">
+						</div>
+						<div id="writer">${memberData.id}</div>
+					</div>
+					<div class="board-info">
+					    <h5>주최: ${ boardData.host }</h5>
+						<h5>장소: ${ boardData.address }</h5>
+						<h5>날짜: ${ boardData.start_date } ~ ${ boardData.end_date }</h5>
+						<h5>시간: ${ boardData.start_time } ~ ${ boardData.end_time }</h5>
 					</div>
 				</div>
 			</div>
 		</div>
-		
 		<div class="mb-3" style="margin-top: 50px;">
-			<label for="exampleFormControlTextarea1" class="form-label">본문</label>
-			<textarea class="form-control" id="text-content" rows="3" style="font-size: 20px; font-weight: normal" readonly><c:out value="${boarddata.content }" /></textarea>
+			<textarea class="form-control" id="textContent" rows="3" style="" readonly>
+				<c:out value="${ boardData.content }" />
+			</textarea>
 		</div>
-		
-		<c:if test="${sessionScope.id ==  boarddata.id }">
-			<div class="row">			
-				<div class="offset-md-9 col-md-3 d-flex justify-content-end">
-					<button type="button" class="btn btn-info" id="edit">게시글 수정/삭제하기</button>
-				</div>
-			</div>
-		</c:if>
-		
-		<c:if test="${sessionScope.id ==  'admin' }">
-			<div class="row">			
-				<div class="offset-md-9 col-md-3 d-flex justify-content-end">
-					<button type="button" class="btn btn-danger" id="delete">게시글 삭제하기</button>
-				</div>
-			</div>
-		</c:if>
 	</div>
-	
-	<script src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.js"></script>	
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-    </script>
     
     <script>
 	    var userId = '<%=(String) request.getSession().getAttribute("id") %>';
-		var boardId = '<%=((Board) request.getAttribute("boarddata")).getBoard_id() %>';
+		var boardId = '<%=((Board) request.getAttribute("boardData")).getBoard_id() %>';
     	var checked = "";
     	
     	$(document).ready(function () {
     		$("#edit").click(function () {
-    			location.href = 'BoardModifyView.bo?board_id=' + boardId;
+    			location.href = 'boardModifyView.bo?num=' + boardId;
     		});
     		
     		$("#delete").click(function() {
     			var check = confirm("정말로 삭제하시겠습니까?")
-    			
     			if(!check){
     				alert("게시글 삭제를 취소하셨습니다.");
     			} else {
-    				location.href="BoardDelete.bo?board_id=" + boardId;
+    				location.href="boardDelete.bo?num=" + boardId;
     			}
-    		})
+    		});
     		
     		selectImage();
     		
@@ -130,7 +106,7 @@
     		
     		var textContent = document.getElementById("text-content");
     		resize(textContent);
-    	});
+    	}); // ready() ends
     	
     	function resize(obj) {
     	    obj.style.height = '1px';
@@ -140,7 +116,7 @@
     	function changeState() {
     		
     		if (checked == "true") {    			
-    			console.log("관심글로 저장 돼 있음...");
+    			console.log("관심 등록 상태");
     			console.log("데이터베이스에서 관심글 리스트에서 지우는 작업 실행...");
     			
     			// 관심글로 저장 돼 있을 때 하트 버튼을 클릭 시 관심글에서 제거 돼야 함. 즉, span 태그 안 내용 및 이미지가 빈 하트로 변경 돼야 함.
@@ -202,7 +178,7 @@
     	
     	function selectImage() {
     		$.ajax({
-				url: "IsAddedToMemberTable.bo",
+				url: "heartForBoard.bo",
 				data: {
 					"userId": userId,
 					"boardId": boardId
@@ -213,17 +189,17 @@
 				async: false,
 				success: function (data) {
 					if (data.isAdded == "true") {
-						$("#heart-text").html("관심글 삭제");
-						$("#heart-img").attr("src", "./images/afterheart.png");
+						$("#heart-text").html("관심 취소");
+						$("#heart-img").attr("src", ".resources/img/afterheart.png");
 						checked = "true";
 					} else {
-						$("#heart-text").html("관심글 등록");
-						$("#heart-img").attr("src", "./images/beforeheart.png");
+						$("#heart-text").html("관심 등록");
+						$("#heart-img").attr("src", ".resources/img/beforeheart.png");
 						checked = "false";
 					}
-				} // success ends
+				}
 			}); // ajax ends
-    	} // selectImage function ends
+    	}
     </script>
 </body>
 </html>

@@ -1,0 +1,62 @@
+@charset "UTF-8";
+.btns {
+	margin-top: 30px;
+	margin-bottom: 20px;
+}
+
+#edit {
+	margin-right: 10px;
+}
+
+#heart {
+	float: right;
+}
+
+.heart-img {
+	width: 40px;
+	height: 40px;
+}
+
+#showMainImg {
+	margin: 0 auto;
+	height: 400px;
+	overflow: hidden;
+	text-align: center;
+}
+
+#boardImg {
+	width: auto;
+	height: 100%;
+	object-fit: cover;
+}
+
+#showProfile {
+	margin: 0 auto;
+	width: 120px;
+	height: 120px;
+	border-radius: 70%;
+	overflow: hidden;
+}
+		
+#profileImg {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+#writer {
+	text-align: center;
+}
+		
+.board-info {
+	display: inline-block;
+	padding-left: 10%;
+}
+
+#textContent {
+	width: 100%;
+	height: 600px;
+	resize: none;
+	font-size: 20px;
+	font-weight: normal
+}
