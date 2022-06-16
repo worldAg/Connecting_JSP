@@ -1,18 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
 	<title>Board Modify</title>
-	<link rel="stylesheet" href="css/bootstrap.css" />
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-	        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-	</script>
-	<script src="resources/js/jquery-3.6.0.js"></script>
-	<script src="resources/js/bo_write.js"></script>
-	<link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-    <link href="https://fonts.googleapis.com/css2?family=Gaegu&display=swap" rel="stylesheet">
+	<link rel="icon" href="<%=request.getContextPath()%>/resources/img/connecting/favicon.ico" />
 	<style>
 		 * {
 	         font-family: 'Gaegu', cursive!important;
@@ -68,7 +61,7 @@
     <jsp:include page="../main/header.jsp" />
     
     <div class="container cont_form">
-    	<form class="board_form" action="BoardModifyAction.bo" method="post" style="font-size:23px" enctype="Multipart/form-data">
+    	<form class="board_form" action="boardModifyAction.bo" method="post" style="font-size:23px" enctype="Multipart/form-data">
 		
     	<div class="sel">
     		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

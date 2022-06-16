@@ -25,7 +25,7 @@ public class HeartAddOrRemoveAction implements Action {
 		HeartDAO dao = new HeartDAO();
 		JsonObject object = new JsonObject();
 
-		if (process.equals("remove")) {
+		if (process.equals("remove")) { // 관심글 제거
 			// 사용자가 하트를 눌러 관심글에서 제거했다면
 			// 첫 번째로 user_heart 테이블에서 제거해 줘야 한다.
 			// 두 번째로 board_heart 테이블에서 1을 감소시켜줘야 한다.

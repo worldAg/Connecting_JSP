@@ -32,8 +32,8 @@
 					<%-- 로그인한 사용자의 경우 관심글 등록 가능 --%>
 					<c:if test="${!empty sessionScope.id}">
 						<div id="heart">
-							<span>관심글</span>
-							<img class="heart-img" src="<%=request.getContextPath()%>/resources/img/beforeheart.png" />
+							<span id="heartText">관심 등록</span>
+							<img id="heartImg" src="<%=request.getContextPath()%>/resources/img/beforeheart.png" />
 						</div>
 					</c:if>
 				</div>		
@@ -71,17 +71,22 @@
 				</div>
 			</div>
 		</div>
-		<div class="mb-3" style="margin-top: 50px;">
-			<textarea class="form-control" id="textContent" rows="3" style="" readonly>
-				<c:out value="${ boardData.content }" />
-			</textarea>
+		<div class="content">
+			<%-- 
+				XSS(Cross Site Scripting) 방지를 위해 출력 시에도 textarea, c:out 태그 사용.
+			 	c:out 태그는 escapeXml 속성 기본값이 true로 HTML 태그를 해석하지 않음.
+			 --%>
+			<textarea class="form-control" id="textContent" readonly><c:out value="${ boardData.content }" /></textarea>
+		</div>
+		<div class="writer_date">
+			${ boardData.write_date } 작성
 		</div>
 	</div>
     
     <script>
-	    var userId = '<%=(String) request.getSession().getAttribute("id") %>';
-		var boardId = '<%=((Board) request.getAttribute("boardData")).getBoard_id() %>';
-    	var checked = "";
+	    const userId = '<%=(String) request.getSession().getAttribute("id") %>';
+		const boardId = '<%=((Board) request.getAttribute("boardData")).getBoard_id() %>';
+    	let checked = "";
     	
     	$(document).ready(function () {
     		$("#edit").click(function () {
@@ -97,108 +102,89 @@
     			}
     		});
     		
-    		selectImage();
+    		isHeart();
     		
-    		$("div#heart").click(function () {
-    			console.log("이벤트 발생!");
+    		$("#heartImg").click(function () {
     			changeState();
     		});
-    		
-    		var textContent = document.getElementById("text-content");
-    		resize(textContent);
+
     	}); // ready() ends
     	
-    	function resize(obj) {
-    	    obj.style.height = '1px';
-    	    obj.style.height = (12 + obj.scrollHeight) + 'px';
-    	}
-    	
-    	function changeState() {
-    		
-    		if (checked == "true") {    			
-    			console.log("관심 등록 상태");
-    			console.log("데이터베이스에서 관심글 리스트에서 지우는 작업 실행...");
-    			
-    			// 관심글로 저장 돼 있을 때 하트 버튼을 클릭 시 관심글에서 제거 돼야 함. 즉, span 태그 안 내용 및 이미지가 빈 하트로 변경 돼야 함.
-    			$("#heart-text").html("관심글 등록");
-				$("#heart-img").attr("src", "./images/beforeheart.png");
-				
-				// 데이터베이스에 가서 관심글 목록에서 지우기. 사용자 아이디 및 게시글의 아이디기 필요
-				$.ajax({
-					url: "AddOrRemoveHeart.bo",
-					data: {
-						"userId": userId,
-						"boardId": boardId,
-						"process": "remove"
-					},
-					dataType: "json",
-					cache: "false",
-					type: "post",
-					async: false,
-					success: function (data) {
-						if (data.success == "true") {
-							console.log("데이터베이스 관심글에서 삭제 성공...");
-							checked = "false";
-						} else if (data.success == "false") {
-							console.log("데이터베이스 관심글에서 삭제 실패...");
-						}
-					} // success ends
-				}); // ajax ends
-    		} else if (checked == "false") {
-    			console.log("관심글로 저장 돼 있지 않음...");
-    			console.log("데이터베이스에서 관심글 리스트에서 추가하는 작업 실행...");
-    			
-    			// 관심글로 저장 돼 있지 않을 때 하트 버튼을 클릭 시 관심글 리스트에 추가돼야 함. 즉, span 태그 안 내용 및 이미지가 빨간 하트로 변경 돼야 함.
-    			$("#heart-text").html("관심글 삭제");
-				$("#heart-img").attr("src", "./images/afterheart.png");
-				
-				// 데이터베이스에 가서 관심글 목록 추가. 사용자 아이디 및 게시글의 아이디기 필요
-				$.ajax({
-					url: "AddOrRemoveHeart.bo",
-					data: {
-						"userId": userId,
-						"boardId": boardId,
-						"process": "add"
-					},
-					dataType: "json",
-					cache: "false",
-					type: "post",
-					async: false,
-					success: function (data) {
-						if (data.success == "true") {
-							console.log("데이터베이스 관심글에서 추가 성공...");
-							checked = "true";
-						} else if (data.success == "false") {
-							console.log("데이터베이스 관심글에서 추가 실패...");
-						}
-					} // success ends
-				}); // ajax ends
-    		}
-    	}
-    	
-    	function selectImage() {
+    	// 사용자의 관심글 등록 여부 확인
+    	function isHeart() {
     		$.ajax({
 				url: "heartForBoard.bo",
+				type: "POST",
 				data: {
 					"userId": userId,
 					"boardId": boardId
 				},
 				dataType: "json",
 				cache: "false",
-				type: "post",
-				async: false,
+				async: false, 
 				success: function (data) {
 					if (data.isAdded == "true") {
-						$("#heart-text").html("관심 취소");
-						$("#heart-img").attr("src", ".resources/img/afterheart.png");
+						$("#heartText").html("관심 취소");
+						$("#heartImg").attr("src", "./resources/img/afterheart.png");
 						checked = "true";
 					} else {
-						$("#heart-text").html("관심 등록");
-						$("#heart-img").attr("src", ".resources/img/beforeheart.png");
+						$("#heartText").html("관심 등록");
+						$("#heartImg").attr("src", "./resources/img/beforeheart.png");
 						checked = "false";
 					}
 				}
-			}); // ajax ends
+			});
+    	} // isHeart() ends
+    	
+    	// 하트 변경 상태에 따라 관심글 추가 및 삭제하도록 함
+    	function changeHeart(process) {
+    		$.ajax({
+				url: "heartAddOrRemove.bo",
+				type: "POST",
+				data: {
+					"userId": userId,
+					"boardId": boardId,
+					"process": process
+				},
+				dataType: "json",
+				cache: "false",
+				async: false,
+				success: function (data) {
+					if (process == "add") {
+						checked = "true";
+					} else {
+						checked = "false";
+					}
+				},
+				error: function(request, status, error) {
+					console.log("code: " + request.status + "\n" 
+						+ "받은 데이터: " + request.responseText + "\n" 
+						+ "error: " + error + "\n" 
+						+ "error status: " + status
+					);
+				}
+			});
+    	} // changeHeart() ends
+    	
+    	// 사용자의 관심글 등록 상태 변경
+    	function changeState() {
+    		let process = "";
+    		// 관심 상태가 true이면 false로 변경
+    		if (checked == "true") {
+    			console.log("관심 취소 작업 실행");
+    			$("#heartText").html("관심 등록");
+				$("#heartImg").attr("src", "./resources/img/beforeheart.png");
+    			process = "remove";
+				changeHeart(process);
+    		} 
+    		// 관심 상태가 false이면 true로 변경
+    		else if (checked == "false") {
+    			console.log("관심 등록 작업 실행");
+    			$("#heartText").html("관심 취소");
+				$("#heartImg").attr("src", "./resources/img/afterheart.png");
+    			process = "add";
+				changeHeart(process);
+    		}
     	}
     </script>
 </body>

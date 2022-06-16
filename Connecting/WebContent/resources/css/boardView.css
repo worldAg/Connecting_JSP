@@ -12,7 +12,7 @@
 	float: right;
 }
 
-.heart-img {
+#heartImg {
 	width: 40px;
 	height: 40px;
 }
@@ -53,10 +53,20 @@
 	padding-left: 10%;
 }
 
+.content {
+	margin-top: 50px;
+}
+
 #textContent {
 	width: 100%;
 	height: 600px;
 	resize: none;
 	font-size: 20px;
-	font-weight: normal
+	font-weight: normal;
+}
+
+.writer_date {
+	text-align: right;
+	font-weight: normal;
+	margin-bottom: 100px;
 }

@@ -16,29 +16,27 @@ public class BoardDeleteAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-
-		BoardDAO bdao = new BoardDAO();
-		int board_id = Integer.parseInt(request.getParameter("board_id"));
-
+		
+		BoardDAO dao = new BoardDAO();
+		int boardId = Integer.parseInt(request.getParameter("num"));
 		int result = 0;
 
 		response.setContentType("text/html;charset=utf-8");
-		result = bdao.deleteBoard(board_id);
+		result = dao.boardDelete(boardId);
 
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
-		// 삭제 된 경우
-		if (result == 1) {
-			out.println("alert('게시글이 삭제 되었습니다.');");
-			out.println("location.href='BoardList.bo';");
-		} else {
-			out.println("alert('게시글 삭제에 실패 하였습니다.');");
+		
+		if (result == 1) { // 삭제 성공
+			out.println("alert('해당 게시글이 삭제되었습니다.');");
+			out.println("location.href='boardList.bo';");
+		} else { // 삭제 실패
+			out.println("alert('데이터를 삭제하지 못했습니다.');");
 			out.println("history.back()");
 		}
 		out.println("</script>");
 		out.close();
-
+		
 		return null;
 	}
 

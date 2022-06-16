@@ -12,6 +12,7 @@ import action.Action;
 import action.ActionForward;
 import bo.board.db.HeartDAO;
 
+// 게시글 상세페이지에 하트(관심) 상태를 전송
 public class HeartForBoardAction implements Action {
 
 	@Override

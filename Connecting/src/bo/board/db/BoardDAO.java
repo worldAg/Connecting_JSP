@@ -309,7 +309,7 @@ public class BoardDAO {
 				board.setEnd_time(rs.getString("end_time"));
 				board.setStart_date(rs.getString("start_date"));
 				board.setEnd_date(rs.getString("end_date"));
-				board.setWrite_date(rs.getString("write_date").substring(0, 10));
+				board.setWrite_date(rs.getString("write_date").substring(0, 16));
 				board.setContent(rs.getString("content"));
 				board.setHeart_count(rs.getInt("heart_count"));;
 			}
