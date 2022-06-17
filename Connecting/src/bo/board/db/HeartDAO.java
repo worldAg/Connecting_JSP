@@ -74,7 +74,12 @@ public class HeartDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		JsonArray array = new JsonArray();
-		String sql = "SELECT BOARD_ID FROM USER_HEART WHERE USER_ID = ?";
+		
+		// IN 연산자를 사용한 다중행 서브쿼리
+		String sql = "SELECT BOARD_ID, USER_ID, TITLE, ADDRESS, END_DATE "
+				   + "FROM BOARD "
+				   + "WHERE BOARD_ID IN "
+				   + "	(SELECT BOARD_ID FROM USER_HEART WHERE USER_ID = ?)";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -84,6 +89,10 @@ public class HeartDAO {
 			while (rs.next()) {
 				JsonObject object = new JsonObject();
 				object.addProperty("board_id", rs.getInt("board_id"));
+				object.addProperty("user_id", rs.getString("user_id"));
+				object.addProperty("title", rs.getString("title"));
+				object.addProperty("address", rs.getString("address"));
+				object.addProperty("end_date", rs.getString("end_date"));
 				array.add(object);
 			}
 		} catch (Exception e) {
