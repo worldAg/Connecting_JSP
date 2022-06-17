@@ -11,12 +11,15 @@
 	<jsp:include page="../main/header.jsp" />
 	<div class="container menu-title">
 		<h1>마이페이지</h1>
+		<c:if test="${sessionScope.id == 'admin'}">
+			<a type="button" class="btn btn-primary" id="goMgr" href="mgrMain.mgr">관리자 페이지</a>
+		</c:if>
 	</div>
 	<div class="container">
 		<div class="row">
 		
 			<!-- 프로필 이미지 등 회원정보 -->
-			<div class="col-md-6">
+			<div class="col-md-5">
 				<div id="showImage">
 					<c:if test='${empty memberInfo.profile_img }'>
 						<img id="profileImg" src="<%=request.getContextPath()%>/resources/img/profile.png">
@@ -43,13 +46,13 @@
 			</div>
 			
 			<!-- 작성글 리스트 및 관심글 리스트 -->
-			<div class="col-md-6">
+			<div class="col-md-7">
 				<ul class="nav nav-tabs">
 					<li class="nav-item">
 						<a class="nav-link active" data-bs-toggle="tab" href="#myList">나의 게시글</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" data-bs-toggle="tab" href="#myHeart">나의 관심글</a>
+						<a class="nav-link" data-bs-toggle="tab" href="#myHeart" id="heartList">나의 관심글</a>
 					</li>
 				</ul>
 				<div id="myTabContent" class="tab-content">

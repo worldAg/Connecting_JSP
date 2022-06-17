@@ -2,10 +2,16 @@
 
 .menu-title {
 	margin-bottom: 30px;
+	display: flex;
+	gap: 30px;
+}
+
+#goMgr {
+	font-size: 23px;
 }
 
 .row {
-	margin-bottom: 150px;
+	margin-bottom: 100px;
 }
 
 #showImage {
@@ -40,8 +46,17 @@
 #goModify {
 	text-align: center;
 	margin-top: 15px;
+	margin-bottom: 30px;
+}
+
+#goModify > a {
+	font-size: 18px;
 }
 
 table {
 	font-size: 16pt;
+}
+
+td {
+	cursor: pointer;
 }
