@@ -99,7 +99,7 @@ public class BoardDAO {
 		} else if (orderby.equals("2")) {
 			sort = " START_DATE ASC, BOARD_ID DESC";
 		} else if (orderby.equals("3")) {
-			sort = " END_DATE ASC, BOARD.BOARD_ID DESC";
+			sort = " END_DATE ASC, BOARD_ID DESC";
 		}
 		
 		String where = null;
@@ -113,12 +113,13 @@ public class BoardDAO {
 			where = "WHERE CATEGORY = " + category + "AND LOC = " + loc;
 		}
 		
-		String sql = "SELECT * " 
-				   + "FROM (SELECT ROWNUM RNUM, B.* " 
-		           + "      FROM BOARD B "
-				   + "		" + where + ""
-				   + "		ORDER BY " + sort + ")" 
-		           + "WHERE RNUM >= ? AND RNUM <= ?";
+		String sql = "SELECT * "
+				   + "FROM (SELECT ROWNUM AS RNUM, B.* "
+				   + "      FROM (SELECT * FROM BOARD "
+				   +  "		      " + where + ""
+				   + "            ORDER BY " + sort + ") B"
+				   + ") "
+				   + "WHERE RNUM >= ? AND RNUM <= ?";
 		
 		List<Board> list = new ArrayList<Board>();
 
@@ -145,7 +146,6 @@ public class BoardDAO {
 				board.setBoard_img(rs.getString("board_img"));
 				board.setCategory(rs.getInt("category"));
 				board.setLoc(rs.getInt("loc"));
-				board.setHost(rs.getString("host"));
 				board.setAddress(textLengthOverCut(rs.getString("address"), 10));
 				board.setStart_date(rs.getString("start_date"));
 				board.setEnd_date(rs.getString("end_date"));
@@ -222,12 +222,13 @@ public class BoardDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = "SELECT * " 
-				   + "FROM (SELECT ROWNUM RNUM, B.* " 
-		           + "      FROM BOARD B "
-				   + "		WHERE TITLE LIKE '%" + keyword + "%'"
-				   + "		ORDER BY BOARD_ID DESC)" 
-		           + "WHERE RNUM >= ? AND RNUM <= ?";
+		String sql = "SELECT * "
+				   + "FROM (SELECT ROWNUM AS RNUM, B.* "
+				   + "      FROM (SELECT * FROM BOARD "
+				   +  "		      WHERE TITLE LIKE '%" + keyword + "%'"
+				   + "            ORDER BY BOARD_ID DESC) B"
+				   + ") "
+				   + "WHERE RNUM >= ? AND RNUM <= ?";
 		
 		List<Board> list = new ArrayList<Board>();
 
@@ -253,7 +254,6 @@ public class BoardDAO {
 				board.setTitle(textLengthOverCut(rs.getString("title"), 15));
 				board.setCategory(rs.getInt("category"));
 				board.setLoc(rs.getInt("loc"));
-				board.setHost(rs.getString("host"));
 				board.setAddress(textLengthOverCut(rs.getString("address"), 10));
 				board.setStart_date(rs.getString("start_date"));
 				board.setEnd_date(rs.getString("end_date"));
@@ -484,6 +484,7 @@ public class BoardDAO {
 				object.addProperty("user_id", rs.getString("user_id"));
 				object.addProperty("title", rs.getString("title"));
 				object.addProperty("write_date", rs.getString("write_date"));
+				object.addProperty("heart_count", rs.getInt("heart_count"));
 				array.add(object);
 			}
 		} catch (Exception e) {
