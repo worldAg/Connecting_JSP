@@ -11,9 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.ActionForward;
-import my.mypage.action.MemberInfoAction;
-import my.mypage.action.MemberUpdateAction;
-import my.mypage.action.MemberUpdateProcessAction;
 
 @WebServlet("*.my")
 public class MyFrontController extends HttpServlet {
@@ -46,7 +43,7 @@ public class MyFrontController extends HttpServlet {
     			action = new MemberUpdateProcessAction();
     			break;
     		case "/mylist.my":
-    			action = new MyBoardListAction();
+    			action = new MyListAction();
     			break;
     	} // switch ends
     	
