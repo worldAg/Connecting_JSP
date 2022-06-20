@@ -16,10 +16,10 @@ import com.google.gson.JsonObject;
 import action.Action;
 import action.ActionForward;
 import bo.board.db.BoardDAO;
-import net.member.db.Member;
-import net.member.db.MemberDAO;
+import bo.board.db.HeartDAO;
 
-public class MyBoardListAction implements Action {
+// 마이페이지에 작성글, 관심글 리스트 json으로 전송
+public class MyListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
@@ -29,10 +29,16 @@ public class MyBoardListAction implements Action {
 		String id = (String) session.getAttribute("id");
 		
 		BoardDAO boardDao = new BoardDAO();
+		HeartDAO heartDao = new HeartDAO();
 		JsonObject object = new JsonObject();
-		JsonArray jarray = boardDao.getMyBoard(id);
-		JsonElement mylist = new Gson().toJsonTree(jarray);
+		
+		JsonArray boardlist = boardDao.getMyBoard(id);
+		JsonArray heartlist = heartDao.getMyHeartList(id);
+		JsonElement mylist = new Gson().toJsonTree(boardlist);
+		JsonElement myheart = new Gson().toJsonTree(heartlist);
+		
 		object.add("mylist", mylist);
+		object.add("myheart", myheart);
 		
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
