@@ -1,0 +1,56 @@
+@charset "UTF-8";
+.board-form {
+	margin-bottom: 100px;
+}
+
+#showImage {
+	margin: 0 auto;
+	height: 400px;
+	overflow: hidden;
+	text-align: center;	
+}
+
+#boardImg {
+	width: auto;
+	height: 100%;
+	object-fit: cover;
+}
+
+#editImg {
+	display: none; /* 이미지 클릭 시 추가되도록 input 보이지 않도록 함 */
+}
+
+.board-info {
+	padding-left: 10%;
+}
+
+.sel {
+	margin-bottom: 50px;
+}
+
+.input-text {
+	border: none;
+}
+
+.input-text:focus {
+	outline: none;
+}
+
+#title {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+table {
+	border-bottom: 1px solid black;
+	font-size: 18px;
+	width: 500px;
+}
+
+tr {
+	height: 50px;
+}
+
+#content {
+	font-size: 23px;
+}
