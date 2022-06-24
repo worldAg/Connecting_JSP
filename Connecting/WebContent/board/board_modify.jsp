@@ -1,188 +1,107 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<title>Board Modify</title>
 	<link rel="icon" href="<%=request.getContextPath()%>/resources/img/connecting/favicon.ico" />
-	<style>
-		 * {
-	         font-family: 'Gaegu', cursive!important;
-	      }
-	      
-		.a {
-			border:none;
-		}
-		
-		.a:focus{
-			outline:none;
-		}
-	
-		.imgupload{
-			display:inline-block;
-		}
-		
-		.content{
-			display:inline-block;
-		}
-		
-		td{
-			border-bottom:1px solid black;
-		}
-		
-		tr{
-			height:50px;
-		}
-		
-		table{
-			border-bottom:1px solid black;
-		}
-
-		.form_header{
-			display:flex;
-			justify-content:center;
-		}
-		
-		.sel{
-			margin:30px 30px;
-			display:flex;
-			justify-content:center;
-		}
-
-		.update_btn{
-			margin-right: 50px;
-			margin-top: 50px;
-			float: right;
-		}
-	</style>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/boardForm.css" />
 </head>
 <body>
-    <jsp:include page="../main/header.jsp" />
+	<jsp:include page="../main/header.jsp" />
     
-    <div class="container cont_form">
-    	<form class="board_form" action="boardModifyAction.bo" method="post" style="font-size:23px" enctype="Multipart/form-data">
-		
-    	<div class="sel">
-    		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	   		<select name="category">
-	   			<option value="">카테고리</option>
-	   			<option value="0">전시회</option>
-	   			<option value="1">박람회</option>
-	   			<option value="2">버스킹</option>
-	   			<option value="3">연극&#47;공연</option>
-	   		</select>		
-	  		&nbsp;&nbsp;&nbsp;
-	  		<select name="loc">
-	      		<option value="">지역</option>
-	   			<option value="0">서울</option>
-	   			<option value="1">경기&#47;인천</option>
-	   			<option value="2">대전&#47;충청&#47;강원</option>
-	   			<option value="3">부산&#47;대구&#47;경상</option>
-	   			<option value="4">광주&#47;전라&#47;제주</option>
-	   		</select>
-		</div>
-
-		<div class="form_header">
-		<div class="imgupload">
-			<label>
-				<span id="showImage">
-					
-				
-				<c:if test='${empty boardInfo.board_img }'>
-					<c:set var='src' value='images/nonimg.png' />
-				</c:if> 
-				<c:if test='${!empty boardInfo.board_img }'>
-					<c:set var='src' value='${"boardupload/"}${boardInfo.board_img}'/>
-				</c:if>
-				
-				
-				<img style="width:300px" src="${src}" alt="board_img">
-				</span>
-				<span id="filevalue" style ="display:none">${boardInfo.board_img}</span>
-				<input type="file" style="display:none;"
-	                   id="change_img" name="board_img"
-	                   accept="image/*" />
-
-			</label>
-		</div>
-		
-       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-       <div class="content">
-       	<table>
-	      <thead>
-	         <tr>
-	            <td colspan="2">
-	               <input class="a" type="text" maxlength="50" style="width:300px" 
-	                value = "${boardInfo.title}" placeholder="제목을 입력하세요..." name="title">
-	            </td>
-	         </tr>
-	      </thead>
-	      <tbody>
-	         <tr>
-	            <th>주최자명</th>
-	            <td><input class="a" type="text" value = "${boardInfo.host_name}" name="host_name"></td>
-	         </tr>
-
-	         <tr>
-	            <th>장소</th>
-	            <td><input class="a" value = "${boardInfo.address}" type="text" name="address"></td>
-	         </tr>
-	         <tr>
-	            <th>날짜</th>
-	            <th><input type="date" name="start_date" value = "${boardInfo.start_date}">
-	               ~
-	               <input type="date" name="end_date" value = "${boardInfo.end_date}">
-	            </th>
-	         </tr>
-	         <tr>
-	            <th>시간</th>
-	            <th><input type="time" name="start_time" value = "${boardInfo.start_time}">
-	               ~
-	               <input type="time" name="end_time" value = "${boardInfo.end_time}">
-	            </th>
-	         </tr>
-	      </tbody>
-        </table>
-       </div> 
-    	</div>
-		       
-                      
-		<div class="form-group">
-			<label for="content" class="form-label mt-4">본문</label>
+    <div class="container board-form">
+    	<form name="boardModify" action="boardModifyAction.bo" method="post" enctype="Multipart/form-data">
+			<div class="form-group row">
+				<!-- 이미지 업로드 -->
+				<div class="col-md-6" id="showImage">
+					<span id="resetBtn"></span>
+					<label>
+						<span id="imgUpdate">
+							<c:set var="resourcesPath" value='${pageContext.request.contextPath}${"/resources/"}'/>
+							<c:if test='${empty boardInfo.board_img}'>
+								<c:set var='imgPath' value='${resourcesPath}img/default-img.png' />
+							</c:if>
+							<c:if test='${!empty boardInfo.board_img}'>
+								<c:set var='imgPath' value='${resourcesPath}${"board_upload/"}${boardInfo.board_img}'/>
+							</c:if>
+							<img id="boardImg" src="${imgPath}" alt="이미지 업로드" />
+						</span>
+						<input type="file" id="editImg" name="board_img" accept="image/*" style="display:none">
+					</label>
+					<span id="originalImg" style="display:none">${boardInfo.board_img}</span>
+				</div>
+				<div class="col-md-6 board-info">
+					<!-- 카테고리 및 지역 select -->
+					<div class="sel">
+						<select name="category">
+							<option value="">카테고리</option>
+							<option value="0">전시회</option>
+							<option value="1">박람회</option>
+							<option value="2">버스킹</option>
+							<option value="3">연극&#47;공연</option>
+						</select>
+						<select name="loc">
+							<option value="">지역</option>
+							<option value="0">서울</option>
+							<option value="1">경기&#47;인천</option>
+							<option value="2">대전&#47;충청&#47;강원</option>
+							<option value="3">부산&#47;대구&#47;경상</option>
+							<option value="4">광주&#47;전라&#47;제주</option>
+						</select>
+					</div>
+					<!--  게시글 정보 입력  -->
+					<table>
+						<thead>
+							<tr>
+								<td colspan="2">
+									<input class="input-text" id="title" type="text" maxlength="30" 
+										placeholder="제목을 입력하세요..." name="title" value="${boardInfo.title}">
+								</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th>주최자명</th>
+								<td><input class="input-text" type="text" name="host" value="${boardInfo.host}"></td>
+							</tr>
+							<tr>
+								<th>장소</th>
+								<td><input class="input-text" type="text" name="address" value="${boardInfo.address}"></td>
+							</tr>
+							<tr>
+								<th>날짜</th>
+								<th>
+									<input type="date" name="start_date" value="${boardInfo.start_date}"> &#126;
+									<input type="date" name="end_date" value="${boardInfo.end_date}">
+								</th>
+							</tr>
+							<tr>
+								<th>시간</th>
+								<th>
+									<input type="time" name="start_time" value="${boardInfo.start_time}"> &#126;
+									<input type="time" name="end_time" value="${boardInfo.end_time}">
+								</th>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="content" class="form-label mt-4">본문</label>
+				<textarea class="form-control" id="content" rows="15"
+					placeholder="내용을 입력하세요." name="content">${boardInfo.content}</textarea>
+			</div>
 			
-      		<textarea class="form-control" name="content" id="content" rows="15" cols="600" 
-      		style="font-size:23px" placeholder="내용을 입력하세요.">${boardInfo.content}</textarea>
-    	</div>
-    	<input type="text" name="board_id" value="${boardInfo.board_id}" style="display:none">
-    	
-    	<div class="update_btn">
-    	  	<button type="submit" class="btn btn-primary btn-lg">수정</button>
-  			
-		  	<a href="BoardDelete.bo?board_id=${boardInfo.board_id}">
-		  	<button type="button" class="btn btn-danger btn-lg" id="del">삭제</button></a>
-    	</div>
-
+			<!-- board_id 값 전달을 위한 input -->
+			<input type="text" name="board_id" value="${boardInfo.board_id}" style="display:none">
+			
+			<div class="mt-4 text-center">
+				<button type="submit" class="btn btn-success btn-lg">수정 완료</button>
+			</div>
 		</form>
-    </div>
- 	
-
-<script>
-
+	</div>
 	
-	//select
-	$("select[name='category']").val('${boardInfo.category}').prop('selected',true);
-	$("select[name='loc']").val('${boardInfo.loc}').prop('selected',true);
-	
-	$("#del").click(function() {
-		var check = confirm("정말로 삭제하시겠습니까?")
-		
-		if(!check){
-			alert("게시글 삭제를 취소하셨습니다.");
-			return false;
-		}
-	})
-
-</script>
+	<script src="<%=request.getContextPath()%>/resources/js/board_write.js"></script>
 </body>
 </html>

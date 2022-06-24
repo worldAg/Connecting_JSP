@@ -4,20 +4,32 @@
 }
 
 #showImage {
+	/* 이미지 위의 x버튼이 div요소(#showImage) 안에서 적용되도록 'position: relative;' */
+	position: relative;
 	margin: 0 auto;
 	height: 400px;
 	overflow: hidden;
 	text-align: center;	
 }
 
+label {
+	z-index: 1;
+}
+
 #boardImg {
 	width: auto;
 	height: 100%;
 	object-fit: cover;
+	cursor: pointer;
 }
 
-#editImg {
-	display: none; /* 이미지 클릭 시 추가되도록 input 보이지 않도록 함 */
+/* 게시글 이미지 초기화 버튼(상세페이지) - 이미지의 왼쪽 위에 위치 */
+#resetBtn {
+	position: absolute;
+	margin-top: 20px;
+	left: 50px;
+	z-index: 2;
+	cursor: pointer;
 }
 
 .board-info {
@@ -39,6 +51,7 @@
 #title {
 	font-size: 20px;
 	font-weight: bold;
+	width: 450px;
 }
 
 table {
@@ -53,4 +66,5 @@ tr {
 
 #content {
 	font-size: 23px;
+	font-weight: normal;
 }
