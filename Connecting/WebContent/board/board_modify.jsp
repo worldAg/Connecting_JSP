@@ -34,15 +34,15 @@
 				<div class="col-md-6 board-info">
 					<!-- 카테고리 및 지역 select -->
 					<div class="sel">
-						<select name="category">
-							<option value="">카테고리</option>
+						<span id="selectedCat" style="display:none">${boardInfo.category}</span>
+						<select id="category" name="category">
 							<option value="0">전시회</option>
 							<option value="1">박람회</option>
 							<option value="2">버스킹</option>
 							<option value="3">연극&#47;공연</option>
 						</select>
-						<select name="loc">
-							<option value="">지역</option>
+						<span id="selectedLoc" style="display:none">${boardInfo.loc}</span>
+						<select id="loc" name="loc">
 							<option value="0">서울</option>
 							<option value="1">경기&#47;인천</option>
 							<option value="2">대전&#47;충청&#47;강원</option>
@@ -62,7 +62,7 @@
 						</thead>
 						<tbody>
 							<tr>
-								<th>주최자명</th>
+								<th>주최명</th>
 								<td><input class="input-text" type="text" name="host" value="${boardInfo.host}"></td>
 							</tr>
 							<tr>

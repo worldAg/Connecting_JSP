@@ -1,6 +1,12 @@
 $(document).ready(function() {	
 	let check = 0; // 게시글 이미지 변경 여부
-	 
+	
+	// 수정페이지에서 기존의 category, loc를 기본으로 선택되도록 함
+	const category = $('#selectedCat').text();
+	const local = $('#selectedLoc').text();
+    $("#category option[value='" + category + "']").attr('selected', 'selected');
+    $("#loc option[value='" + local + "']").attr('selected', 'selected');
+
 	// 게시글 이미지 추가
 	$('input[type=file]').change(function(event) {
 		check++;
@@ -23,7 +29,7 @@ $(document).ready(function() {
 		}
 	});
 	
-	// x버튼 클릭 시 이미지 초기화
+	// 수정페이지의 경우 x버튼 클릭 시 이미지 초기화
 	$('#resetBtn').click(function() {
 		check = 0;
 		$('input[type=file]').val(""); // input file 초기화
@@ -35,7 +41,7 @@ $(document).ready(function() {
 	
 	$('form').submit(function() {
 		
-		/*	이미지 변경 안했을 경우(check == 0)
+		/*	게시글 수정 시 이미지 변경 안했을 경우(check == 0)
 			$('#originalImg').text()의 기존 파일명을 파라미터 'check'라는 이름으로 form에 추가해 전송	*/
 		if (check == 0) {
 			const original = $('#originalImg').text();
