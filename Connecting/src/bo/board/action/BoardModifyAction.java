@@ -20,69 +20,67 @@ public class BoardModifyAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		BoardDAO bdao = new BoardDAO();
-		Board board = new Board();
+		
 		ActionForward forward = new ActionForward();
+		BoardDAO dao = new BoardDAO();
+		Board data = new Board();
 		int result = 0;
 
 		String realFolder = "";
+		String saveFolder = "resources/board_upload";
+		int fileSize = 5 * 1024 * 1024; // 업로드할 파일의 최대 사이즈(5MB)
 
-		// WebContent아래에 꼭 폴더 생성
-		String saveFolder = "boardupload";
-
-		int fileSize = 5 * 1024 * 1024; // 업로드할 파일의 최대 사이즈 입니다. 5MB
-
-		// 실제 저장 경로를 지정합니다.
+		// 실제 저장 경로 지정
 		ServletContext sc = request.getServletContext();
 		realFolder = sc.getRealPath(saveFolder);
 		System.out.println(realFolder);
+		
 		try {
 			MultipartRequest multi = new MultipartRequest(request, realFolder, fileSize, "utf-8",
 					new DefaultFileRenamePolicy());
-			board.setBoard_id(Integer.parseInt(multi.getParameter("board_id")));
-			board.setCategory(Integer.parseInt(multi.getParameter("category")));
-			board.setLoc(Integer.parseInt(multi.getParameter("loc")));
-			board.setTitle(multi.getParameter("title"));
-			board.setHost_name(multi.getParameter("host_name"));
-			board.setAddress(multi.getParameter("address"));
-			board.setStart_date(multi.getParameter("start_date"));
-			board.setEnd_date(multi.getParameter("end_date"));
-			board.setStart_time(multi.getParameter("start_time"));
-			board.setEnd_time(multi.getParameter("end_time"));
-			board.setContent(multi.getParameter("content"));
-
+			data.setBoard_id(Integer.parseInt(multi.getParameter("board_id")));
+			data.setTitle(multi.getParameter("title"));
+			data.setCategory(Integer.parseInt(multi.getParameter("category")));
+			data.setLoc(Integer.parseInt(multi.getParameter("loc")));
+			data.setHost(multi.getParameter("host"));
+			data.setAddress(multi.getParameter("address"));
+			data.setStart_time(multi.getParameter("start_time"));
+			data.setEnd_time(multi.getParameter("end_time"));
+			data.setStart_date(multi.getParameter("start_date"));
+			data.setEnd_date(multi.getParameter("end_date"));
+			data.setContent(multi.getParameter("content"));
+			
 			String check = multi.getParameter("check");
-
-			if (check != null) {
-				board.setBoard_img(check);
+			if (check != null) { // 기존 파일 그대로 사용하는 경우
+				data.setBoard_img(check);
 			} else {
-				board.setBoard_img(multi.getFilesystemName("board_img"));
+				// 업로드된 파일의 시스템 상에 업로드된 실제 파일명 얻어오기
+				data.setBoard_img(multi.getFilesystemName("board_img"));
 			}
 
-			result = bdao.boardUpdate(board);
+			result = dao.boardUpdate(data);
 
 			// 글 수정에 실패할 경우
 			if (result == 0) {
 				System.out.println("게시판 수정 실패");
-				forward.setPath("BoardModifyView.bo");
-				request.setAttribute("message", "게시판 수정 실패입니다.");
 				forward.setRedirect(false);
+				request.setAttribute("message", "게시판 수정 실패입니다.");
+				forward.setPath("error/error500.jsp");
 				return forward;
 			}
-
-			System.out.println("게시판 등록 완료");
-
-			// 글 등록이 완료되면 게시판 리스트로 이동
+			
+			System.out.println("게시판 수정 완료");
 			forward.setRedirect(true);
-			forward.setPath("BoardList.bo");
+			forward.setPath("boardList.bo"); // 글 수정이 완료되면 게시글 목록 페이지로 이동
 			return forward;
 
-		} catch (IOException ex) {
-			forward.setPath("BoardModifyView.bo");
-			request.setAttribute("message", "게시판 수정 실패입니다.");
+		} catch (IOException e) {
+			forward.setPath("error/error500.jsp");
+			request.setAttribute("message", "게시판 수정 업로드 중 실패입니다.");
 			forward.setRedirect(false);
 			return forward;
 		}
+		
 	}
 
 }

@@ -17,30 +17,27 @@ public class BoardModifyView implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		int board_id = Integer.parseInt(request.getParameter("board_id").trim());
-		 
 		ActionForward forward = new ActionForward();
-		BoardDAO bdao = new BoardDAO();
-		Board bo = new Board();
+		BoardDAO dao = new BoardDAO();
+		Board data = new Board();
 
-		bo = bdao.getBoardById(board_id);
+		int boardId = Integer.parseInt(request.getParameter("num").trim()); // 파라미터로 전달 받은 수정할 글의 번호를 boardId 변수에 저장
+		
+		data = dao.getBoardDetail(boardId);
 
-		if (bo == null) {
-			System.out.println("게시판 불러오기 실패");
+		if (data == null) {
+			System.out.println("(수정)상세보기 실패");
 			forward = new ActionForward();
 			forward.setRedirect(false);
-			request.setAttribute("message", "회원정보 불러오기에 실패하였습니다.");
-			forward.setPath("error/error.jsp");
+			request.setAttribute("message", "게시판 수정 상세보기 실패입니다.");
+			forward.setPath("error/error500.jsp");
 			return forward;
 		}
 
-		System.out.println("게시판 불러오기 성공");
-
-		request.setAttribute("boardInfo", bo);
-
+		System.out.println("(수정)상세보기 성공");
+		request.setAttribute("boardInfo", data);
 		forward.setRedirect(false);
-		forward.setPath("board/board_update.jsp");
-
+		forward.setPath("board/board_modify.jsp");
 		return forward;
 	}
 
