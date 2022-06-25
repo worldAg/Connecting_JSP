@@ -8,10 +8,10 @@
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/boardForm.css" />
 </head>
 <body>
-    <jsp:include page="../main/header.jsp" />
-    
-    <div class="container board-form">
-    	<form name="boardWrite" action="boardAddAction.bo" method="post" enctype="Multipart/form-data">
+	<jsp:include page="../main/header.jsp" />
+	
+	<div class="container board-form">
+		<form name="boardWrite" action="boardAddAction.bo" method="post" enctype="Multipart/form-data">
 			<div class="form-group row">
 				<!-- 이미지 업로드 -->
 				<div class="col-md-6" id="showImage">
@@ -19,7 +19,7 @@
 						<span id="imgUpdate">
 							<img id="boardImg" src="./resources/img/default-img.png" alt="이미지 업로드">
 						</span>
-						<input type="file" id="editImg" name="board_img" accept="image/*" />
+						<input type="file" id="editImg" name="board_img" accept="image/*" style="display:none"/>
 					</label>
 				</div>
 				<div class="col-md-6 board-info">
@@ -52,7 +52,7 @@
 						</thead>
 						<tbody>
 							<tr>
-								<th>주최자명</th>
+								<th>주최명</th>
 								<td><input class="input-text" type="text" name="host"></td>
 							</tr>
 							<tr>
@@ -80,7 +80,7 @@
 			</div>
 		</form>
 	</div>
- 	
+	
 	<script src="<%=request.getContextPath()%>/resources/js/board_write.js"></script>
 </body>
 </html>

@@ -12,7 +12,7 @@
 	<div class="container menu-title">
 		<h1>마이페이지</h1>
 		<c:if test="${sessionScope.id == 'admin'}">
-			<a type="button" class="btn btn-primary" id="goMgr" href="mgrMain.mgr">관리자 페이지</a>
+			<a type="button" class="btn btn-primary" id="goMgr" href="mgrMain.mgr">관리자 메뉴 <img src="<%=request.getContextPath()%>/resources/img/settings.png"></a>
 		</c:if>
 	</div>
 	<div class="container">
@@ -21,10 +21,10 @@
 			<!-- 프로필 이미지 등 회원정보 -->
 			<div class="col-md-5">
 				<div id="showImage">
-					<c:if test='${empty memberInfo.profile_img }'>
+					<c:if test='${empty memberInfo.profile_img}'>
 						<img id="profileImg" src="<%=request.getContextPath()%>/resources/img/profile.png">
 					</c:if>  
-					<c:if test='${!empty memberInfo.profile_img }'>
+					<c:if test='${!empty memberInfo.profile_img}'>
 						<img id="profileImg" src="<%=request.getContextPath()%>/resources/profile_upload/${memberInfo.profile_img}">
 					</c:if>
 				</div>
@@ -41,7 +41,7 @@
 					</div>
 				</div>
 				<div id="goModify">
-					<a type="button" href="memberModify.my" class="btn btn-success">프로필 및 정보 변경</a>
+					<a type="button" href="memberModify.my" class="btn rounded-pill bg-success">프로필 및 정보 변경</a>
 				</div>
 			</div>
 			

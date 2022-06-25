@@ -1,7 +1,7 @@
 @charset "UTF-8";
 #board-container {
 	margin-top: 30px;
-	margin-bottom: 50px;
+	margin-bottom: 100px;
 }
 		
 .write-orderby {
@@ -37,4 +37,8 @@
 		
 tr, td {
 	font-size: 20px;
+}
+
+td {
+	cursor: pointer;
 }

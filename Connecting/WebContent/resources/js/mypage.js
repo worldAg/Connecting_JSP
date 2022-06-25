@@ -53,7 +53,7 @@ function myHeart() {
 		cache: "false",
 		success: function (data) {
 				let output = '<table class="table table-hover"><thead>';
-				output += '<tr class="table-success">';
+				output += '<tr class="table-danger">';
 				output += '<th scope="col" class="text-center">제목</th>';
 				output += '<th scope="col" class="text-center">지역</th>';
 				output += '<th scope="col" class="text-center">종료일</th>';

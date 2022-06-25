@@ -9,13 +9,15 @@
 </head>
 <body>
 	<jsp:include page="../main/header.jsp" />
-    
-    <div class="container board-form">
-    	<form name="boardModify" action="boardModifyAction.bo" method="post" enctype="Multipart/form-data">
+	
+	<div class="container board-form">
+		<form name="boardModify" action="boardModifyAction.bo" method="post" enctype="Multipart/form-data">
 			<div class="form-group row">
 				<!-- 이미지 업로드 -->
 				<div class="col-md-6" id="showImage">
-					<span id="resetBtn"></span>
+					<span id="resetBtn">
+						<!-- 이미지 변경 시 이미지 초기화 x버튼 생성 -->
+					</span>
 					<label>
 						<span id="imgUpdate">
 							<c:set var="resourcesPath" value='${pageContext.request.contextPath}${"/resources/"}'/>

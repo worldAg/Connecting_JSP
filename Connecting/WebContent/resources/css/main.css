@@ -1,0 +1,25 @@
+@charset "UTF-8";
+#main {
+	margin-top: 50px;
+	margin-bottom: 100px;
+}
+
+.recent-board {
+	width: 1000px;
+	margin: auto;
+}
+
+.go-btn {
+	margin-bottom: 10px;
+}
+
+#goList {
+	font-weight: bold;
+	border-radius: 25px;
+}
+
+.card-img-top {
+	width: 315px;
+	height: 446px;
+	object-fit: cover;
+}

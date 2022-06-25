@@ -80,14 +80,14 @@
 						</c:if>	
 					</c:if>
 					<span id="listCount">
-						${cate}&#44; ${local}<br />
+						${cate}&nbsp; ${local}<br />
 						조회 결과 : ${listcount}개
 					</span>&nbsp;&nbsp;
 					<button type="button" class="btn btn-outline-secondary all-list">전체 목록</button>
 				</c:otherwise>
 			</c:choose>
 		</div>
-			
+		
 		<!-- 게시글 존재하는 경우 -->
 		<c:if test="${listcount >= 1}">
 			<table class="table table-hover table-striped" id="board-table">
@@ -100,37 +100,37 @@
 						<th scope="col">지역</th>
 						<th scope="col">관심</th>
 					</tr>
-		        </thead>
-		        <tbody>
-		        	<c:set var="num" value="${listcount - (page - 1) * limit}" />
-		        	<c:forEach var="b" items="${boardlist}">
-		        		<tr onClick="location.href='boardDetail.bo?num=${b.board_id}'">
-		        			<td> <%--글 번호 --%>
-		        				<c:out value="${num}" />
+				</thead>
+				<tbody>
+					<c:set var="num" value="${listcount - (page - 1) * limit}" />
+					<c:forEach var="b" items="${boardlist}">
+						<tr onClick="location.href='boardDetail.bo?num=${b.board_id}'">
+							<td> <%--글 번호 --%>
+								<c:out value="${num}" />
 								<c:set var="num" value="${num - 1}" />
-		        			</td>
-		        			<td> <%--글 제목 --%>
-		        				<c:if test="${b.category == 0}">&#91;전시회&#93;</c:if>
+							</td>
+							<td> <%--글 제목 --%>
+								<c:if test="${b.category == 0}">&#91;전시회&#93;</c:if>
 								<c:if test="${b.category == 1}">&#91;박람회&#93;</c:if>
 								<c:if test="${b.category == 2}">&#91;버스킹&#93;</c:if>
-								<c:if test="${b.category == 3}">&#91;연극/공연&#93;</c:if>	        				
-		        				<c:out value="${ b.title }" />
-		        			</td>        				
-		        			<td>
-		        				<c:out value="${ b.start_date }" />
-		        			</td>	        				
-		        			<td>
-		        				<c:out value="${ b.end_date }" />
-		        			</td>	        				
-		        			<td>
-		        				<c:out value="${ b.address }" />
-		        			</td>
-		        			<td>
-		        				<c:out value="${ b.heart_count }" />
-		        			</td>
-		        		</tr>
-		        	</c:forEach>
-		        </tbody>
+								<c:if test="${b.category == 3}">&#91;연극&#47;공연&#93;</c:if>	        				
+								<c:out value="${ b.title }" />
+							</td>        				
+							<td>
+								<c:out value="${ b.start_date }" />
+							</td>	        				
+							<td>
+								<c:out value="${ b.end_date }" />
+							</td>	        				
+							<td>
+								<c:out value="${ b.address }" />
+							</td>
+							<td>
+								<c:out value="${ b.heart_count }" />
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
 			</table>
 			
 			<!-- 페이징 -->
@@ -203,6 +203,6 @@
 			ajaxList(sendData);
 		}
 	</script>
-	<script src="<%=request.getContextPath()%>/resources/js/board_list.js"?v=<%=System.currentTimeMillis() %>></script>	
+	<script src="<%=request.getContextPath()%>/resources/js/board_list.js"></script>	
 </body>
 </html>

@@ -116,7 +116,7 @@ public class BoardDAO {
 		String sql = "SELECT * "
 				   + "FROM (SELECT ROWNUM AS RNUM, B.* "
 				   + "      FROM (SELECT * FROM BOARD "
-				   +  "		      " + where + ""
+				   + "            " + where + ""
 				   + "            ORDER BY " + sort + ") B"
 				   + ") "
 				   + "WHERE RNUM >= ? AND RNUM <= ?";
@@ -225,7 +225,7 @@ public class BoardDAO {
 		String sql = "SELECT * "
 				   + "FROM (SELECT ROWNUM AS RNUM, B.* "
 				   + "      FROM (SELECT * FROM BOARD "
-				   +  "		      WHERE TITLE LIKE '%" + keyword + "%'"
+				   + "            WHERE TITLE LIKE '%" + keyword + "%'"
 				   + "            ORDER BY BOARD_ID DESC) B"
 				   + ") "
 				   + "WHERE RNUM >= ? AND RNUM <= ?";

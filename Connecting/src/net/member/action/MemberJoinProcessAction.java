@@ -13,7 +13,7 @@ import net.member.db.Member;
 import net.member.db.MemberDAO;
 
 public class MemberJoinProcessAction implements Action {
-
+	
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -24,25 +24,27 @@ public class MemberJoinProcessAction implements Action {
 		String email = request.getParameter("email");
 		
 		Member data = new Member();
-		data.setId(id);			data.setPassword(password);
-		data.setName(name);		data.setEmail(email);
+		data.setId(id);
+		data.setPassword(password);
+		data.setName(name);
+		data.setEmail(email);
 		
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
 		MemberDAO dao = new MemberDAO();
 		int result = dao.memberInsert(data);
-		if(result==0) {
+		if (result == 0) {
 			System.out.println("회원가입 실패입니다.");
 			ActionForward forward = new ActionForward();
 			forward.setRedirect(false);
 			request.setAttribute("message", "회원가입 실패입니다.");
-			forward.setPath("error/error.jsp");
+			forward.setPath("error/error500.jsp");
 			return forward;
 		}
 		
 		out.println("<script>");
-		if (result == 1) { 
+		if (result == 1) {
 			out.println("alert('회원가입을 축하합니다.');");
 			out.println("location.href='login.net';");
 		} else if (result == -1) {

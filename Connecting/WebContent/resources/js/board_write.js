@@ -20,7 +20,7 @@ $(document).ready(function() {
 			reader.onload = function(event) {// 읽기에 성공했을 때 실행되는 이벤트 핸들러
 				// 이미지 경로 변경 및 이미지 초기화 가능한 x버튼
 				$('#imgUpdate').html('<img id="boardImg" src="' + event.target.result + '">');
-				$('#resetBtn').html('<img id="xBtn" src="./resources/img/x-circle.png">');
+				$('#resetBtn').html('<img id="xBtn" src="./resources/img/x-reset.png">');
 			}
 		} else {
 			alert('확장자는 gif, jpg, jpeg, png 사용 가능합니다.')
@@ -45,8 +45,6 @@ $(document).ready(function() {
 			$('#originalImg').text()의 기존 파일명을 파라미터 'check'라는 이름으로 form에 추가해 전송	*/
 		if (check == 0) {
 			const original = $('#originalImg').text();
-			console.log($('#editImg').val());
-			console.log(original);
 			const changeVal = "<input type='hidden' value='" + original + "' name='check'>";
 			$(this).append(changeVal);
 		}

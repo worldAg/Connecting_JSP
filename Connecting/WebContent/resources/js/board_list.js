@@ -32,13 +32,13 @@ function ajaxList(sendData) {
 				$(data.boardlist).each(function (index, item) {
 					// 게시글의 카테고리를 구분
 					if (item.category == 0) {
-						category = "[전시회] ";
+						category = "&#91;전시회&#93;";
 					} else if (item.category == 1) {
-						category = "[박람회] ";
+						category = "&#91;박람회&#93;";
 					} else if (item.category == 2) {
-						category = "[버스킹] ";
+						category = "&#91;버스킹&#93;";
 					} else if (item.category == 3) {
-						category = "[연극/공연] ";
+						category = "&#91;연극	&#47;공연&#93;";
 					}
 					output += `<tr onClick='location.href="boardDetail.bo?num=${item.board_id}"'>`;
 					output += "		<td>" + (num--) + "</td>";
