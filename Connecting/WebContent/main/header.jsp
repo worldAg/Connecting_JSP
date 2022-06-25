@@ -11,7 +11,6 @@
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap.css" />
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/header.css" />
 </head>
-
 <body>
 	<header>
 		<!-- 로그인 nav -->
@@ -29,16 +28,11 @@
 					<div class="p-2 bd-highlight">
 			 			<a class="nav-link">고객센터 &nbsp;</a> 
 			 		</div>
-			 		<c:if test='${id != "admin" && empty email}'>
+			 		<c:if test='${empty email}'>
 			 			<div class="p-2 bd-highlight">
 			 				<a class="nav-link" href="mypage.my">마이페이지 &#124;</a>
 			 			</div>
 			 		</c:if>
-			 	    <c:if test='${id == "admin"}'>
-			 	    	<div class="p-2 bd-highlight">
-			 				<a class="nav-link" href="mgrMain.mgr">관리자페이지 &#124;</a>
-			 			</div>
-					</c:if>
 					<div class="p-2 bd-highlight">
 			 			<a class="nav-link" href="logout.net">로그아웃 &#124;</a>
 			 		</div>
@@ -78,7 +72,7 @@
 	                <h2 class="accordion-header nav-item" id="headingThree">
 		                <button class="bg-dark accordion-button" type="button" data-bs-toggle="collapse"
 		                    data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree"
-		                    style="color: #fff; font-size: 1.5rem; border-radius: 30%">
+		                    style="color: #fff; font-size: 23px; border-radius: 30%">
 		                    조건 검색&nbsp;<img src="<%=request.getContextPath()%>/resources/img/search2.png">  
 		                </button>
 	            	</h2>
@@ -94,7 +88,7 @@
 	                <legend class="mt-4">카테고리</legend>
 	                <div class="form-check">
 	                    <label class="form-check-label"> 
-	                    	<input type="radio" class="form-check-input" name="category" id="optionsRadios1" value="all"> 전체
+	                    	<input type="radio" class="form-check-input" name="category" id="optionsRadios1" value=""> 전체
 	                    </label>
 	                </div>
 	                <div class="form-check">
@@ -127,7 +121,7 @@
 	                <legend class="mt-4">지역</legend>
 	                <div class="form-check">
 	                    <label class="form-check-label">
-	                    	<input type="radio" class="form-check-input" name="loc" id="optionsRadios1" value="all"> 전체
+	                    	<input type="radio" class="form-check-input" name="loc" id="optionsRadios1" value=""> 전체
 	                    </label>
 	                </div>
 	                <div class="form-check">
@@ -177,15 +171,17 @@
 			});
 			
 			$("#smartBtn").click(function () {
-				var category = $("input[name='category']:checked").val();
-				var loc = $("input[name='loc']:checked").val();				
+				const category = $("input[name='category']:checked").val();
+				const loc = $("input[name='loc']:checked").val();
+				if (category === undefined) category = "all";
+				if (loc === undefined) loc = "all";
 				console.log(category);
-				console.log(loc);				
+				console.log(loc);
 				location.href = "boardList.bo?category=" + category + "&loc=" + loc;
 			});
 			
 			$("#searchForm").submit(function () {
-				var keyword = $("#searchBar").val();
+				const keyword = $("#searchBar").val();
 				if (keyword == "") {
 					alert("검색어를 입력해주세요.");
 					$("#searchBar").focus();
