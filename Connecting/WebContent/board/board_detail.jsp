@@ -51,11 +51,11 @@
 				<div class="d-flex justify-content-center align-items-center">
 					<div class="member-info">
 						<c:set var="resourcesPath" value='${pageContext.request.contextPath}${"/resources/"}'/>
-						<c:if test='${empty memberInfo.profile_img}'>
+						<c:if test='${empty memberData.profile_img}'>
 							<c:set var='imgPath' value='${resourcesPath}img/profile.png' />
 						</c:if>  
-						<c:if test='${!empty memberInfo.profile_img}'>
-							<c:set var='imgPath' value='${resourcesPath}${"profile_upload/"}${memberInfo.profile_img}'/>
+						<c:if test='${!empty memberData.profile_img}'>
+							<c:set var='imgPath' value='${resourcesPath}${"profile_upload/"}${memberData.profile_img}'/>
 						</c:if>
 	    				<div id="showProfile">
 	    					<img id="profileImg" src="${imgPath}" alt="profile">
