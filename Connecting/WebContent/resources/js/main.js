@@ -1,10 +1,9 @@
 $(document).ready(function () {	
 	goBoard(1);
 	
-	$(".go-list").click(function () {
+	$("#goList").click(function () {
 		location.href = "boardList.bo";
-	});
-		
+	});	
 });
 	
 function goBoard(page) {
@@ -16,9 +15,9 @@ function goBoard(page) {
 function ajaxList(sendData) {
 	console.log("sendData: " + sendData);
 	$.ajax({
-		type: "post",
-		data: sendData,
 		url: "boardList.bo",
+		type: "POST",
+		data: sendData,
 		dataType: "json",
 		cache: "false",
 		success: function (data) {
@@ -26,15 +25,15 @@ function ajaxList(sendData) {
 			$(data.boardlist).each(function (index, item) {
 				// 게시글의 지역을 구분
 				if (item.loc == 0) {
-					local = "[서울]";
+					local = "&#91;서울&#93";
 				} else if (item.loc == 1) {
-					local = "[경기/인천] ";
+					local = "&#91;경기&#47;인천&#93";
 				} else if (item.loc == 2) {
-					local = "[대전/충청/강원]";
+					local = "&#91;대전&#47;충청&#47;강원&#93";
 				} else if (item.loc == 3) {
-					local = "[부산/대구/경상] ";
+					local = "&#91;부산&#47;대구&#47;경상&#93";
 				} else if (item.loc == 4) {
-					local = "[광주/전라/제주] ";
+					local = "&#91;광주&#47;전라&#47;제주&#93";
 				}
 				output += '<div class="col">';
 				output += `   <div class="card" onClick="location.href='boardDetail.bo?num=${item.board_id}'" style="cursor:pointer;">`;

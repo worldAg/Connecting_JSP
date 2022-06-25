@@ -4,30 +4,20 @@
 	<meta charset="utf-8">
 	<title>Connecting</title>
 	<link rel="icon" href="<%=request.getContextPath()%>/resources/img/favicon.ico" />
-	<style>
-		.recent-board {
-			width: 1000px;
-			margin: auto;
-		}
-		
-		.go-btn {
-			margin-top: 20px;
-			margin-bottom: 10px;
-		}
-	</style>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/main.css" />
 </head>
 
 <body>
 	<jsp:include page="header.jsp" />
 	<div id="main">
 		<div class="recent-board">
-
+			
 			<div class="go-btn">
-				<button type="button" class="btn btn-primary btn-lg go-list">새로운 소식을 확인하세요 ></button>
+				<button type="button" class="btn btn-outline-primary btn-lg" id="goList">새로운 소식을 확인하세요 &#62;</button>
 			</div>
 			
 			<div class="row row-cols-1 row-cols-md-3 g-4" id="mainBoard">
-		
+				<!-- 최신글 6개 카드 형식으로 보여 줌 -->
 			</div>
 			
 		</div>
