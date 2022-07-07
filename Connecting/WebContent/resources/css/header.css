@@ -2,7 +2,7 @@
 * {
 	font-family: 'Gaegu', cursive !important;
 }
-		
+
 a {
 	text-decoration-line: none !important;
 }
@@ -18,35 +18,38 @@ header {
 .nav-link {
 	padding: 0;
 }
- 		
+
 #searchForm {
 	text-align: center;
 	margin: 0;
 }
-		
+
 #searchBar {
 	width: 350px;
 	height: 36px;
 }
-	
+
 #logo {
 	margin: 20px;		
 }
-	
+
 .nav-item {
 	margin-left: 50px;
 	font-size: 23px;
 }
-     
+
 #collapseThree {
+	width: 100%;
 	position: absolute;
 	z-index: 99;
 	background-color: #FFF5EE;
+	
+	box-shadow: 1px 1px 10px 5px #ccc2bc inset;
+	border-radius: 25px;
 }
- 
+
 .accordion-body {
-	height: 350px;
-	width: 100vw;
+	height: 300px;
 	display: flex;
 	justify-content: center;
 }
@@ -59,7 +62,8 @@ header {
 	text-align: center;
 	margin: 20px;
 }
-        
+
 #smartBtn {
 	font-size: 20px;
-}		
+	margin-bottom: 20px;
+}
