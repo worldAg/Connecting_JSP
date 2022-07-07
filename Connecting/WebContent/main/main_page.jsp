@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Connecting</title>
-	<link rel="icon" href="<%=request.getContextPath()%>/resources/img/favicon.ico" />
+	<link rel="icon" href="<%=request.getContextPath()%>/resources/img/connecting/favicon.ico" />
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/main.css" />
 </head>
 
@@ -21,7 +21,10 @@
 			</div>
 			
 		</div>
+		
 	</div>
+	
+	<footer></footer>
 	
 	<script src="<%=request.getContextPath()%>/resources/js/main.js"></script>
 </body>

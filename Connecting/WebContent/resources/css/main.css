@@ -1,7 +1,6 @@
 @charset "UTF-8";
 #main {
 	margin-top: 50px;
-	margin-bottom: 100px;
 }
 
 .recent-board {
@@ -22,4 +21,11 @@
 	width: 315px;
 	height: 446px;
 	object-fit: cover;
+}
+
+footer {
+	height: 50vh;
+	background-image: url('../img/wave.svg');
+	background-repeat: no-repeat;
+	background-size: cover;
 }
